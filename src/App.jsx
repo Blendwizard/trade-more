@@ -4,7 +4,7 @@ const App = () => {
   return (
     <>
     <h1>TradeMore</h1>
-    <form>
+    <form method="post">
       <div>
         <label htmlFor="username">Username:</label>
         <input type="text" id="username" name="username" required></input>
