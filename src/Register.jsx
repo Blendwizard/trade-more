@@ -5,7 +5,7 @@ const Register = () => {
   return(
     <>
     <h2>Register</h2>
-   <form method="post">
+   <form action="register" method="post">
       <div>
         <label htmlFor="username">Create Username:</label>
         <input type="text" id="username" name="username" required></input>
@@ -13,7 +13,7 @@ const Register = () => {
 
       <div>
         <label htmlFor="pass">Create Password (8 characters minimum):</label>
-        <input type="password" id="pass" name="password"
+        <input type="password" id="password" name="password"
           minLength="8" required autoComplete="off"></input>
       </div>
 
