@@ -8,7 +8,22 @@ const pool = new Pool({
   password: process.env.PGPASSWORD,
 });
 
-pool.connect();
+pool.connect((err, res) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Connected to database...')
+  }
+});
 
 
- pool.end();
+module.exports = {
+  databaseTestFunction: (input) => {
+    console.log('DB TEST INPUT: ', input );
+  }
+}
+
+// pool.connect();
+
+
+//  pool.end();

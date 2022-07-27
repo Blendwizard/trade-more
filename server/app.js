@@ -7,8 +7,14 @@ const { nextTick } = require('process');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
-
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('/register', (req, res) => {
+  console.log('hitting this')
+  res.sendStatus(200);
+})
+
+
 
 
 

@@ -14,6 +14,9 @@ const App = () => {
   }
 
   const registerClick = () => {
+    fetch('/register', () => {
+
+    })
     setPageView('register');
   }
 
