@@ -1,1 +1,1 @@
-exports.database = require('/databaseHandler');
+exports.database = require('./databaseHandler');

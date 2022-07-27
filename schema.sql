@@ -13,23 +13,23 @@
 
 
 
+CREATE TABLE "User" (
+  "User_ID" SERIAL NOT NULL,
+  "Username" varchar(10),
+  "Cash_Balance" int DEFAULT 10000,
+  "Created_At" date DEFAULT current_date,
+  "Portfolio_ID" SERIAL NOT NULL,
+  PRIMARY KEY ("User_ID")
+);
+
 CREATE TABLE "Password" (
   "Pass_ID" SERIAL NOT NULL,
   "Password" varchar(20),
   "User_ID" int,
-  PRIMARY KEY ("Pass_ID")
+  PRIMARY KEY ("Pass_ID"),
+  FOREIGN KEY ("User_ID") REFERENCES "User"("User_ID")
 );
 
-
-CREATE TABLE "Users" (
-  "User_ID" SERIAL NOT NULL,
-  "Username" varchar(10),
-  "Cash_Balance" int DEFAULT 10000,
-  "Created_At" date,
-  "Portfolio_ID" int,
-  PRIMARY KEY ("User_ID"),
-  FOREIGN KEY ("User_ID") REFERENCES "Password"("User_ID")
-);
 
 CREATE TABLE "Transaction" (
   "Trans_ID" SERIAL NOT NULL,
@@ -42,6 +42,6 @@ CREATE TABLE "Transaction" (
   PRIMARY KEY ("Trans_ID"),
   CONSTRAINT "FK_Transaction.User_ID"
     FOREIGN KEY ("User_ID")
-      REFERENCES "Users"("User_ID")
+      REFERENCES "User"("User_ID")
 );
 
