@@ -13,12 +13,14 @@ module.exports = {
     ({username, password} = req.body);
     models.database.validateCredentials({user: username, pass: password})
     .then((data) => {
-      if (data.rows.length > 0) {
-        const userID = data.rows[0]['User_ID'];
-        res.status(200).send({user: userID});
+      if (data.rows.length < 1) {
+        // Incorrect user or password
+        console.log('Incorrect username or password')
+        res.redirect('/login');
       } else {
-        console.log('User not found')
+        // Validated user and password
         res.redirect('/');
+        console.log("Successfully logged user in");
       }
 
     })

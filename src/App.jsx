@@ -1,59 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import Home from './Home.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
+import { Routes, Route, Link } from 'react-router-dom';
 
 const App = () => {
-  const [pageView, setPageView] = useState('');
-
-  useEffect(() => {
-    setPageView('home');
-  }, []);
-
-  const loginClick = () => {
-    setPageView('login');
-  }
-
-  const registerClick = () => {
-    fetch('/register', () => {
-
-    })
-    setPageView('register');
-  }
-
-  const homeClick = () => {
-    setPageView('home');
-  }
-
-  console.log(pageView)
 
   return (
     <>
-      <h1 onClick={homeClick}>TradeMore</h1>
-      {pageView === 'home'
-        ?
-        <>
-          <button onClick={loginClick}>Login</button>
-          <button onClick={registerClick}>Register</button>
-        </>
-        :
-        null
-      }
-      {pageView === 'login'
-        ?
-        <>
-          <Login></Login>
-        </>
-        :
-        null
-      }
-      {pageView === 'register'
-        ?
-        <>
-          <Register></Register>
-        </>
-        :
-        null
-      }
+      <h1>TradeMore</h1>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/register' element={<Register />}></Route>
+      </Routes>
     </>
   )
 }
