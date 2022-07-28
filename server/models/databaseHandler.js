@@ -17,23 +17,18 @@ pool.connect((err, res) => {
 
 
 module.exports = {
+
   insertNewUser: async (input) => {
-    // const userQuery = `INSERT INTO "User" ("Username") VALUES ($1))`;
-    // const passQuery = `INSERT INTO "Password" ("Password") VALUES ($1)`;
-
     const query = `WITH "New_User_ID" AS
-    (INSERT INTO "User" ("Username") VALUES ($1) RETURNING "User_ID")
+    (INSERT INTO "Users" ("Username") VALUES ($1) RETURNING "User_ID")
+    INSERT INTO "Passwords" ("Password", "User_ID") VALUES ($2, (SELECT "User_ID" FROM "New_User_ID"))`
 
-    INSERT INTO "Password" ("Password", "User_ID") VALUES ($2, (SELECT "User_ID" FROM "New_User_ID"))`
+    return await pool.query(query, [input.user, input.pass])
+    .then(console.log("Successfully inserted Users and Passwords to database!"))
+  },
 
-    await pool.query(query, [input.user, input.pass])
-    .then(console.log("Successfully inserted User and Password to database!"))
-
-
+  validateCredentials: async (credentials) => {
+    const query = `SELECT "User_ID" FROM "Users" WHERE "Username" = $1`;
+    return await pool.query(query, [credentials.user])
   }
 }
-
-// pool.connect();
-
-
-//  pool.end();

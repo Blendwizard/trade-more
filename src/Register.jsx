@@ -7,8 +7,8 @@ const Register = () => {
     <h2>Register</h2>
    <form action="register" method="post">
       <div>
-        <label htmlFor="username">Create Username:</label>
-        <input type="text" id="username" name="username" required></input>
+        <label htmlFor="username">Create Username (10 characters maximum):</label>
+        <input type="text" id="username" name="username" maxLength="10" required></input>
       </div>
 
       <div>

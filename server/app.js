@@ -6,10 +6,10 @@ const router = require('./routes');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
+
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', router);
-
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
