@@ -2,7 +2,7 @@ import React from 'react';
 
 const Register = () => {
 
-  return(
+  return (
     <>
     <h2>Register</h2>
    <form action="register" method="post">
