@@ -16,11 +16,11 @@ const Login = () => {
   const handleSubmit = (e) => {
     sendLoginInfo(credentials)
     .then((res) => {
-      console.log(res)
       if (res.status === 200) {
         window.location.href = res.url;
       } else {
         console.log('Unauthorized')
+        alert('Incorrect username or password')
       }
     })
     e.preventDefault();

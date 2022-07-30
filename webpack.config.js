@@ -7,6 +7,7 @@ module.exports = {
     path: path.join(__dirname, 'public'),
     filename: "bundle.js"
   },
+  devtool: 'source-map',
   // [module] will allow us to set any external modules we have added to webpack
   module: {
     // [rules] will determine the rules around those external modules
