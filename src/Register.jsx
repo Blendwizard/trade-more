@@ -14,7 +14,7 @@ const Register = () => {
       <div>
         <label htmlFor="pass">Create Password (8 characters minimum):</label>
         <input type="password" id="password" name="password"
-          minLength="8" required autoComplete="off"></input>
+          minLength="8" maxLength="20" required autoComplete="off"></input>
       </div>
 
       <input type="submit" value="Create Account"></input>
