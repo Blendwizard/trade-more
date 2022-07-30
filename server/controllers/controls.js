@@ -11,6 +11,7 @@ module.exports = {
   },
 
   attemptLogin: (req, res) => {
+    console.log(req);
     ({username, password} = req.body);
     models.database.validateCredentials({user: username, pass: password})
     .then((data) => {
