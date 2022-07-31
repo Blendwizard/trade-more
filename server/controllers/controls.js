@@ -11,11 +11,16 @@ module.exports = {
   },
 
   attemptLogin: (req, res) => {
-    console.log(req);
     ({username, password} = req.body);
     models.database.validateCredentials({user: username, pass: password})
     .then((data) => {
       if (helpers.validate(data)) {
+        if (!req.headers.cookie) {
+          console.log('Setting new cookie');
+          res.cookie('testCookie', 'testValue', {
+            maxAge: 300000
+          })
+        }
         res.redirect('/');
       } else {
         res.redirect(401, '/login');
