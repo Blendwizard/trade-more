@@ -45,3 +45,8 @@ CREATE TABLE "Transactions" (
       REFERENCES "Users"("User_ID")
 );
 
+CREATE TABLE "Sessions" (
+  "id" SERIAL NOT NULL,
+  "Session_ID" int,
+  "Username" varchar(10)
+);

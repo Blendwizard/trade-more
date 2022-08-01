@@ -15,13 +15,13 @@ module.exports = {
     models.database.validateCredentials({user: username, pass: password})
     .then((data) => {
       if (helpers.validate(data)) {
-        if (!req.headers.cookie) {
+        // if (req.headers.cookie) {
           console.log('Setting new cookie');
-          res.cookie('testCookie', 'testValue', {
-            maxAge: 300000
-          })
-        }
-        res.redirect('/');
+          const {session, options} = helpers.generateSessionID(username);
+          models.database.createSession(session, username)
+          res.cookie('auth', session, options);
+          res.redirect('/');
+        // }
       } else {
         res.redirect(401, '/login');
       }

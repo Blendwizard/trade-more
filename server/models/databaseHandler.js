@@ -31,5 +31,11 @@ module.exports = {
 
     const query = `SELECT "Password" FROM "Passwords" WHERE "User_ID" = (SELECT "User_ID" FROM "Users" WHERE "Username" = $1)`;
     return await pool.query(query, [credentials.user])
+  },
+
+  createSession: async (id, user) => {
+    const query = `INSERT INTO "Sessions" ("Session_ID", "Username") VALUES ($1, $2)`;
+    console.log('inserting session')
+    return await pool.query(query, [id, user]);
   }
 }
