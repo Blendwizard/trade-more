@@ -14,14 +14,15 @@ module.exports = {
     ({username, password} = req.body);
     models.database.validateCredentials({user: username, pass: password})
     .then((data) => {
+      console.log(helpers.validate(data));
       if (helpers.validate(data)) {
-        // if (req.headers.cookie) {
-          console.log('Setting new cookie');
-          const {session, options} = helpers.generateSessionID(username);
+        const {session, options} = helpers.generateSessionID(username);
           models.database.createSession(session, username)
-          res.cookie('auth', session, options);
-          res.redirect('/');
-        // }
+          .then(() => {
+            console.log('Setting new cookie');
+            res.cookie('auth', session, options);
+            res.redirect('/dashboard');
+          })
       } else {
         res.redirect(401, '/login');
       }
