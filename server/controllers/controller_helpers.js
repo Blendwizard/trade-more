@@ -7,7 +7,7 @@ module.exports = {
       return false;
     } else {
       // Validated user and password
-      console.log("Successfully logged user in");
+      console.log("...Login credentials have been validated...");
       return true;
     }
   },

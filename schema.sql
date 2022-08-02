@@ -1,17 +1,3 @@
--- CREATE TABLE users (
---   id SERIAL NOT NULL,
---   username TEXT NOT NULL,
---   password_id VARCHAR,
---   portfolio_id INT,
---   cash_balance MONEY DEFAULT 10000,
---   created_at date,
---   PRIMARY KEY(id),
---   FOREIGN KEY(password_id) REFERENCES passwords(id)
--- );
-
-
-
-
 
 CREATE TABLE "Users" (
   "User_ID" SERIAL NOT NULL,

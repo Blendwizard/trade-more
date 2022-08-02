@@ -14,13 +14,13 @@ module.exports = {
     ({username, password} = req.body);
     models.database.validateCredentials({user: username, pass: password})
     .then((data) => {
-      console.log(helpers.validate(data));
       if (helpers.validate(data)) {
         const {session, options} = helpers.generateSessionID(username);
           models.database.createSession(session, username)
           .then(() => {
             console.log('Setting new cookie');
             res.cookie('auth', session, options);
+            console.log('...redirecting to dashboard...');
             res.redirect('/dashboard');
           })
       } else {

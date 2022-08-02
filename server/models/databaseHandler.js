@@ -27,8 +27,6 @@ module.exports = {
   },
 
   validateCredentials: async (credentials) => {
-    // const query = `SELECT "User_ID" FROM "Users" WHERE "Username" = $1`;
-
     const query = `SELECT "Password" FROM "Passwords" WHERE "User_ID" = (SELECT "User_ID" FROM "Users" WHERE "Username" = $1)`;
     return await pool.query(query, [credentials.user])
   },
