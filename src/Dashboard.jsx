@@ -3,10 +3,8 @@ import React, { useEffect } from 'react';
 const Dashboard = () => {
 
   useEffect(() => {
-    console.log('WAiting...')
     checkLoginStatus()
     .then((res) => {
-      console.log(res)
       if (res.status !== 200) {
         console.log('redirecting!', res.url);
         window.location.href = 'http://localhost:3000/login';
