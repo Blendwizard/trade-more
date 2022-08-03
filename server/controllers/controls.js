@@ -30,4 +30,15 @@ module.exports = {
     .catch((err) => res.send(err));
   },
 
+  logoutUser: (req, res) => {
+    const sessionID = req.headers.cookie.slice(5);
+    models.database.clearSession(sessionID)
+    .then((success) => {
+      res.cookie('auth', '', {maxAge: 1});
+      res.redirect('/');
+    })
+    .catch((err) => res.send(err))
+
+  }
+
 }

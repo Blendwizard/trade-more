@@ -40,5 +40,12 @@ module.exports = {
   lookupSession: async (id) => {
     const query = `SELECT * FROM "Sessions" WHERE "Session_ID" = $1`;
     return await pool.query(query, [id]);
+  },
+
+  clearSession: async (id) => {
+    console.log(id)
+    const query = `DELETE FROM "Sessions" WHERE "Session_ID" = $1`;
+    console.log('Logging user out, clearing session from database...');
+    return await pool.query(query, [id]);
   }
 }
