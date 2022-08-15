@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import StockTable from './ui_components/stockTable';
+import StockTable from './ui_components/StockTable';
 
 const Dashboard = () => {
 

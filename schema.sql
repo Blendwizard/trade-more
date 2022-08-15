@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS "Passwords", "Sessions", "Transactions", "Users";
 
 CREATE TABLE "Users" (
   "User_ID" SERIAL NOT NULL,
@@ -36,3 +37,4 @@ CREATE TABLE "Sessions" (
   "Session_ID" int,
   "Username" varchar(10)
 );
+
