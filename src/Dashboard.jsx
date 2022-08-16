@@ -19,6 +19,10 @@ const Dashboard = () => {
     .catch((err) => console.log(err))
   }, []);
 
+  const loadUserDashboard = async () => {
+
+  }
+
   const requestLogout = async () => {
     const response = await fetch('/logout', {
       method: 'POST',

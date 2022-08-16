@@ -38,7 +38,11 @@ module.exports = {
       res.redirect('/');
     })
     .catch((err) => res.send(err))
+  },
 
+  getDashboard: (req, res) => {
+    console.log('getting user dashboard');
+    res.send(('Loaded dash'))
   }
 
 }
