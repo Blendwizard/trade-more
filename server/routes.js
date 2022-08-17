@@ -4,10 +4,11 @@ const path = require('path');
 const auth = require('./middleware/auth');
 
 
-router.get('/*', auth.checkValidSession, (req, res) => {
-  console.log(req.url);
-  res.sendFile((path.join(__dirname, '../public/index.html')));
-});
+const resolvePaths = (req, res) => {
+  // res.sendFile((path.join(__dirname, '../public/index.html')));
+}
+
+router.get('/*', auth.secureRouteCheck, resolvePaths);
 
 
 router.post('/register', controller.registerUser);

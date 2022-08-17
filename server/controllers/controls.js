@@ -22,6 +22,7 @@ module.exports = {
             res.cookie('auth', session, options);
             console.log('...redirecting to dashboard...');
             res.redirect('/dashboard');
+            // res.sendStatus(200);
           })
       } else {
         res.redirect(401, '/login');

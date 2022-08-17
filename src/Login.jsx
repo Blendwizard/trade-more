@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({username: '', password: ''})
+  const navigate = useNavigate();
 
   const sendLoginInfo =  async (data) => {
     const response = await fetch('/login', {
@@ -17,7 +18,8 @@ const Login = () => {
     sendLoginInfo(credentials)
     .then((res) => {
       if (res.status === 200) {
-        window.location.href = res.url;
+        // window.location.href = res.url;
+        navigate('/dashboard')
       } else {
         console.log('Unauthorized')
         alert('Incorrect username or password')

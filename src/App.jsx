@@ -3,7 +3,8 @@ import Home from './Home.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
 import Dashboard from './Dashboard.jsx';
-import { Routes, Route, Link } from 'react-router-dom';
+import RequireAuth from './RequireAuth.jsx';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 const App = () => {
 
@@ -14,7 +15,13 @@ const App = () => {
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
-        <Route path='/dashboard' element={<Dashboard />}></Route>
+        <Route path='/dashboard'
+          element={
+            <RequireAuth redirectTo='/login'>
+              <Dashboard />
+            </RequireAuth>
+          }>
+        </Route>
       </Routes>
     </>
   )

@@ -3,48 +3,13 @@ import StockTable from './ui_components/StockTable';
 
 const Dashboard = () => {
 
-  useEffect(() => {
-    checkLoginStatus()
-    .then((res) => {
-      if (res.status !== 200) {
-        console.log('redirecting!', res.url);
-        window.location.href = 'http://localhost:3000/login';
-        alert('Please login before continuing');
-      } else {
-        console.log('Loading dashboard content...');
-        // Insert API calls
-
-      }
-    })
-    .catch((err) => console.log(err))
-  }, []);
-
-  const loadUserDashboard = async () => {
-
-  }
-
-  const requestLogout = async () => {
-    const response = await fetch('/logout', {
+  const handleLogout = () => {
+    fetch('/logout', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {'Content-Type': 'application/json'}
     })
-    return response;
-  }
-
-
-  const checkLoginStatus =  async () => {
-    const response = await fetch('/dashboard', {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json' }
-    })
-    return response;
-  }
-
-  const handleLogout = async () => {
-    requestLogout()
     .then((res) => {
       window.location.href = res.url;
-      alert('Logout successful, redirecting to home...')
     })
   }
 
