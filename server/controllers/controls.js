@@ -40,9 +40,19 @@ module.exports = {
     .catch((err) => res.send(err))
   },
 
-  getDashboard: (req, res) => {
-    console.log('getting user dashboard');
-    res.send(('Loaded dash'))
-  }
+
+  checkSession: async (req, res) => {
+    const sessionID = req.headers.cookie.slice(5);
+    let isValidSession = null;
+    await models.database.lookupSession(sessionID)
+    .then((result) => {
+      if (result.rowCount < 1) {
+        isValidSession = false;
+      } else {
+        isValidSession = true;
+      }
+    });
+    return isValidSession;
+  },
 
 }
