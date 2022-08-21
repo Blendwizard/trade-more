@@ -15,7 +15,7 @@ const secureRouteCheck = (req, res, next) => {
     // Check if they have a current valid session
     checkValidSession(req, res)
     .then((allowedAccess) => {
-      console.log('Allowed?  ', allowedAccess)
+      // console.log('Allowed?  ', allowedAccess)
       if (allowedAccess === true) {
         // res.redirect(req.url);
         res.sendStatus(200);
@@ -28,7 +28,6 @@ const secureRouteCheck = (req, res, next) => {
     })
 
   }
-
   if (locked === false) {
     next();
   }

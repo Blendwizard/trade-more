@@ -8,7 +8,7 @@ const RequireAuth = ({ children, redirectTo }) => {
   useEffect(() => {
     getAuth()
     .then((res) => {
-      console.log(res.status)
+      console.log('Status', res.status)
       res.status !== 403 ? setAuth(true) : setAuth(false);
     })
   }, [])
@@ -23,7 +23,6 @@ const RequireAuth = ({ children, redirectTo }) => {
   if (auth !== null) {
     return auth ? children : <Navigate to={redirectTo} />;
   }
-
 
 };
 

@@ -3,6 +3,10 @@ import StockTable from './ui_components/StockTable';
 
 const Dashboard = () => {
 
+  useEffect(() => {
+    loadDashboard();
+  }, []);
+
   const handleLogout = () => {
     fetch('/logout', {
       method: 'POST',
@@ -12,6 +16,15 @@ const Dashboard = () => {
       window.location.href = res.url;
     })
   }
+
+  const loadDashboard = async () => {
+    await fetch('/userDash', {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then((response) => response.json())
+    .then((data) => console.log('data: ', data))
+  };
 
   return (
     <>

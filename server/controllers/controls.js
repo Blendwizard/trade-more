@@ -56,4 +56,14 @@ module.exports = {
     return isValidSession;
   },
 
+  fetchUserDashboard: async (req, res) => {
+    Promise.all([
+      models.database.fetchUserDashboardData(),
+    ])
+    .then((data) => {
+      console.log('data: ', data);
+      res.status(200).send(data);
+    })
+  }
+
 }
