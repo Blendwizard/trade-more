@@ -62,9 +62,10 @@ module.exports = {
   },
 
   fetchUserDashboard: async (req, res) => {
-    const sessionID = req.headers.cookie.slice(5, 10);
+    const username = req.headers.cookie.slice(21);
+    console.log('username: ', req.headers.cookie.slice(21));
     Promise.all([
-      models.database.fetchUserDashboardData(sessionID),
+      models.database.fetchUserDashboardData(username),
     ])
     .then((data) => {
       console.log('data: ', data);

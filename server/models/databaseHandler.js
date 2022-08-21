@@ -55,24 +55,27 @@ module.exports = {
   },
 
   // Lookup all data required for user dashboard
-  fetchUserDashboardData: async (id) => {
+  fetchUserDashboardData: async (username) => {
 
-    const getUserID = async (id) => {
-      const query = `SELECT "User_ID" FROM "Sessions" WHERE "Session_ID" = $1`;
-      return await pool.query(query, [id]);
-    };
+    // const getUserID = async (id) => {
+    //   const query = `SELECT "User_ID" FROM "Users" WHERE "Username" = $1`;
+    //   return await pool.query(query, [id]);
+    // };
 
-    const findStocksHeld = async (id) => {
+    const findStocksHeld = async (username) => {
       const query = `SELECT "Symbol", SUM("Quantity") AS "TotalShares"
       FROM "Transactions"
-      WHERE "User_ID" = $1
+      WHERE "User_ID" = (SELECT "User_ID" FROM "Users" WHERE "Username" = $1)
       GROUP BY "Symbol"
       HAVING SUM("Quantity") > 0`;
-      return await pool.query(query, [id]);
+      const stocks = await pool.query(query, [username]);
+      return stocks;
     };
 
-    // getUserID(id)
-    //   .then((result) => console.log('User id: ', result));
+    const response = await findStocksHeld(username);
+    return response.rows;
+
+
 
 
   },
