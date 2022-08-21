@@ -8,7 +8,7 @@ const restricted = ['/dashboard', '/auth'];
 const secureRouteCheck = (req, res, next) => {
   let locked = false;
   let allowedAccess = false;
-  console.log('URL?> ', req.url);
+  // console.log('URL?> ', req.url);
   // If user is trying to GET a protected resource
   if (restricted.includes(req.url)) {
     locked = true;

@@ -20,6 +20,7 @@ module.exports = {
           .then(() => {
             console.log('Setting new cookie');
             res.cookie('auth', session, options);
+            res.cookie('username', username, options);
             console.log('...redirecting to dashboard...');
             res.redirect('/dashboard');
             // res.sendStatus(200);
@@ -32,10 +33,13 @@ module.exports = {
   },
 
   logoutUser: (req, res) => {
-    const sessionID = req.headers.cookie.slice(5);
+    const sessionID = req.headers.cookie.slice(5, 10);
     models.database.clearSession(sessionID)
     .then((success) => {
+      // Destroy cookies
       res.cookie('auth', '', {maxAge: 1});
+      res.cookie('username', '', {maxAge: 1});
+
       res.redirect('/');
     })
     .catch((err) => res.send(err))
@@ -43,7 +47,8 @@ module.exports = {
 
 
   checkSession: async (req, res) => {
-    const sessionID = req.headers.cookie.slice(5);
+    const sessionID = req.headers.cookie.slice(5, 10);
+    console.log('Checking session ID: ', sessionID);
     let isValidSession = null;
     await models.database.lookupSession(sessionID)
     .then((result) => {
@@ -57,8 +62,9 @@ module.exports = {
   },
 
   fetchUserDashboard: async (req, res) => {
+    const sessionID = req.headers.cookie.slice(5, 10);
     Promise.all([
-      models.database.fetchUserDashboardData(),
+      models.database.fetchUserDashboardData(sessionID),
     ])
     .then((data) => {
       console.log('data: ', data);

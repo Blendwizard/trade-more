@@ -24,7 +24,7 @@ module.exports = {
     INSERT INTO "Passwords" ("Password", "User_ID") VALUES ($2, (SELECT "User_ID" FROM "New_User_ID"))`
 
     return await pool.query(query, [input.user, input.pass])
-    .then(console.log("Successfully inserted Users and Passwords to database!"))
+      .then(console.log("Successfully inserted Users and Passwords to database!"))
   },
 
   // Retrieve password for a specific user ID
@@ -46,11 +46,6 @@ module.exports = {
     return await pool.query(query, [id]);
   },
 
-
-  getUserID: async (id) => {
-
-  },
-
   // Destroy session auth upon logout
   clearSession: async (id) => {
     console.log(id)
@@ -62,6 +57,11 @@ module.exports = {
   // Lookup all data required for user dashboard
   fetchUserDashboardData: async (id) => {
 
+    const getUserID = async (id) => {
+      const query = `SELECT "User_ID" FROM "Sessions" WHERE "Session_ID" = $1`;
+      return await pool.query(query, [id]);
+    };
+
     const findStocksHeld = async (id) => {
       const query = `SELECT "Symbol", SUM("Quantity") AS "TotalShares"
       FROM "Transactions"
@@ -69,9 +69,11 @@ module.exports = {
       GROUP BY "Symbol"
       HAVING SUM("Quantity") > 0`;
       return await pool.query(query, [id]);
-    }
+    };
 
-    return findStocksHeld(id);
+    // getUserID(id)
+    //   .then((result) => console.log('User id: ', result));
+
 
   },
 
