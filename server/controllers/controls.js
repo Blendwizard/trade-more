@@ -47,6 +47,7 @@ module.exports = {
 
 
   checkSession: async (req, res) => {
+    console.log('Request headers: ', req.headers.cookie);
     const sessionID = req.headers.cookie.slice(5, 10);
     console.log('Checking session ID: ', sessionID);
     let isValidSession = null;
@@ -68,7 +69,7 @@ module.exports = {
       models.database.fetchUserDashboardData(username),
     ])
     .then((data) => {
-      console.log('data: ', data);
+      console.log('data sent for dashboard: ', data);
       res.status(200).send(data);
     })
   }

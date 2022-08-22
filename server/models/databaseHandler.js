@@ -48,7 +48,6 @@ module.exports = {
 
   // Destroy session auth upon logout
   clearSession: async (id) => {
-    console.log(id)
     const query = `DELETE FROM "Sessions" WHERE "Session_ID" = $1`;
     console.log('Logging user out, clearing session from database...');
     return await pool.query(query, [id]);
@@ -57,10 +56,12 @@ module.exports = {
   // Lookup all data required for user dashboard
   fetchUserDashboardData: async (username) => {
 
-    // const getUserID = async (id) => {
-    //   const query = `SELECT "User_ID" FROM "Users" WHERE "Username" = $1`;
-    //   return await pool.query(query, [id]);
-    // };
+    const findUserBalance = async (username) => {
+      const query = `SELECT "Cash_Balance" FROM "Users" WHERE "Username" = $1`
+      const balance = await pool.query(query, [username]);
+      return balance.rows[0];
+    };
+
 
     const findStocksHeld = async (username) => {
       const query = `SELECT "Symbol", SUM("Quantity") AS "TotalShares"
@@ -69,15 +70,14 @@ module.exports = {
       GROUP BY "Symbol"
       HAVING SUM("Quantity") > 0`;
       const stocks = await pool.query(query, [username]);
-      return stocks;
+      return stocks.rows;
     };
 
-    const response = await findStocksHeld(username);
-    return response.rows;
-
-
-
-
+    const response = {
+      'portfolio': await findStocksHeld(username),
+      'balance': await findUserBalance(username)
+    }
+    return response;
   },
 
 }

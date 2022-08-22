@@ -15,12 +15,14 @@ module.exports = {
   generateSessionID: (username) => {
 
     const session = [];
-    for (let index in username) session.push(username.charCodeAt(index));
+    for (let i = 0; i < 5; i++) {
+      session.push(Math.floor(Math.random() * 9));
+    }
 
     const options = {
       maxAge: 300000
     }
 
-    return {session: session.slice(0, 2).join(''), options: options};
+    return {session: session.join(''), options: options};
   }
 }
