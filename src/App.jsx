@@ -8,9 +8,15 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 const App = () => {
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/')
+  }
+
   return (
     <>
-      <h1>TradeMore</h1>
+      <h1 onClick={handleClick}>TradeMore</h1>
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
