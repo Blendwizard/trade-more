@@ -12,7 +12,7 @@ const App = () => {
 
   const handleClick = () => {
     navigate('/')
-  }
+  };
 
   return (
     <>

@@ -20,8 +20,8 @@ const StockTable = ({stocks}) => {
         {stocks.map((stock) => {
           return (
             <tr>
+            <td>{stock.Stock_Name}</td>
             <td>{stock.Symbol}</td>
-            <td>{sample.companyName}</td>
             <td>$170.00</td>
             <td>{stock.TotalShares}</td>
             <td>${sample.iexRealtimePrice}</td>

@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 require('dotenv').config();
+const IEX = require('./apiHandler.js');
 
 const pool = new Pool({
   host: 'localhost',
@@ -64,14 +65,21 @@ module.exports = {
 
 
     const findStocksHeld = async (username) => {
-      const query = `SELECT "Symbol", SUM("Quantity") AS "TotalShares"
+      const query = `SELECT "Stock_Name", "Symbol", SUM("Quantity") AS "TotalShares"
       FROM "Transactions"
       WHERE "User_ID" = (SELECT "User_ID" FROM "Users" WHERE "Username" = $1)
-      GROUP BY "Symbol"
+      GROUP BY "Stock_Name", "Symbol"
       HAVING SUM("Quantity") > 0`;
       const stocks = await pool.query(query, [username]);
       return stocks.rows;
     };
+
+    // Company	Symbol	Average Cost	Quantity Owned	Current Price	Delta	Current Gain/Loss	Current Value
+    const rows = await findStocksHeld(username);
+    rows.forEach((row) => {
+      const iex = new IEX();
+      iex.lookup(row["Symbol"]);
+    });
 
     const response = {
       'portfolio': await findStocksHeld(username),
