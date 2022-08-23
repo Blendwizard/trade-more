@@ -81,22 +81,24 @@ module.exports = {
     const iex = new IEX();
 
     const portfolio = [];
-    rows.forEach(async (row) => {
-      const stock = await iex.lookup(row["Symbol"]);
-      portfolio.push({
-        "company": row["Stock_Name"],
-        "symbol": row["Symbol"],
-        "totalShares": row["TotalShares"],
-        "averageCost": 'placeholder',
-        "currentPrice": stock.latestPrice,
-        "totalDelta": 'placeholder',
-        "currentTotalValue": (row["TotalShares"] * stock.latestPrice)
-      })
-      console.log('Portfolio:::::', portfolio)
-    });
+    const generatePortfolio = async (rows, portfolio) => {
+      for (row of rows) {
+        const stock = await iex.lookup(row["Symbol"]);
+        portfolio.push({
+          "company": row["Stock_Name"],
+          "symbol": row["Symbol"],
+          "totalShares": row["TotalShares"],
+          "averageCost": 'placeholder',
+          "currentPrice": stock.latestPrice,
+          "totalDelta": 'placeholder',
+          "currentTotalValue": (row["TotalShares"] * stock.latestPrice)
+        })
+      }
+      return portfolio;
+    }
 
     const response = {
-      'portfolio': await findStocksHeld(username),
+      'portfolio': await generatePortfolio(rows, portfolio),
       'balance': await findUserBalance(username)
     }
     return response;

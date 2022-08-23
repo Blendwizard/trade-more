@@ -17,17 +17,17 @@ const StockTable = ({stocks}) => {
           <th>Current Gain/Loss</th>
           <th>Current Value</th>
         </tr>
-        {stocks.map((stock) => {
+        {stocks.map((stock, index) => {
           return (
-            <tr>
-            <td>{stock.Stock_Name}</td>
-            <td>{stock.Symbol}</td>
-            <td>$170.00</td>
-            <td>{stock.TotalShares}</td>
-            <td>${sample.iexRealtimePrice}</td>
-            <td>{Math.abs(170 - sample.iexRealtimePrice).toFixed(2)}</td>
-            <td>{10 * Math.abs(170 - sample.iexRealtimePrice).toFixed(2)}</td>
-            <td>{10 * sample.iexRealtimePrice}</td>
+            <tr key={index}>
+            <td>{stock.company}</td>
+            <td>{stock.symbol}</td>
+            <td>{stock.averageCost}</td>
+            <td>{stock.totalShares}</td>
+            <td>${stock.currentPrice}</td>
+            <td>{stock.totalDelta}</td>
+            <td>{stock.averageCost}</td>
+            <td>{stock.currentTotalValue}</td>
           </tr>
           )
         })}
