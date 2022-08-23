@@ -1,6 +1,5 @@
 require('dotenv').config();
-
-console.log('FETCH::::', fetch);
+const axios = require('axios');
 
 class IEX {
   constructor() {
@@ -8,12 +7,8 @@ class IEX {
   }
 
   lookup = async (symbol) => {
-    const response = await fetch(`https://cloud.iexapis.com/v1/stock/${symbol}/quote?token=${process.env.TOKEN}`, {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'}
-    })
-    console.log('Response from API::::: ', response)
-
+    const response = await axios.get(`https://cloud.iexapis.com/v1/stock/${symbol}/quote?token=${process.env.TOKEN}`);
+    return response.data;
   }
 }
 

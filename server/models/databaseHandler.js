@@ -75,10 +75,24 @@ module.exports = {
     };
 
     // Company	Symbol	Average Cost	Quantity Owned	Current Price	Delta	Current Gain/Loss	Current Value
+    // Get all stocks held by user
     const rows = await findStocksHeld(username);
-    rows.forEach((row) => {
-      const iex = new IEX();
-      iex.lookup(row["Symbol"]);
+    // Create a new object to query the stock market
+    const iex = new IEX();
+
+    const portfolio = [];
+    rows.forEach(async (row) => {
+      const stock = await iex.lookup(row["Symbol"]);
+      portfolio.push({
+        "company": row["Stock_Name"],
+        "symbol": row["Symbol"],
+        "totalShares": row["TotalShares"],
+        "averageCost": 'placeholder',
+        "currentPrice": stock.latestPrice,
+        "totalDelta": 'placeholder',
+        "currentTotalValue": (row["TotalShares"] * stock.latestPrice)
+      })
+      console.log('Portfolio:::::', portfolio)
     });
 
     const response = {
