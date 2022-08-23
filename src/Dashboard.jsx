@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import StockTable from './ui_components/StockTable';
+import { BarLoader } from 'react-spinners';
 
 const Dashboard = () => {
 
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState(null);
   const [stocks, setStocks] = useState(null);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Dashboard = () => {
     <>
     <h2>Dashboard!</h2>
     <h3>Balance: ${balance} </h3>
-    {stocks !== null ?  <StockTable stocks={stocks}></StockTable> : null}
+    {stocks !== null ?  <StockTable stocks={stocks}></StockTable> : <BarLoader height={15} />}
     <button onClick={handleLogout}>Logout</button>
     </>
   )
