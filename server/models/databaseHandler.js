@@ -105,15 +105,13 @@ module.exports = {
 
     const balance = await findUserBalance(username);
     const userBalance = iex.usd(balance);
+    totalPortfolioValue = totalPortfolioValue + balance;
     const userPortfolio = await generatePortfolio(rows, portfolio);
-    totalPortfolioValue = iex.usd(totalPortfolioValue + balance);
-
-
 
     const response = {
       'portfolio': userPortfolio,
       'balance': userBalance,
-      'totalPortfolioValue': totalPortfolioValue
+      'totalPortfolioValue': iex.usd(totalPortfolioValue)
     }
     return response;
   },
