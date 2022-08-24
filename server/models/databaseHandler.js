@@ -65,7 +65,7 @@ module.exports = {
 
 
     const findStocksHeld = async (username) => {
-      const query = `SELECT "Stock_Name", "Symbol", SUM("Quantity") AS "TotalShares"
+      const query = `SELECT "Stock_Name", "Symbol", AVG("Value")::NUMERIC(10, 2) AS "AveragePrice", SUM("Quantity") AS "TotalShares"
       FROM "Transactions"
       WHERE "User_ID" = (SELECT "User_ID" FROM "Users" WHERE "Username" = $1)
       GROUP BY "Stock_Name", "Symbol"
@@ -88,10 +88,13 @@ module.exports = {
           "company": row["Stock_Name"],
           "symbol": row["Symbol"],
           "totalShares": row["TotalShares"],
-          "averageCost": 'placeholder',
-          "currentPrice": stock.latestPrice,
-          "totalDelta": 'placeholder',
-          "currentTotalValue": (row["TotalShares"] * stock.latestPrice)
+          "averageCost": iex.usd(row["AveragePrice"]),
+          "currentPrice": iex.usd(stock.latestPrice),
+          "singleDelta": iex.usd((stock.latestPrice - row["AveragePrice"])),
+          "totalDelta": iex.usd(
+            (stock.latestPrice * row["TotalShares"]) - (row["AveragePrice"] * row["TotalShares"])
+            ),
+          "currentTotalValue": iex.usd((row["TotalShares"] * stock.latestPrice))
         })
       }
       return portfolio;

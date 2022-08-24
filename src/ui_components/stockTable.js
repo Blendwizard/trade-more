@@ -10,8 +10,8 @@ const StockTable = ({stocks}) => {
         <tr>
           <th>Company</th>
           <th>Symbol</th>
-          <th>Average Cost</th>
           <th>Quantity Owned</th>
+          <th>Average Cost</th>
           <th>Current Price</th>
           <th>Delta</th>
           <th>Current Gain/Loss</th>
@@ -22,11 +22,11 @@ const StockTable = ({stocks}) => {
             <tr key={index}>
             <td>{stock.company}</td>
             <td>{stock.symbol}</td>
-            <td>{stock.averageCost}</td>
             <td>{stock.totalShares}</td>
-            <td>${stock.currentPrice}</td>
-            <td>{stock.totalDelta}</td>
             <td>{stock.averageCost}</td>
+            <td>{stock.currentPrice}</td>
+            <td>{stock.singleDelta}</td>
+            <td>{stock.totalDelta}</td>
             <td>{stock.currentTotalValue}</td>
           </tr>
           )
