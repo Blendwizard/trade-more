@@ -60,7 +60,7 @@ module.exports = {
     const findUserBalance = async (username) => {
       const query = `SELECT "Cash_Balance" FROM "Users" WHERE "Username" = $1`
       const balance = await pool.query(query, [username]);
-      return balance.rows[0];
+      return balance.rows[0]['Cash_Balance'];
     };
 
 
@@ -74,12 +74,12 @@ module.exports = {
       return stocks.rows;
     };
 
-    // Company	Symbol	Average Cost	Quantity Owned	Current Price	Delta	Current Gain/Loss	Current Value
     // Get all stocks held by user
     const rows = await findStocksHeld(username);
-    // Create a new object to query the stock market
+    // Create an API object to query the stock market
     const iex = new IEX();
 
+    // Create portfolio collection
     const portfolio = [];
     const generatePortfolio = async (rows, portfolio) => {
       for (row of rows) {
@@ -100,9 +100,12 @@ module.exports = {
       return portfolio;
     }
 
+    const userBalance = iex.usd(await findUserBalance(username));
+    const userPortfolio = await generatePortfolio(rows, portfolio);
+
     const response = {
-      'portfolio': await generatePortfolio(rows, portfolio),
-      'balance': await findUserBalance(username)
+      'portfolio': userPortfolio,
+      'balance': userBalance
     }
     return response;
   },

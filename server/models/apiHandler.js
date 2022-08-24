@@ -12,7 +12,6 @@ class IEX {
   }
 
   usd = (value) => {
-    // const number = parseInt(Number(value).toFixed(2));
     const number = (Number(value)).toLocaleString(undefined, { minimumFractionDigits: 2 });
     return '$' + (number);
   }

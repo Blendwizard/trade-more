@@ -29,7 +29,7 @@ const Dashboard = () => {
     .then((response) => response.json())
     .then((data) => {
       console.log('data: ', data);
-      setBalance(data[0].balance.Cash_Balance);
+      setBalance(data[0].balance);
       setStocks(data[0].portfolio);
     })
   };
@@ -37,7 +37,7 @@ const Dashboard = () => {
   return (
     <>
     <h2>Dashboard!</h2>
-    <h3>Balance: ${balance} </h3>
+    <h3>Balance: {balance} </h3>
     {stocks !== null ?  <StockTable stocks={stocks}></StockTable> : <BarLoader height={15} />}
     <button onClick={handleLogout}>Logout</button>
     </>
