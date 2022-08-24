@@ -81,9 +81,12 @@ module.exports = {
 
     // Create portfolio collection
     const portfolio = [];
+    let totalPortfolioValue = 0;
     const generatePortfolio = async (rows, portfolio) => {
       for (row of rows) {
         const stock = await iex.lookup(row["Symbol"]);
+        totalPortfolioValue += row["TotalShares"] * stock.latestPrice;
+
         portfolio.push({
           "company": row["Stock_Name"],
           "symbol": row["Symbol"],
@@ -100,12 +103,17 @@ module.exports = {
       return portfolio;
     }
 
-    const userBalance = iex.usd(await findUserBalance(username));
+    const balance = await findUserBalance(username);
+    const userBalance = iex.usd(balance);
     const userPortfolio = await generatePortfolio(rows, portfolio);
+    totalPortfolioValue = iex.usd(totalPortfolioValue + balance);
+
+
 
     const response = {
       'portfolio': userPortfolio,
-      'balance': userBalance
+      'balance': userBalance,
+      'totalPortfolioValue': totalPortfolioValue
     }
     return response;
   },
