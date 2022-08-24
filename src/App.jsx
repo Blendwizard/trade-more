@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Home from './Home.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
+import Research from './Research.jsx';
 import Dashboard from './Dashboard.jsx';
 import RequireAuth from './RequireAuth.jsx';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
@@ -25,6 +26,13 @@ const App = () => {
           element={
             <RequireAuth redirectTo='/login'>
               <Dashboard />
+            </RequireAuth>
+          }>
+        </Route>
+        <Route path='/research'
+          element={
+            <RequireAuth redirectTo={'/login'}>
+              <Research />
             </RequireAuth>
           }>
         </Route>

@@ -116,4 +116,10 @@ module.exports = {
     return response;
   },
 
+  getStockData: async (symbol) => {
+    const iex = new IEX();
+    const stockInfo = await iex.lookup(symbol);
+    return stockInfo;
+  }
+
 }

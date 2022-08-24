@@ -1,6 +1,7 @@
 const models = require('../models');
 const helpers = require('./controller_helpers');
 
+
 module.exports = {
 
   registerUser: (req, res) => {
@@ -72,6 +73,12 @@ module.exports = {
       console.log('data sent for dashboard: ', data);
       res.status(200).send(data);
     })
+  },
+
+  getStockInfo: async (req, res, next) => {
+    await models.database.getStockData(req.query.symbol)
+    .then((data) => res.status(200).send(data))
+    // next();
   }
 
 }
