@@ -120,6 +120,28 @@ module.exports = {
     const iex = new IEX();
     const stockInfo = await iex.lookup(symbol);
     return stockInfo;
+  },
+
+  processOrder: async (order) => {
+    const { orderDetails, companySymbol } = order;
+    const { type } = orderDetails
+
+    if (type === 'buy') {
+      // Get user balance
+
+      // Get stock price
+
+      // Calculate total price
+
+      // Compare against current balance
+
+
+
+    } else if (type === 'sell') {
+
+    }
+
+    return 'Processed order!';
   }
 
 }

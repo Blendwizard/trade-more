@@ -84,7 +84,12 @@ module.exports = {
   },
 
   attemptSale: async (req, res) => {
-    console.log('Attemping sale: ', req.body)
+    const order = req.body;
+    await models.database.processOrder(order)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => console.log(err))
   }
 
 }
