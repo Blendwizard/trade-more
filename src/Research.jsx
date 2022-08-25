@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import StockData from "./ui_components/StockData";
-import SaleControls from "./SaleControls.jsx";
+import OrderControls from "./OrderControls.jsx";
 
 const Research = () => {
   const [symbol, setSymbol] = useState('');
@@ -15,7 +15,7 @@ const Research = () => {
     const stock = JSON.stringify({ "stock": symbol })
     const response = await fetch('/stock', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: stock
     });
     return response;
@@ -25,6 +25,7 @@ const Research = () => {
     getStockData(symbol)
       .then((response) => response.json())
       .then((data) => setStock(data))
+      .catch((err) => console.log('err: ', err))
 
     e.preventDefault();
   }
@@ -43,7 +44,7 @@ const Research = () => {
         stock !== null
           ? <>
               <StockData stock={stock} />
-              <SaleControls />
+              <OrderControls stock={stock} />
             </>
           : null
       }

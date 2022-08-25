@@ -10,6 +10,8 @@ const resolvePaths = (req, res) => {
 
 router.post('/stock', controller.getStockInfo);
 
+router.post('/trade', controller.attemptSale)
+
 router.get('/userDash', controller.fetchUserDashboard)
 
 router.get('/*', auth.secureRouteCheck, resolvePaths);

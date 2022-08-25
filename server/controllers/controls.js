@@ -80,6 +80,11 @@ module.exports = {
     .then((data) => {
       res.status(200).send(data);
     })
+    .catch((err) => res.status(400).send('Invalid stock'))
+  },
+
+  attemptSale: async (req, res) => {
+    console.log('Attemping sale: ', req.body)
   }
 
 }
