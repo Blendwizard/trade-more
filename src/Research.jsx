@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import StockData from "./ui_components/StockData";
+import SaleControls from "./SaleControls.jsx";
 
 const Research = () => {
   const [symbol, setSymbol] = useState('');
@@ -11,10 +12,10 @@ const Research = () => {
 
 
   const getStockData = async () => {
-    const stock = JSON.stringify({"stock": symbol})
+    const stock = JSON.stringify({ "stock": symbol })
     const response = await fetch('/stock', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: stock
     });
     return response;
@@ -22,8 +23,8 @@ const Research = () => {
 
   const handleSubmit = (e) => {
     getStockData(symbol)
-    .then((response) => response.json())
-    .then((data) => setStock(data))
+      .then((response) => response.json())
+      .then((data) => setStock(data))
 
     e.preventDefault();
   }
@@ -38,7 +39,14 @@ const Research = () => {
         </div>
         <input type="submit" value="Search"></input>
       </form>
-      {stock !== null ? <StockData stock={stock}/> : null}
+      {
+        stock !== null
+          ? <>
+              <StockData stock={stock} />
+              <SaleControls />
+            </>
+          : null
+      }
     </>
   )
 };

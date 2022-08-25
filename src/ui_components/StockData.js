@@ -3,7 +3,6 @@ import Format from "../helpers/format";
 
 const StockData = ( { stock } ) => {
   const format = new Format();
-  console.log(stock)
   return (
     <>
       <h3>Company</h3>
