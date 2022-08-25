@@ -8,7 +8,7 @@ const resolvePaths = (req, res) => {
   res.sendFile((path.join(__dirname, '../public/index.html')));
 }
 
-router.get('/research', controller.getStockInfo);
+router.post('/stock', controller.getStockInfo);
 
 router.get('/userDash', controller.fetchUserDashboard)
 

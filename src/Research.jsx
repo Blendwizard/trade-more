@@ -7,15 +7,23 @@ const Research = () => {
     setSymbol(e.target.value);
   }
 
-  const handleSubmit = (e) => {
-    const options = {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'},
-    }
-    fetch(`/research/${symbol}`, options)
-    .then((res) => console.log(res))
 
-    // e.preventDefault();
+  const getStockData = async () => {
+    const stock = JSON.stringify({"stock": symbol})
+    const response = await fetch('/stock', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: stock
+    });
+    return response;
+  }
+
+  const handleSubmit = (e) => {
+    getStockData(symbol)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+
+    e.preventDefault();
   }
 
   return (

@@ -76,9 +76,10 @@ module.exports = {
   },
 
   getStockInfo: async (req, res, next) => {
-    await models.database.getStockData(req.query.symbol)
-    .then((data) => res.status(200).send(data))
-    // next();
+    await models.database.getStockData(req.body.stock)
+    .then((data) => {
+      res.status(200).send(data);
+    })
   }
 
 }
