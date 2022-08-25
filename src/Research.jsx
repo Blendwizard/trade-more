@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import StockData from "./ui_components/StockData";
 
 const Research = () => {
   const [symbol, setSymbol] = useState('');
+  const [stock, setStock] = useState(null);
 
   const handleChange = (e) => {
     setSymbol(e.target.value);
@@ -21,7 +23,7 @@ const Research = () => {
   const handleSubmit = (e) => {
     getStockData(symbol)
     .then((response) => response.json())
-    .then((data) => console.log(data))
+    .then((data) => setStock(data))
 
     e.preventDefault();
   }
@@ -34,9 +36,9 @@ const Research = () => {
           <label htmlFor="symbol">Symbol: </label>
           <input onChange={handleChange} type="text" id="symbol" name="symbol" autoComplete="off" required></input>
         </div>
-
         <input type="submit" value="Search"></input>
       </form>
+      {stock !== null ? <StockData stock={stock}/> : null}
     </>
   )
 };
