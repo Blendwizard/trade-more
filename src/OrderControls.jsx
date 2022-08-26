@@ -24,8 +24,12 @@ const OrderControls = ( { stock } ) => {
       headers: {'Content-Type': 'application/json'},
       body: data
     };
-    const response = await fetch('/trade', options);
-    return response;
+    try {
+      const response = await fetch('/trade', options);
+      return response;
+    } catch (err) {
+      console.log('caught err: ', err)
+    }
   }
 
 
@@ -36,7 +40,16 @@ const OrderControls = ( { stock } ) => {
       companySymbol: stock.symbol
     };
     processOrder(orderData)
-    .then((res) => console.log(res))
+    .then((response) => {
+      console.log(response)
+      if (!response.ok) {
+        response.json()
+        .then((err) => alert(err))
+      } else {
+        alert('Stock has been purchased!');
+      }
+    })
+    .catch((error) => alert(error))
     e.preventDefault();
   };
 

@@ -20,10 +20,11 @@ CREATE TABLE "Passwords" (
 
 CREATE TABLE "Transactions" (
   "Trans_ID" SERIAL NOT NULL,
-  "Stock_Name" varchar(20),
+  "Stock_Name" varchar(150),
   "Symbol" varchar(10),
   "Quantity" int,
   "Sale_Type" varchar(10),
+  "Stock_Price" real,
   "Value" real,
   "User_ID" int,
   PRIMARY KEY ("Trans_ID"),

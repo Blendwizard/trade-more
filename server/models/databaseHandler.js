@@ -137,7 +137,6 @@ const processOrder = async (order, username) => {
     if (orderPrice > balance) {
       // Not enough funds
 
-
     } else if (orderPrice <= balance) {
       // Funds can be safely removed
       balance -= orderPrice;
