@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS "Passwords", "Sessions", "Transactions", "Users";
 CREATE TABLE "Users" (
   "User_ID" SERIAL NOT NULL,
   "Username" varchar(10),
-  "Cash_Balance" int DEFAULT 10000,
+  "Cash_Balance" real DEFAULT 10000,
   "Created_At" date DEFAULT current_date,
   "Portfolio_ID" SERIAL NOT NULL,
   PRIMARY KEY ("User_ID")
@@ -24,7 +24,7 @@ CREATE TABLE "Transactions" (
   "Symbol" varchar(10),
   "Quantity" int,
   "Sale_Type" varchar(10),
-  "Value" int,
+  "Value" real,
   "User_ID" int,
   PRIMARY KEY ("Trans_ID"),
   CONSTRAINT "FK_Transaction.User_ID"

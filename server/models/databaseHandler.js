@@ -118,6 +118,7 @@ const getStockData = async (symbol) => {
   return stockInfo;
 };
 
+// Order processing for request to buy/sell stocks
 const processOrder = async (order, username) => {
   const { orderDetails, companySymbol } = order;
   const { type, quantity } = orderDetails;
@@ -127,7 +128,7 @@ const processOrder = async (order, username) => {
     const iex = new IEX();
 
     // Get user balance
-    const balance = await findUserBalance(username);
+    let balance = await findUserBalance(username);
     // Get stock data
     const stock = await iex.lookup(companySymbol);
     // Calculate total order price
@@ -137,14 +138,19 @@ const processOrder = async (order, username) => {
       // Not enough funds
 
 
-    } else if (orderPrice < balance) {
+    } else if (orderPrice <= balance) {
       // Funds can be safely removed
-      const query = `INSERT INTO "Transactions"(
+      balance -= orderPrice;
+      const queryOne = `INSERT INTO "Transactions"(
         "Stock_Name", "Symbol", "Quantity", "Sale_Type", "Value", "User_ID"
       )
       VALUES ($1, $2, $3, $4, $5, (SELECT "User_ID" from "Users" WHERE "Username" = $6))`;
-      return await pool.query(query, [stock.companyName, stock.symbol, quantity, type, orderPrice, username])
-      .then(console.log("Stock successfully purchased."))
+      await pool.query(queryOne, [stock.companyName, stock.symbol, quantity, type, orderPrice, username])
+      .then(async () => {
+        console.log("Stock successfully purchased, updating balance");
+        const queryTwo = `UPDATE "Users" SET "Cash_Balance" = $1 WHERE "Username" = $2`;
+        return await pool.query(queryTwo, [balance, username]);
+      })
     }
 
 
