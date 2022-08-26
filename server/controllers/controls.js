@@ -90,7 +90,7 @@ module.exports = {
       .then((data) => {
         res.status(200).send(data);
       })
-      .catch((err) => res.status(400).send('Invalid stock'))
+      .catch((err) => res.status(400).send(JSON.stringify('getStockInfo(): Invalid stock')))
   },
 
   attemptSale: async (req, res) => {
@@ -103,13 +103,8 @@ module.exports = {
     await models.database.processOrder(order, username)
       .then((result) => {
         console.log(result)
-        if (!result.error) {
-          res.status(200).send(result);
-        } else {
-          res.status(400).send(JSON.stringify(result.error))
-        }
+        res.status(200).send(result);
       })
-
 
   }
 

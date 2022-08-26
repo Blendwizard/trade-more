@@ -7,13 +7,8 @@ class IEX {
   }
 
   lookup = async (symbol) => {
-    try {
       const response = await axios.get(`https://cloud.iexapis.com/v1/stock/${symbol}/quote?token=${process.env.TOKEN}`);
       return response.data;
-    } catch(err) {
-      console.log('firing api handl')
-      return null;
-    }
   }
 
   usd = (value) => {
