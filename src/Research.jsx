@@ -34,17 +34,6 @@ const Research = () => {
     })
     .catch((err) => console.log('Err: ', err))
 
-    // getStockData(symbol)
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       alert('Stock information could not be found.');
-    //     } else {
-    //       return response.json();
-    //     }
-    //   })
-    //   .then((data) => setStock(data))
-    //   .catch((err) => console.log('err: ', err))
-
     e.preventDefault();
   }
 

@@ -41,10 +41,10 @@ const OrderControls = ( { stock } ) => {
     };
     processOrder(orderData)
     .then((response) => {
-      console.log(response)
+
       if (!response.ok) {
         response.json()
-        .then((err) => alert(err))
+        .then((err) =>alert(err.message))
       } else {
         alert('Stock has been purchased!');
       }

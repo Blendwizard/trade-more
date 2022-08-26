@@ -90,7 +90,7 @@ module.exports = {
       .then((data) => {
         res.status(200).send(data);
       })
-      .catch((err) => res.status(400).send(JSON.stringify('getStockInfo(): Invalid stock')))
+      .catch((err) => res.status(400).json(err))
   },
 
   attemptSale: async (req, res) => {
@@ -100,11 +100,14 @@ module.exports = {
     const username = req.headers.cookie.slice(start, end);
     const order = req.body;
 
-    await models.database.processOrder(order, username)
-      .then((result) => {
-        console.log(result)
-        res.status(200).send(result);
-      })
+    try {
+      const result = await models.database.processOrder(order, username);
+      res.status(200).send(result);
+    } catch (err) {
+      console.log('Sale error: ', err);
+      res.status(400).json(err);
+    }
+
 
   }
 

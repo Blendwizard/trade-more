@@ -1,6 +1,8 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 const IEX = require('./apiHandler.js');
+const CustomError = require('./errorHandlers.js');
+
 
 const pool = new Pool({
   host: 'localhost',
@@ -118,6 +120,7 @@ const getStockData = async (symbol) => {
   return stockInfo;
 };
 
+
 // Order processing for request to buy/sell stocks
 const processOrder = async (order, username) => {
   const { orderDetails, companySymbol } = order;
@@ -136,6 +139,7 @@ const processOrder = async (order, username) => {
     // Compare against current balance
     if (orderPrice > balance) {
       // Not enough funds
+      throw new CustomError('Insufficient funds');
 
     } else if (orderPrice <= balance) {
       // Funds can be safely removed
