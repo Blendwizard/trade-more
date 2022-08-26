@@ -76,7 +76,7 @@ module.exports = {
     let end = req.headers.cookie.indexOf(';');
     end = end > start ? end : end + 100;
     const username = req.headers.cookie.slice(start, end);
-    console.log('username: ', req.headers.cookie.slice(21));
+    console.log('username: ', username);
     Promise.all([
       models.database.fetchUserDashboardData(username),
     ])
