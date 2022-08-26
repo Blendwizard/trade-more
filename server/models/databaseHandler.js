@@ -59,7 +59,7 @@ const findUserBalance = async (username) => {
 };
 
 const findStocksHeld = async (username) => {
-  const query = `SELECT "Stock_Name", "Symbol", AVG("Value")::NUMERIC(10, 2) AS "AveragePrice", SUM("Quantity") AS "TotalShares"
+  const query = `SELECT "Stock_Name", "Symbol", SUM("Value")::NUMERIC(10, 2) AS "TotalValue", SUM("Quantity") AS "TotalShares"
     FROM "Transactions"
     WHERE "User_ID" = (SELECT "User_ID" FROM "Users" WHERE "Username" = $1)
     GROUP BY "Stock_Name", "Symbol"
@@ -83,16 +83,15 @@ const fetchUserDashboardData = async (username) => {
     for (row of rows) {
       const stock = await iex.lookup(row["Symbol"]);
       totalPortfolioValue += row["TotalShares"] * stock.latestPrice;
-
       portfolio.push({
         "company": row["Stock_Name"],
         "symbol": row["Symbol"],
         "totalShares": row["TotalShares"],
-        "averageCost": iex.usd(row["AveragePrice"]),
+        "averageCost": iex.usd((row["TotalValue"] / row["TotalShares"])),
         "currentPrice": iex.usd(stock.latestPrice),
-        "singleDelta": iex.usd((stock.latestPrice - row["AveragePrice"])),
+        "singleDelta": iex.usd((stock.latestPrice - (row["TotalValue"] / row["TotalShares"]))),
         "totalDelta": iex.usd(
-          (stock.latestPrice * row["TotalShares"]) - (row["AveragePrice"] * row["TotalShares"])
+          (stock.latestPrice * row["TotalShares"]) - ((row["TotalValue"] / row["TotalShares"]) * row["TotalShares"])
         ),
         "currentTotalValue": iex.usd((row["TotalShares"] * stock.latestPrice))
       })

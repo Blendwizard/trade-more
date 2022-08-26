@@ -97,7 +97,8 @@ module.exports = {
   attemptSale: async (req, res) => {
     const start = req.headers.cookie.indexOf('username=') + 9;
     let end = req.headers.cookie.indexOf(';');
-    end = end > start ? end : end + 100;    const username = req.headers.cookie.slice(start, end);
+    end = end > start ? end : end + 100;
+    const username = req.headers.cookie.slice(start, end);
     const order = req.body;
     await models.database.processOrder(order, username)
     .then((result) => {
