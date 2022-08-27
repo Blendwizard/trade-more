@@ -33,7 +33,6 @@ const Research = () => {
       }
     })
     .catch((err) => console.log('Err: ', err))
-
     e.preventDefault();
   }
 

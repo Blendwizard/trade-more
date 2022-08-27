@@ -39,9 +39,9 @@ const OrderControls = ( { stock } ) => {
       orderDetails: order,
       companySymbol: stock.symbol
     };
+
     processOrder(orderData)
     .then((response) => {
-
       if (!response.ok) {
         response.json()
         .then((err) =>alert(err.message))

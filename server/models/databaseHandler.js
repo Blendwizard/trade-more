@@ -70,6 +70,17 @@ const findStocksHeld = async (username) => {
   return stocks.rows;
 };
 
+const findQuantityOwned = async (username, symbol) => {
+  const query = `
+  SELECT "Symbol", SUM("Quantity") AS "SharesHeld"
+  FROM "Transactions"
+  WHERE "User_ID" = (SELECT "User_ID" FROM "Users" WHERE "Username" = $1)
+  AND "Symbol" = $2
+  GROUP BY "Symbol" HAVING SUM("Quantity") > 0`;
+  const quantity = await pool.query(query, [username, symbol]);
+  return quantity.rows[0];
+}
+
 // Lookup all data required for user dashboard
 const fetchUserDashboardData = async (username) => {
 
@@ -125,24 +136,19 @@ const getStockData = async (symbol) => {
 const processOrder = async (order, username) => {
   const { orderDetails, companySymbol } = order;
   const { type, quantity } = orderDetails;
+  const iex = new IEX();
 
   if (type === 'buy') {
-    // Create new API object to query stock market
-    const iex = new IEX();
 
-    // Get user balance
     let balance = await findUserBalance(username);
-    // Get stock data
     const stock = await iex.lookup(companySymbol);
-    // Calculate total order price
+
     const orderPrice = (quantity * stock.latestPrice);
-    // Compare against current balance
+
     if (orderPrice > balance) {
-      // Not enough funds
       throw new CustomError('Insufficient funds');
 
     } else if (orderPrice <= balance) {
-      // Funds can be safely removed
       balance -= orderPrice;
       const queryOne = `INSERT INTO "Transactions"(
         "Stock_Name", "Symbol", "Quantity", "Sale_Type", "Value", "User_ID"
@@ -158,6 +164,19 @@ const processOrder = async (order, username) => {
 
 
   } else if (type === 'sell') {
+    console.log('Sell order in process...')
+    let balance = await findUserBalance(username);
+    const userStockData = await findQuantityOwned(username, companySymbol);
+    const stock = await iex.lookup(companySymbol);
+    const sellPrice = (quantity * stock.latestPrice);
+
+    if (Number(userStockData["SharesHeld"]) < Number(quantity)) {
+      throw new CustomError('Not enough shares to cover sale.');
+    } else {
+
+    }
+
+    console.log("amount owned:",  userStockData, " Sale Price: ", sellPrice.toFixed(2));
 
   }
 
