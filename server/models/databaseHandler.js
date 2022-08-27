@@ -155,11 +155,11 @@ const processOrder = async (order, username) => {
       )
       VALUES ($1, $2, $3, $4, $5, (SELECT "User_ID" from "Users" WHERE "Username" = $6))`;
       await pool.query(queryOne, [stock.companyName, stock.symbol, quantity, type, orderPrice, username])
-      .then(async () => {
-        console.log("Stock successfully purchased, updating balance");
-        const queryTwo = `UPDATE "Users" SET "Cash_Balance" = $1 WHERE "Username" = $2`;
-        return await pool.query(queryTwo, [balance, username]);
-      })
+        .then(async () => {
+          console.log("Stock successfully purchased, updating balance");
+          const queryTwo = `UPDATE "Users" SET "Cash_Balance" = $1 WHERE "Username" = $2`;
+          return await pool.query(queryTwo, [balance, username]);
+        })
     }
 
 
@@ -173,10 +173,21 @@ const processOrder = async (order, username) => {
     if (Number(userStockData["SharesHeld"]) < Number(quantity)) {
       throw new CustomError('Not enough shares to cover sale.');
     } else {
-
+      balance += Number(sellPrice.toFixed(2));
+      const reflectedQuantity = (0 - quantity);
+      const query = `
+      INSERT INTO "Transactions"
+      ("Stock_Name", "Symbol", "Quantity", "Sale_Type", "Value", "User_ID")
+      VALUES ($1, $2, $3, $4, $5, (SELECT "User_ID" from "Users" WHERE "Username" = $6))`;
+      await pool.query(query, [stock.companyName, stock.symbol, reflectedQuantity, type, sellPrice, username])
+      .then(async (res) => {
+        console.log(`Sold ${reflectedQuantity} shares of ${stock.companyName} for ${sellPrice}.`);
+        const queryTwo = `UPDATE "Users" SET "Cash_Balance" = $1 WHERE "Username" = $2`;
+        await pool.query(queryTwo, [balance, username]);
+      });
     }
 
-    console.log("amount owned:",  userStockData, " Sale Price: ", sellPrice.toFixed(2));
+    console.log("amount owned:", userStockData, " Sale Price: ", sellPrice.toFixed(2));
 
   }
 
