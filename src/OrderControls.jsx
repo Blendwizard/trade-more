@@ -8,7 +8,7 @@ const OrderControls = ( { stock } ) => {
   const [order, setOrder] = useState({ type: null, quantity: 0 });
 
   const selectOrderType = (e) => {
-     console.log(e.target.value)
+    console.log(e.target.value)
     setOrder({type: e.target.value, quantity: order.quantity})
 
   };

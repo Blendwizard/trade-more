@@ -34,14 +34,18 @@ module.exports = {
 
   logoutUser: (req, res) => {
     const sessionID = helpers.parseCookie(req.headers.cookie, 'id');
-    models.database.clearSession(sessionID)
-      .then((success) => {
-        // Destroy cookies
-        res.cookie('auth', '', { maxAge: 1 });
-        res.cookie('username', '', { maxAge: 1 });
-        res.redirect('/');
-      })
-      .catch((err) => res.send(err))
+    if (sessionID !== false) {
+      models.database.clearSession(sessionID)
+        .then((success) => {
+          // Destroy cookies
+          res.cookie('auth', '', { maxAge: 1 });
+          res.cookie('username', '', { maxAge: 1 });
+          res.redirect('/');
+        })
+        .catch((err) => res.send(err))
+    } else {
+      res.redirect('/');
+    }
   },
 
 
@@ -73,6 +77,7 @@ module.exports = {
   getStockInfo: (req, res) => {
     models.database.getStockData(req.body.stock)
       .then((data) => {
+        console.log('data? ', data)
         res.status(200).send(data);
       })
       .catch((err) => res.status(400).json(err))

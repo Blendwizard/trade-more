@@ -13,7 +13,6 @@ module.exports = {
   },
 
   generateSessionID: (username) => {
-
     const session = [];
     for (let i = 0; i < 5; i++) {
       session.push(Math.floor(Math.random() * 9));
@@ -22,11 +21,14 @@ module.exports = {
     const options = {
       maxAge: 300000
     }
-
     return { session: session.join(''), options: options };
   },
 
   parseCookie: (cookie, key) => {
+    if (cookie === undefined) {
+      return false;
+    }
+
     if (key === 'id') {
       const start = cookie.indexOf('auth=') + 5;
       let end = cookie.indexOf(';');

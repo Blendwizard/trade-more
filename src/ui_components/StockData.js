@@ -8,7 +8,7 @@ const StockData = ( { stock } ) => {
       <h3>Company</h3>
       <p>{stock.companyName}</p>
       <h4>Price</h4>
-      <p>{format.usd(stock.iexRealtimePrice)}</p>
+      <p>{format.usd(stock.latestPrice)}</p>
       <h4>52-Week High</h4>
       <p>{format.usd(stock.week52High)}</p>
       <h4>52-Week Low</h4>

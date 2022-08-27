@@ -38,14 +38,3 @@ CREATE TABLE "Sessions" (
   "Session_ID" int,
   "Username" varchar(10)
 );
-
--- -- Test Portfolios table
--- CREATE TABLE "Portfolios" (
---   "Portfolio_ID" int NOT NULL,
-
-
---   PRIMARY KEY ("Portfolio_ID"),
---     FOREIGN KEY ("Portfolio_ID")
---       REFERENCES "Users"("User_ID");
--- )
-

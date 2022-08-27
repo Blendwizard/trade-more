@@ -82,6 +82,9 @@ const fetchUserDashboardData = async (username) => {
     for (row of rows) {
       const stock = await iex.lookup(row["Symbol"]);
       totalPortfolioValue += row["TotalShares"] * stock.latestPrice;
+
+      console.log(`${row["Symbol"]}: ${row["TotalValue"]} divided by ${row["TotalShares"]} = ${(row["TotalValue"] / row["TotalShares"])}`);
+
       portfolio.push({
         "company": row["Stock_Name"],
         "symbol": row["Symbol"],
@@ -140,13 +143,13 @@ const processOrder = async (order, username) => {
     let balance = await findUserBalance(username);
     let userStockData = await findQuantityOwned(username, companySymbol);
     const stock = await iex.lookup(companySymbol);
-    const sellPrice = (quantity * stock.latestPrice);
+    const sellPrice = (-1 * (quantity * stock.latestPrice));
     userStockData = userStockData === undefined ? { "SharesHeld": 0 } : userStockData;
 
     if (Number(userStockData["SharesHeld"]) < Number(quantity)) {
       throw new CustomError('Not enough shares to cover sale.');
     } else {
-      balance += Number(sellPrice.toFixed(2));
+      balance += Number(-1 * (sellPrice.toFixed(2)));
       const reflectedQuantity = (0 - quantity);
       await pool.query(queries.sale.newTransaction, [stock.companyName, stock.symbol, reflectedQuantity, type, sellPrice, username])
         .then(async (res) => {
