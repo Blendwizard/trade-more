@@ -31,9 +31,9 @@ const Dashboard = () => {
     .then((response) => response.json())
     .then((data) => {
       console.log('data: ', data);
-      setBalance(data[0].balance);
-      setStocks(data[0].portfolio);
-      setTotal(data[0].totalPortfolioValue)
+      setBalance(data.balance);
+      setStocks(data.portfolio);
+      setTotal(data.totalPortfolioValue)
     })
   };
 

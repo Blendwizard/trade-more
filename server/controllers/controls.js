@@ -7,8 +7,8 @@ module.exports = {
   registerUser: (req, res) => {
     ({ username, password } = req.body);
     models.database.insertNewUser({ user: username, pass: password })
-    .then((success) => res.redirect('/login'))
-    .catch((err) => res.send("Failed"))
+      .then((success) => res.redirect('/login'))
+      .catch((err) => res.send("Failed"))
   },
 
   attemptLogin: (req, res) => {
@@ -68,23 +68,21 @@ module.exports = {
     return isValidSession;
   },
 
-  fetchUserDashboard: async (req, res) => {
+  fetchUserDashboard: (req, res) => {
     const start = req.headers.cookie.indexOf('username=') + 9;
     let end = req.headers.cookie.indexOf(';');
     end = end > start ? end : end + 100;
     const username = req.headers.cookie.slice(start, end);
     console.log('username: ', username);
-    Promise.all([
-      models.database.fetchUserDashboardData(username),
-    ])
+    models.database.fetchUserDashboardData(username)
       .then((data) => {
         console.log('data sent for dashboard: ', data);
         res.status(200).send(data);
       })
   },
 
-  getStockInfo: async (req, res, next) => {
-    await models.database.getStockData(req.body.stock)
+  getStockInfo: (req, res) => {
+    models.database.getStockData(req.body.stock)
       .then((data) => {
         res.status(200).send(data);
       })
