@@ -7,8 +7,8 @@ module.exports = {
   registerUser: (req, res) => {
     ({ username, password } = req.body);
     models.database.insertNewUser({ user: username, pass: password })
-      .then((success) => res.redirect('/login'))
-      .catch((err) => res.send("Failed"))
+    .then((success) => res.redirect('/login'))
+    .catch((err) => res.send("Failed"))
   },
 
   attemptLogin: (req, res) => {
@@ -24,7 +24,6 @@ module.exports = {
               res.cookie('username', username, options);
               console.log('...redirecting to dashboard...');
               res.redirect('/dashboard');
-              // res.sendStatus(200);
             })
         } else {
           res.redirect(401, '/login');
@@ -34,7 +33,6 @@ module.exports = {
   },
 
   logoutUser: (req, res) => {
-
     const start = req.headers.cookie.indexOf('auth=') + 5;
     let end = req.headers.cookie.indexOf(';');
     end = end > start ? end : end + 100;

@@ -172,8 +172,6 @@ const processOrder = async (order, username) => {
 
     userStockData = userStockData === undefined ? {"SharesHeld": 0} : userStockData;
 
-    console.log(userStockData);
-
     if (Number(userStockData["SharesHeld"]) < Number(quantity)) {
       throw new CustomError('Not enough shares to cover sale.');
     } else {
