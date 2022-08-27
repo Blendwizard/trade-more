@@ -166,9 +166,13 @@ const processOrder = async (order, username) => {
   } else if (type === 'sell') {
     console.log('Sell order in process...')
     let balance = await findUserBalance(username);
-    const userStockData = await findQuantityOwned(username, companySymbol);
+    let userStockData = await findQuantityOwned(username, companySymbol);
     const stock = await iex.lookup(companySymbol);
     const sellPrice = (quantity * stock.latestPrice);
+
+    userStockData = userStockData === undefined ? {"SharesHeld": 0} : userStockData;
+
+    console.log(userStockData);
 
     if (Number(userStockData["SharesHeld"]) < Number(quantity)) {
       throw new CustomError('Not enough shares to cover sale.');
