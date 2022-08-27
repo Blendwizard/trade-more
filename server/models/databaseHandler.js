@@ -63,7 +63,6 @@ const findQuantityOwned = async (username, symbol) => {
   return quantity.rows[0];
 }
 
-
 const getStockData = async (symbol) => {
   const iex = new IEX();
   const stockInfo = await iex.lookup(symbol);

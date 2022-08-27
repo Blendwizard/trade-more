@@ -23,6 +23,22 @@ module.exports = {
       maxAge: 300000
     }
 
-    return {session: session.join(''), options: options};
+    return { session: session.join(''), options: options };
+  },
+
+  parseCookie: (cookie, key) => {
+    if (key === 'id') {
+      const start = cookie.indexOf('auth=') + 5;
+      let end = cookie.indexOf(';');
+      end = end > start ? end : end + 100;
+      return cookie.slice(start, end);
+    } else if (key === 'username') {
+      const start = cookie.indexOf('username=') + 9;
+      let end = cookie.indexOf(';');
+      end = end > start ? end : end + 100;
+      return cookie.slice(start, end);
+    } else {
+      return 'Error in cookie parser...';
+    }
   }
 }

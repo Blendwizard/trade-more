@@ -33,10 +33,7 @@ module.exports = {
   },
 
   logoutUser: (req, res) => {
-    const start = req.headers.cookie.indexOf('auth=') + 5;
-    let end = req.headers.cookie.indexOf(';');
-    end = end > start ? end : end + 100;
-    const sessionID = req.headers.cookie.slice(start, end);
+    const sessionID = helpers.parseCookie(req.headers.cookie, 'id');
     models.database.clearSession(sessionID)
       .then((success) => {
         // Destroy cookies
@@ -49,12 +46,7 @@ module.exports = {
 
 
   checkSession: async (req, res) => {
-    console.log('Request headers: ', req.headers.cookie);
-    const start = req.headers.cookie.indexOf('auth=') + 5;
-    let end = req.headers.cookie.indexOf(';');
-    end = end > start ? end : end + 100;
-
-    const sessionID = req.headers.cookie.slice(start, end);
+    const sessionID = helpers.parseCookie(req.headers.cookie, 'id');
     console.log('Checking session ID: ', sessionID);
     let isValidSession = null;
     await models.database.lookupSession(sessionID)
@@ -69,10 +61,7 @@ module.exports = {
   },
 
   fetchUserDashboard: (req, res) => {
-    const start = req.headers.cookie.indexOf('username=') + 9;
-    let end = req.headers.cookie.indexOf(';');
-    end = end > start ? end : end + 100;
-    const username = req.headers.cookie.slice(start, end);
+    const username = helpers.parseCookie(req.headers.cookie, 'username')
     console.log('username: ', username);
     models.database.fetchUserDashboardData(username)
       .then((data) => {
@@ -90,10 +79,7 @@ module.exports = {
   },
 
   attemptSale: async (req, res) => {
-    const start = req.headers.cookie.indexOf('username=') + 9;
-    let end = req.headers.cookie.indexOf(';');
-    end = end > start ? end : end + 100;
-    const username = req.headers.cookie.slice(start, end);
+    const username = helpers.parseCookie(req.headers.cookie, 'username')
     const order = req.body;
 
     try {
