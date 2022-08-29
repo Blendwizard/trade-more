@@ -8,9 +8,7 @@ const OrderControls = ( { stock } ) => {
   const [order, setOrder] = useState({ type: null, quantity: 0 });
 
   const selectOrderType = (e) => {
-    console.log(e.target.value)
     setOrder({type: e.target.value, quantity: order.quantity})
-
   };
 
   const handleChange = (e) => {
@@ -46,7 +44,7 @@ const OrderControls = ( { stock } ) => {
         response.json()
         .then((err) =>alert(err.message))
       } else {
-        alert('Stock has been purchased!');
+        alert('Order has been completed');
       }
     })
     .catch((error) => alert(error))

@@ -19,12 +19,11 @@ pool.connect((err, res) => {
 });
 
 
-
 // Create account for new user
 const insertNewUser = async (input) => {
   return await pool.query(queries.insertUser, [input.user, input.pass])
     .then(console.log("Successfully inserted Users and Passwords to database!"))
-}
+};
 
 // Retrieve password for a specific user ID
 const validateCredentials = async (credentials) => {
@@ -61,7 +60,7 @@ const findStocksHeld = async (username) => {
 const findQuantityOwned = async (username, symbol) => {
   const quantity = await pool.query(queries.findQuantity, [username, symbol]);
   return quantity.rows[0];
-}
+};
 
 const getStockData = async (symbol) => {
   const iex = new IEX();
