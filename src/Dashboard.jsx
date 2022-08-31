@@ -43,11 +43,14 @@ const Dashboard = () => {
     <>
     <h2>Dashboard!</h2>
     <nav>
-        <Link to="/research">Research</Link>
+      <Link to="/research">Research</Link>
     </nav>
     <h3>Balance: {balance} </h3>
     <h3>Total Assets: {total}</h3>
     {stocks !== null ?  <StockTable stocks={stocks}></StockTable> : <BarLoader height={15} />}
+    <nav>
+      <Link to="/account">Add Funds</Link>
+    </nav>
     <button onClick={handleLogout}>Logout</button>
     </>
   )
