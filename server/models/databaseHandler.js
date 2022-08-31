@@ -82,7 +82,7 @@ const fetchUserDashboardData = async (username) => {
       const stock = await iex.lookup(row["Symbol"]);
       totalPortfolioValue += row["TotalShares"] * stock.latestPrice;
 
-      console.log(`${row["Symbol"]}: ${row["TotalValue"]} divided by ${row["TotalShares"]} = ${(row["TotalValue"] / row["TotalShares"])}`);
+      // console.log(`${row["Symbol"]}: ${row["TotalValue"]} divided by ${row["TotalShares"]} = ${(row["TotalValue"] / row["TotalShares"])}`);
 
       portfolio.push({
         "company": row["Stock_Name"],
@@ -156,18 +156,14 @@ const processOrder = async (order, username) => {
           await pool.query(queries.updateBalance, [balance, username]);
         });
     }
-    console.log("amount owned:", userStockData, " Sale Price: ", sellPrice.toFixed(2));
   }
 
   return 'Processed order!';
 };
 
 const addFunds = async (amount, username) => {
-  console.log('amount: ', amount, 'user: ', username);
   let balance = Number(await findUserBalance(username));
   balance += Number(amount);
-  console.log('balance: ', balance)
-
   return await pool.query(queries.updateBalance, [balance, username]);
 };
 

@@ -97,11 +97,14 @@ module.exports = {
   },
 
   addFunds: async (req, res) => {
-    console.log(req.body)
     const { amount } = req.body;
     const username = helpers.parseCookie(req.headers.cookie, 'username');
-    const result = await models.database.addFunds(amount, username);
-    console.log(result)
+    try {
+      const result = await models.database.addFunds(amount, username);
+      res.status(200).send('success');
+    } catch {
+      res.status(400).send('error');
+    }
   }
 
 }
