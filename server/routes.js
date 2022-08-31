@@ -8,6 +8,8 @@ const resolvePaths = (req, res) => {
   res.sendFile((path.join(__dirname, '../public/index.html')));
 }
 
+router.post('/addFunds', controller.addFunds)
+
 router.post('/stock', controller.getStockInfo);
 
 router.post('/trade', controller.attemptSale)

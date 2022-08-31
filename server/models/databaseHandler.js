@@ -131,10 +131,10 @@ const processOrder = async (order, username) => {
       throw new CustomError('Insufficient funds');
     } else if (orderPrice <= balance) {
       balance -= orderPrice;
-      await pool.query(queries.purchase.newTransaction, [stock.companyName, stock.symbol, quantity, type, orderPrice, username])
+      await pool.query(queries.newTransaction, [stock.companyName, stock.symbol, quantity, type, orderPrice, username])
         .then(async () => {
           console.log("Stock successfully purchased, updating balance");
-          return await pool.query(queries.purchase.updateBalance, [balance, username]);
+          return await pool.query(queries.updateBalance, [balance, username]);
         })
     }
   } else if (type === 'sell') {
@@ -150,10 +150,10 @@ const processOrder = async (order, username) => {
     } else {
       balance += Number(-1 * (sellPrice.toFixed(2)));
       const reflectedQuantity = (0 - quantity);
-      await pool.query(queries.sale.newTransaction, [stock.companyName, stock.symbol, reflectedQuantity, type, sellPrice, username])
+      await pool.query(queries.newTransaction, [stock.companyName, stock.symbol, reflectedQuantity, type, sellPrice, username])
         .then(async (res) => {
           console.log(`Sold ${reflectedQuantity} shares of ${stock.companyName} for ${sellPrice}.`);
-          await pool.query(queries.sale.updateBalance, [balance, username]);
+          await pool.query(queries.updateBalance, [balance, username]);
         });
     }
     console.log("amount owned:", userStockData, " Sale Price: ", sellPrice.toFixed(2));
@@ -162,5 +162,14 @@ const processOrder = async (order, username) => {
   return 'Processed order!';
 };
 
+const addFunds = async (amount, username) => {
+  console.log('amount: ', amount, 'user: ', username);
+  let balance = Number(await findUserBalance(username));
+  balance += Number(amount);
+  console.log('balance: ', balance)
 
-module.exports = { insertNewUser, validateCredentials, createSession, lookupSession, clearSession, fetchUserDashboardData, getStockData, processOrder }
+  return await pool.query(queries.updateBalance, [balance, username]);
+};
+
+
+module.exports = { insertNewUser, validateCredentials, createSession, lookupSession, clearSession, fetchUserDashboardData, getStockData, processOrder, addFunds }

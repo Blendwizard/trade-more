@@ -77,14 +77,14 @@ module.exports = {
   getStockInfo: (req, res) => {
     models.database.getStockData(req.body.stock)
       .then((data) => {
-        console.log('data? ', data)
+        console.log('data? ', data);
         res.status(200).send(data);
       })
-      .catch((err) => res.status(400).json(err))
+      .catch((err) => res.status(400).json(err));
   },
 
   attemptSale: async (req, res) => {
-    const username = helpers.parseCookie(req.headers.cookie, 'username')
+    const username = helpers.parseCookie(req.headers.cookie, 'username');
     const order = req.body;
 
     try {
@@ -94,8 +94,14 @@ module.exports = {
       console.log('Sale error: ', err);
       res.status(400).json(err);
     }
+  },
 
-
+  addFunds: async (req, res) => {
+    console.log(req.body)
+    const { amount } = req.body;
+    const username = helpers.parseCookie(req.headers.cookie, 'username');
+    const result = await models.database.addFunds(amount, username);
+    console.log(result)
   }
 
 }

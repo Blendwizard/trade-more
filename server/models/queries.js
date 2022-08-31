@@ -28,21 +28,14 @@ const queries = {
   AND "Symbol" = $2
   GROUP BY "Symbol" HAVING SUM("Quantity") > 0`,
 
-  purchase: {
-    newTransaction: `
+  newTransaction: `
     INSERT INTO "Transactions"("Stock_Name", "Symbol", "Quantity", "Sale_Type", "Value", "User_ID")
     VALUES ($1, $2, $3, $4, $5, (SELECT "User_ID" from "Users" WHERE "Username" = $6))`,
-    updateBalance: `
+  updateBalance: `
     UPDATE "Users" SET "Cash_Balance" = $1 WHERE "Username" = $2`
-  },
 
-  sale: {
-    newTransaction: `
-    INSERT INTO "Transactions" ("Stock_Name", "Symbol", "Quantity", "Sale_Type", "Value", "User_ID")
-    VALUES ($1, $2, $3, $4, $5, (SELECT "User_ID" from "Users" WHERE "Username" = $6))`,
-    updateBalance: `
-    UPDATE "Users" SET "Cash_Balance" = $1 WHERE "Username" = $2`
-  },
+
+
 
 
 
