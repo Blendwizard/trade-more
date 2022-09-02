@@ -77,7 +77,6 @@ module.exports = {
   getStockInfo: (req, res) => {
     models.database.getStockData(req.body.stock)
       .then((data) => {
-        console.log('data? ', data);
         res.status(200).send(data);
       })
       .catch((err) => res.status(400).json(err));
