@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import mock_dashboard from './sample_data/mock_dashboard';
 import StockTable from './ui_components/StockTable';
 import { BarLoader } from 'react-spinners';
+import FlexContainer from './ui_components/FlexContainer';
 
 const Dashboard = () => {
 
@@ -24,19 +26,29 @@ const Dashboard = () => {
   }
 
   const loadDashboard = async () => {
-    await fetch('/userDash', {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('data: ', data);
-      setBalance(data.balance);
-      setStocks(data.portfolio);
-      setTotal(data.totalPortfolioValue)
-    })
+    // await fetch('/userDash', {
+    //   method: 'GET',
+    //   headers: {'Content-Type': 'application/json'}
+    // })
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   console.log('data: ', data);
+    //   setBalance(data.balance);
+    //   setStocks(data.portfolio);
+    //   setTotal(data.totalPortfolioValue)
+    // })
+
+    setBalance(mock_dashboard.balance);
+    setStocks(mock_dashboard.portfolio);
+    setTotal(mock_dashboard.totalPortfolioValue);
   };
 
+
+
+
+  // return (
+  //   <FlexContainer border="1px solid red"></FlexContainer>
+  // )
 
 
   return (
