@@ -7,6 +7,11 @@ const GlobalCSS = createGlobalStyle`
     color: antiquewhite;
   }
 
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
 `;
 
 export default GlobalCSS;

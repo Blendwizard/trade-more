@@ -7,6 +7,7 @@ import { BarLoader } from 'react-spinners';
 import FlexContainer from './ui_components/FlexContainer';
 import DashBackground from './ui_components/DashBackground';
 import DashSidebar from './ui_components/DashSidebar';
+import MenuTab from './ui_components/MenuTab';
 
 const Dashboard = () => {
 
@@ -21,11 +22,11 @@ const Dashboard = () => {
   const handleLogout = () => {
     fetch('/logout', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     })
-    .then((res) => {
-      window.location.href = res.url;
-    })
+      .then((res) => {
+        window.location.href = res.url;
+      })
   }
 
   const loadDashboard = async () => {
@@ -58,7 +59,11 @@ const Dashboard = () => {
       </FlexContainer>
 
       <FlexContainer gap="0" justify="center" border="2px solid green">
-        <DashSidebar></DashSidebar>
+        <DashSidebar>
+          <MenuTab>
+            <span>Navigation</span>
+          </MenuTab>
+        </DashSidebar>
         <DashBackground></DashBackground>
       </FlexContainer>
     </>
