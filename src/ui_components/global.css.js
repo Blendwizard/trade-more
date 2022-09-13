@@ -10,6 +10,11 @@ const GlobalCSS = createGlobalStyle`
   a {
     color: white;
     text-decoration: none;
+
+  }
+
+  .link {
+    margin-bottom: 5%;
   }
 
 `;

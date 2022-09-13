@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import mock_dashboard from './sample_data/mock_dashboard';
 import StockTable from './ui_components/StockTable';
 import { BarLoader } from 'react-spinners';
+import NavigationGroup from './NavigationGroup.jsx';
 
 import FlexContainer from './ui_components/FlexContainer';
 import DashBackground from './ui_components/DashBackground';
@@ -60,11 +61,14 @@ const Dashboard = () => {
 
       <FlexContainer gap="0" justify="center" border="2px solid green">
         <DashSidebar>
-          <MenuTab>
+          <MenuTab marginBottom="5%">
             <span>Navigation</span>
           </MenuTab>
+          <NavigationGroup />
         </DashSidebar>
-        <DashBackground></DashBackground>
+
+        <DashBackground>
+        </DashBackground>
       </FlexContainer>
     </>
   )
