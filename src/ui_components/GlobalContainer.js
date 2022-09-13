@@ -5,7 +5,6 @@ const GlobalContainer = styled.div`
   padding: .75em;
   max-width: 1400px;
   margin: 0 auto;
-
 `;
 
 

@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import mock_dashboard from './sample_data/mock_dashboard';
 import StockTable from './ui_components/StockTable';
 import { BarLoader } from 'react-spinners';
+
 import FlexContainer from './ui_components/FlexContainer';
+import DashBackground from './ui_components/DashBackground';
+import DashSidebar from './ui_components/DashSidebar';
 
 const Dashboard = () => {
 
@@ -46,26 +49,37 @@ const Dashboard = () => {
 
 
 
-  // return (
-  //   <FlexContainer border="1px solid red"></FlexContainer>
-  // )
-
-
   return (
     <>
-    <h2>Dashboard!</h2>
-    <nav>
-      <Link to="/research">Research</Link>
-    </nav>
-    <h3>Balance: {balance} </h3>
-    <h3>Total Assets: {total}</h3>
-    {stocks !== null ?  <StockTable stocks={stocks}></StockTable> : <BarLoader height={15} />}
-    <nav>
-      <Link to="/account">Add Funds</Link>
-    </nav>
-    <button onClick={handleLogout}>Logout</button>
+      <FlexContainer justify="flex-end" border="1px solid red">
+        <p>Settings</p>
+        <p>Username</p>
+        <p>Logout</p>
+      </FlexContainer>
+
+      <FlexContainer gap="0" justify="center" border="2px solid green">
+        <DashSidebar></DashSidebar>
+        <DashBackground></DashBackground>
+      </FlexContainer>
     </>
   )
+
+
+  // return (
+  //   <>
+  //   <h2>Dashboard!</h2>
+  //   <nav>
+  //     <Link to="/research">Research</Link>
+  //   </nav>
+  //   <h3>Balance: {balance} </h3>
+  //   <h3>Total Assets: {total}</h3>
+  //   {stocks !== null ?  <StockTable stocks={stocks}></StockTable> : <BarLoader height={15} />}
+  //   <nav>
+  //     <Link to="/account">Add Funds</Link>
+  //   </nav>
+  //   <button onClick={handleLogout}>Logout</button>
+  //   </>
+  // )
 }
 
 export default Dashboard;

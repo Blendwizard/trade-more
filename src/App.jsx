@@ -19,8 +19,8 @@ const App = () => {
 
   return (
     <>
-      <h1 onClick={handleClick}>TradeMore</h1>
       <GlobalContainer>
+      <h1 onClick={handleClick}>TradeMore</h1>
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/login' element={<Login />}></Route>

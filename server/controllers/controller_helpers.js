@@ -19,7 +19,7 @@ module.exports = {
     }
 
     const options = {
-      maxAge: 300000
+      maxAge: 3000000
     }
     return { session: session.join(''), options: options };
   },
