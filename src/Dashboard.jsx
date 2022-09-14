@@ -62,7 +62,7 @@ const Dashboard = () => {
 
       <FlexContainer gap="0" justify="center">
         <DashSidebar>
-          <MenuTab marginBottom="5%">
+          <MenuTab marginBottom="10%">
             <span>Navigation</span>
           </MenuTab>
           <NavigationGroup />

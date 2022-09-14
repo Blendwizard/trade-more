@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const DashBackground = styled.div`
-
+display: flex;
 width: 100%;
 height: 40em;
 

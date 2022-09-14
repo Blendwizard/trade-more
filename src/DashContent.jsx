@@ -10,8 +10,8 @@ const SummaryContainer = styled.div`
   left: 50px;
   top: 50px;
   background-color: rgba(4, 0, 31, 1);
-  width: 400px;
-  height: 200px;
+  width: 25%;
+  height: 140px;
   border-radius: 45px;
 
 `;
@@ -21,13 +21,13 @@ const DashContent = ({balance, total}) => {
 
 
   return (
-    <FlexContainer>
+    <FlexContainer border="1px solid red">
       <SummaryContainer>
-        <MenuTab height="22%">
+        <MenuTab height="27%">
           <span>Summary</span>
         </MenuTab>
 
-        <FlexContainer gap="1em" direction="column" border="1px solid red">
+        <FlexContainer gap="1em" direction="column">
           <span style={{"marginLeft": "25px", "marginTop": "20px" }}>Balance: {balance} </span>
           <span style={{"marginLeft": "25px"}}>Total Assets: {total} </span>
         </FlexContainer>
