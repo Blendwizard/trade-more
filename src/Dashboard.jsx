@@ -4,6 +4,7 @@ import mock_dashboard from './sample_data/mock_dashboard';
 import StockTable from './ui_components/StockTable';
 import { BarLoader } from 'react-spinners';
 import NavigationGroup from './NavigationGroup.jsx';
+import DashContent from './DashContent.jsx';
 
 import FlexContainer from './ui_components/FlexContainer';
 import DashBackground from './ui_components/DashBackground';
@@ -68,6 +69,7 @@ const Dashboard = () => {
         </DashSidebar>
 
         <DashBackground>
+          <DashContent balance={balance} total={total} />
         </DashBackground>
       </FlexContainer>
     </>
