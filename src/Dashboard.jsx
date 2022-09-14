@@ -53,13 +53,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <FlexContainer justify="flex-end" border="1px solid red">
+      <FlexContainer justify="flex-end">
         <p>Settings</p>
         <p>Username</p>
         <p>Logout</p>
       </FlexContainer>
 
-      <FlexContainer gap="0" justify="center" border="2px solid green">
+      <FlexContainer gap="0" justify="center">
         <DashSidebar>
           <MenuTab marginBottom="5%">
             <span>Navigation</span>
