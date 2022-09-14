@@ -67,10 +67,12 @@ const Dashboard = () => {
           </MenuTab>
           <NavigationGroup />
         </DashSidebar>
-
-        <DashBackground>
-          <DashContent balance={balance} total={total} />
-        </DashBackground>
+        {stocks !== null ?
+          <DashBackground>
+            <DashContent balance={balance} total={total} stocks={stocks}/>
+          </DashBackground>
+        :
+           <BarLoader height={15} />}
       </FlexContainer>
     </>
   )

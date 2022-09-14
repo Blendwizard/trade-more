@@ -18,6 +18,10 @@ const GlobalCSS = createGlobalStyle`
     margin-bottom: 5%;
   }
 
+  .holdingGraph {
+    width: 100%;
+  }
+
 `;
 
 export default GlobalCSS;
