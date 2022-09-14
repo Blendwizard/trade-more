@@ -31,19 +31,19 @@ const NavigationGroup = () => {
     <MainContainer>
     <LinkGroup>
       <LinkItem>
-        <i className="ci-alarm" style={{"marginRight": "7%"}}></i>
+        <i className="ci-home_alt_fill" style={{"marginRight": "7%"}}></i>
         <Link className="link" to="/">Home</Link>
       </LinkItem>
       <LinkItem>
-        <i className="ci-alarm" style={{"marginRight": "7%"}}></i>
+        <i className="ci-search" style={{"marginRight": "7%"}}></i>
         <Link className="link" to="/research">Research</Link>
       </LinkItem>
       <LinkItem>
-        <i className="ci-alarm" style={{"marginRight": "7%"}}></i>
+        <i className="ci-line_chart_up" style={{"marginRight": "7%"}}></i>
         <Link className="link" to="/analytics">Analytics</Link>
       </LinkItem>
       <LinkItem>
-        <i className="ci-alarm" style={{"marginRight": "7%"}}></i>
+        <i className="ci-credit_card" style={{"marginRight": "7%"}}></i>
         <Link className="link" to="/account">Funding</Link>
       </LinkItem>
     </LinkGroup>
