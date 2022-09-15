@@ -22,6 +22,11 @@ const GlobalCSS = createGlobalStyle`
     width: 100%;
   }
 
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
 `;
 
 export default GlobalCSS;

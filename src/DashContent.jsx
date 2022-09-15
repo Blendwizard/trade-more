@@ -53,7 +53,7 @@ const DashContent = ({ balance, total, stocks }) => {
       </GraphContainer>
       </FlexContainer>
 
-      <FlexContainer border="1px solid white">
+      <FlexContainer height="100%" align="flex-start" border="1px solid white">
         <StockTable stocks={stocks}></StockTable>
       </FlexContainer>
 
