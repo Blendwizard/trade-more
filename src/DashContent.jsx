@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import helpers from "./helpers/helper";
 import FlexContainer from "./ui_components/FlexContainer";
 import MenuTab from "./ui_components/MenuTab";
 import { Doughnut } from "react-chartjs-2";
@@ -17,7 +18,6 @@ const SummaryContainer = styled.div`
   width: 25%;
   height: 140px;
   border-radius: 45px;
-
 `;
 
 const GraphContainer = styled.div`
@@ -34,20 +34,6 @@ const GraphContainer = styled.div`
 
 
 const DashContent = ({ balance, total, stocks }) => {
-
-
-  const calculateWeight = (total, item) => {
-    const regex = /(?=...)\d/g;
-    let totalHoldings = total.match(regex).join('');
-    totalHoldings = Number(totalHoldings);
-    let stockValue = item.currentTotalValue.match(regex).join('');
-    stockValue = Number(stockValue);
-
-    return ((stockValue / totalHoldings) * 100).toFixed(2);
-
-  }
-
-  // stocks.forEach((stock) => calculateWeight(total, stock))
 
   ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -67,7 +53,7 @@ const DashContent = ({ balance, total, stocks }) => {
 
     datasets: [
       {
-        data: stocks.map((stock) => calculateWeight(total, stock)),
+        data: stocks.map((stock) => helpers.calculateWeight(total, stock)),
         backgroundColor:
           [
             'rgb(255, 99, 132)',
