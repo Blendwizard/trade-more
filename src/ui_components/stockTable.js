@@ -6,7 +6,7 @@ const StockTable = ({stocks}) => {
   return (
     <table style={{ 'borderStyle': 'solid' }}>
       <colgroup span="8"></colgroup>
-      <tbody>
+      <thead>
         <tr>
           <th>Company</th>
           <th>Symbol</th>
@@ -17,6 +17,8 @@ const StockTable = ({stocks}) => {
           <th>Current Gain/Loss</th>
           <th>Current Value</th>
         </tr>
+      </thead>
+      <tbody>
         {stocks.map((stock, index) => {
           return (
             <tr key={index}>

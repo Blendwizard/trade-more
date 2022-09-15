@@ -37,7 +37,7 @@ const DashContent = ({ balance, total, stocks }) => {
 
   return (
     <FlexContainer align="center" direction="row" padding="25px" gap="0" border="1px solid red">
-      <FlexContainer border="1px solid blue" height="100%" justify="space-between" gap="0" direction="column">
+      <FlexContainer border="1px solid blue" width="auto" height="100%" justify="space-between" gap="0" direction="column">
       <SummaryContainer>
         <MenuTab height="27%">
           <span>Summary</span>
