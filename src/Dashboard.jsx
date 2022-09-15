@@ -57,7 +57,7 @@ const Dashboard = () => {
       <FlexContainer justify="flex-end">
         <p>Settings</p>
         <p>Username</p>
-        <p>Logout</p>
+        <p onClick={handleLogout}>Logout</p>
       </FlexContainer>
 
       <FlexContainer gap="1em" justify="center">
