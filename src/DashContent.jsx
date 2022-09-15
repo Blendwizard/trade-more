@@ -25,8 +25,8 @@ const GraphContainer = styled.div`
   left: 350px;
   top: 50px;
   background-color: rgba(4, 0, 31, 1);
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
   border-radius: 45px;
   padding: 25px;
 `;
@@ -36,7 +36,7 @@ const DashContent = ({ balance, total, stocks }) => {
 
 
   return (
-    <FlexContainer>
+    <FlexContainer border="1px solid red">
       <SummaryContainer>
         <MenuTab height="27%">
           <span>Summary</span>
