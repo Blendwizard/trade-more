@@ -31,13 +31,24 @@ const GraphContainer = styled.div`
   padding: 25px;
 `;
 
+const TableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border-radius: 45px;
+  background-color: rgba(4, 0, 31, 1);
+`;
+
 
 const DashContent = ({ balance, total, stocks }) => {
 
 
   return (
-    <FlexContainer align="center" direction="row" padding="25px" gap="2rem" border="1px solid red">
-      <FlexContainer border="1px solid blue" width="auto" height="100%" align="center" justify="space-between" gap="0" direction="column">
+    <FlexContainer align="center" direction="row" padding="25px" gap="2rem">
+      <FlexContainer  width="auto" height="100%" align="center" justify="space-between" gap="0" direction="column">
+
       <SummaryContainer>
         <MenuTab height="27%">
           <span>Summary</span>
@@ -53,8 +64,10 @@ const DashContent = ({ balance, total, stocks }) => {
       </GraphContainer>
       </FlexContainer>
 
-      <FlexContainer height="100%" align="flex-start" border="1px solid white">
-        <StockTable stocks={stocks}></StockTable>
+      <FlexContainer className="tableBackground" height="100%" align="flex-start">
+        <TableContainer>
+          <StockTable stocks={stocks}></StockTable>
+        </TableContainer>
       </FlexContainer>
 
 
