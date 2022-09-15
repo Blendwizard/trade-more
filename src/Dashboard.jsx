@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import mock_dashboard from './sample_data/mock_dashboard';
 import StockTable from './ui_components/StockTable';
-import { BarLoader } from 'react-spinners';
+import { BounceLoader } from 'react-spinners';
 import NavigationGroup from './NavigationGroup.jsx';
 import DashContent from './DashContent.jsx';
 
@@ -32,21 +32,21 @@ const Dashboard = () => {
   }
 
   const loadDashboard = async () => {
-    // await fetch('/userDash', {
-    //   method: 'GET',
-    //   headers: {'Content-Type': 'application/json'}
-    // })
-    // .then((response) => response.json())
-    // .then((data) => {
-    //   console.log('data: ', data);
-    //   setBalance(data.balance);
-    //   setStocks(data.portfolio);
-    //   setTotal(data.totalPortfolioValue)
-    // })
+    await fetch('/userDash', {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('data: ', data);
+      setBalance(data.balance);
+      setStocks(data.portfolio);
+      setTotal(data.totalPortfolioValue)
+    })
 
-    setBalance(mock_dashboard.balance);
-    setStocks(mock_dashboard.portfolio);
-    setTotal(mock_dashboard.totalPortfolioValue);
+    // setBalance(mock_dashboard.balance);
+    // setStocks(mock_dashboard.portfolio);
+    // setTotal(mock_dashboard.totalPortfolioValue);
   };
 
 
@@ -67,12 +67,12 @@ const Dashboard = () => {
           </MenuTab>
           <NavigationGroup />
         </DashSidebar>
+        <DashBackground>
         {stocks !== null ?
-          <DashBackground>
             <DashContent balance={balance} total={total} stocks={stocks}/>
-          </DashBackground>
-        :
-           <BarLoader height={15} />}
+            :
+            <BounceLoader color='#36d7b7' />}
+        </DashBackground>
       </FlexContainer>
     </>
   )
