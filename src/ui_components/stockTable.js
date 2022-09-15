@@ -4,7 +4,7 @@ import sample from '../sample_data/test_data';
 const StockTable = ({stocks}) => {
 
   return (
-    <table style={{ 'borderStyle': 'solid' }}>
+    <table>
       <colgroup span="8"></colgroup>
       <thead>
         <tr>
