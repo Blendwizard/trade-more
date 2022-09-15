@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import helpers from "./helpers/helper";
 import FlexContainer from "./ui_components/FlexContainer";
 import MenuTab from "./ui_components/MenuTab";
-import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import HoldingsDoughnut from "./HoldingsDoughnut.jsx";
+
 
 
 
@@ -35,37 +34,6 @@ const GraphContainer = styled.div`
 
 const DashContent = ({ balance, total, stocks }) => {
 
-  ChartJS.register(ArcElement, Tooltip, Legend);
-
-  const options = {
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: (item, data) => {
-            return item.label + ': ' + item.parsed + '%';
-          }
-        }
-      }
-    }
-  };
-
-  const chartData = {
-
-    datasets: [
-      {
-        data: stocks.map((stock) => helpers.calculateWeight(total, stock)),
-        backgroundColor:
-          [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
-          ]
-      }
-    ],
-    labels: stocks.map((stock) => stock.symbol)
-
-  };
-
 
   return (
     <FlexContainer border="1px solid red">
@@ -80,7 +48,7 @@ const DashContent = ({ balance, total, stocks }) => {
       </SummaryContainer>
 
       <GraphContainer>
-        <Doughnut className="holdingGraph" data={chartData} options={options} ></Doughnut>
+        <HoldingsDoughnut balance={balance} total={total} stocks={stocks}></HoldingsDoughnut>
       </GraphContainer>
 
     </FlexContainer>
