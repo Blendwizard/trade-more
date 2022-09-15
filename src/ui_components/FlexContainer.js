@@ -10,7 +10,7 @@ align-items: ${(props) => props.align};
 flex-wrap: ${(props) => props.wrap || 'nowrap'};
 margin: ${(props) => props.margin || '0'};
 border-bottom ${(props) => props.borderbottom || '0'};
-padding: ${(props) => props.margin || '0'};
+padding: ${(props) => props.padding || '0'};
 width: ${(props) => props.width || '100%'};
 border: ${(props) => props.border || 'none'};
 `;

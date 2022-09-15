@@ -3,25 +3,25 @@ import styled from "styled-components";
 import FlexContainer from "./ui_components/FlexContainer";
 import MenuTab from "./ui_components/MenuTab";
 import HoldingsDoughnut from "./HoldingsDoughnut.jsx";
-
+import StockTable from "./ui_components/StockTable";
 
 
 
 const SummaryContainer = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  left: 50px;
-  top: 50px;
+
+
   background-color: rgba(4, 0, 31, 1);
-  width: 25%;
+  width: 75%;
+  max-width: 270px;
   height: 140px;
   border-radius: 45px;
 `;
 
 const GraphContainer = styled.div`
   display: flex;
-  position: relative;
+
   left: 350px;
   top: 50px;
   background-color: rgba(4, 0, 31, 1);
@@ -36,7 +36,8 @@ const DashContent = ({ balance, total, stocks }) => {
 
 
   return (
-    <FlexContainer border="1px solid red">
+    <FlexContainer align="center" direction="row" padding="25px" gap="0" border="1px solid red">
+      <FlexContainer border="1px solid blue" direction="column">
       <SummaryContainer>
         <MenuTab height="27%">
           <span>Summary</span>
@@ -50,6 +51,12 @@ const DashContent = ({ balance, total, stocks }) => {
       <GraphContainer>
         <HoldingsDoughnut balance={balance} total={total} stocks={stocks}></HoldingsDoughnut>
       </GraphContainer>
+      </FlexContainer>
+
+      <FlexContainer border="1px solid white">
+        <StockTable stocks={stocks}></StockTable>
+      </FlexContainer>
+
 
     </FlexContainer>
 

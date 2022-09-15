@@ -60,7 +60,7 @@ const Dashboard = () => {
         <p>Logout</p>
       </FlexContainer>
 
-      <FlexContainer gap="0" justify="center">
+      <FlexContainer gap="1em" justify="center">
 
         <DashSidebar>
           <MenuTab marginBottom="10%">
