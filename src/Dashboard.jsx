@@ -32,21 +32,24 @@ const Dashboard = () => {
   }
 
   const loadDashboard = async () => {
-    await fetch('/userDash', {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('data: ', data);
-      setBalance(data.balance);
-      setStocks(data.portfolio);
-      setTotal(data.totalPortfolioValue)
-    })
+    // await fetch('/userDash', {
+    //   method: 'GET',
+    //   headers: {'Content-Type': 'application/json'}
+    // })
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   console.log('data: ', data);
+    //   setBalance(data.balance);
+    //   setStocks(data.portfolio);
+    //   setTotal(data.totalPortfolioValue)
+    // })
 
-    // setBalance(mock_dashboard.balance);
-    // setStocks(mock_dashboard.portfolio);
-    // setTotal(mock_dashboard.totalPortfolioValue);
+    setTimeout(() => {
+      setBalance(mock_dashboard.balance);
+      setStocks(mock_dashboard.portfolio);
+      setTotal(mock_dashboard.totalPortfolioValue);
+    }, 1000);
+
   };
 
 

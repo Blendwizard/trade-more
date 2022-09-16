@@ -8,6 +8,12 @@ const GlobalCSS = createGlobalStyle`
     font-family: 'Varela Round', sans-serif;
   }
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   a {
     color: white;
     text-decoration: none;
