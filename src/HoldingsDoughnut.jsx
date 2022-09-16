@@ -8,6 +8,9 @@ const HoldingsDoughnut = ({ balance, total, stocks }) => {
   ChartJS.register(ArcElement, Tooltip, Legend);
   const options = {
     plugins: {
+      legend: {
+        display: false
+      },
       tooltip: {
         callbacks: {
           label: (item, data) => {
