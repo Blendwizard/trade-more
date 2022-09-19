@@ -11,6 +11,10 @@ const HoldingsDoughnut = ({ balance, total, stocks }) => {
       legend: {
         display: false
       },
+      title: {
+        display: true,
+        text: 'Custom Title'
+      },
       tooltip: {
         callbacks: {
           label: (item, data) => {

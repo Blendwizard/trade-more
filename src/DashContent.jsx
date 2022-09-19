@@ -10,13 +10,15 @@ import StockTable from "./ui_components/StockTable";
 const SummaryContainer = styled.div`
   display: flex;
   flex-direction: column;
+  border: 1px solid white;
 
-
+  padding: 20px;
+  gap: 1rem;
   background-color: rgba(4, 0, 31, 1);
   width: 100%;
   max-width: 270px;
-  height: 140px;
-  border-radius: 45px 45px 0px 0px;
+  height: auto;
+  border-radius: 45px 45px 45px 45px;
 `;
 
 const GraphContainer = styled.div`
@@ -45,22 +47,20 @@ const DashContent = ({ balance, total, stocks }) => {
 
 
   return (
-    <FlexContainer align="center" direction="row" padding="25px" gap="2rem">
-      <FlexContainer  width="auto" height="100%" align="center" justify="flex-start" gap="0" direction="column">
+    <FlexContainer align="center" direction="row" padding="25px" gap="2rem" border="1px solid red">
+      <FlexContainer  width="33%" height="100%" align="center" justify="space-between" gap="0" direction="column" border="1px solid blue">
 
       <SummaryContainer>
-        <MenuTab height="27%">
+        {/* <MenuTab height="27%">
           <span>Summary</span>
-        </MenuTab>
-        <FlexContainer gap="1em" direction="column">
-          <span style={{ "marginLeft": "25px", "marginTop": "20px" }}>Balance: {balance} </span>
-          <span style={{ "marginLeft": "25px" }}>Total Assets: {total} </span>
+        </MenuTab> */}
+        <FlexContainer gap="0.5rem" direction="column">
+          <span>Balance: {balance} </span>
+          <span>Total Assets: {total} </span>
         </FlexContainer>
+        <HoldingsDoughnut balance={balance} total={total} stocks={stocks}></HoldingsDoughnut>
       </SummaryContainer>
 
-      <GraphContainer>
-        <HoldingsDoughnut balance={balance} total={total} stocks={stocks}></HoldingsDoughnut>
-      </GraphContainer>
       </FlexContainer>
 
       <FlexContainer className="tableBackground" height="100%" align="flex-start">
