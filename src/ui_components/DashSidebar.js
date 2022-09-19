@@ -6,7 +6,7 @@ flex-direction: column;
 flex-wrap: wrap;
 align-content: center;
 justify-content: flex-start;
-width: 20%;
+width: 15%;
 height: auto;
 
 

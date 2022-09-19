@@ -74,17 +74,20 @@ const Dashboard = () => {
 
         {stocks !== null ?
             <>
-            <DashBackground>
+            <DashBackground align="center" direction="row" padding="25px" gap="2rem" border="1px solid red">
             <DashContent balance={balance} total={total} stocks={stocks}/>
             </DashBackground>
             </>
             :
             <>
-            <DashBackground align="center" justify="center">
+            <DashBackground  justify="center" align="center" direction="row" padding="25px" gap="2rem" border="1px solid red">
             <BounceLoader color='#36d7b7' />
             </DashBackground>
             </>
         }
+             {/* <DashBackground align="center" direction="row" justify="center" padding="25px" gap="2rem" border="1px solid red">
+            <BounceLoader color='#36d7b7' />
+            </DashBackground> */}
       </FlexContainer>
     </>
   )

@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import FlexContainer from "./FlexContainer";
 
-const DashBackground = styled.div`
+const DashBackground = styled(FlexContainer)`
 display: flex;
-width: 100%;
+width: 90%;
 height: 40em;
 justify-content: ${(props) => props.justify || 'normal'};
 align-items: ${(props) => props.align || 'normal'};
