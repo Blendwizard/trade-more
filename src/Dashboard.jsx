@@ -32,23 +32,23 @@ const Dashboard = () => {
   }
 
   const loadDashboard = async () => {
-    // await fetch('/userDash', {
-    //   method: 'GET',
-    //   headers: {'Content-Type': 'application/json'}
-    // })
-    // .then((response) => response.json())
-    // .then((data) => {
-    //   console.log('data: ', data);
-    //   setBalance(data.balance);
-    //   setStocks(data.portfolio);
-    //   setTotal(data.totalPortfolioValue)
-    // })
+    await fetch('/userDash', {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('data: ', data);
+      setBalance(data.balance);
+      setStocks(data.portfolio);
+      setTotal(data.totalPortfolioValue)
+    })
 
-    setTimeout(() => {
-      setBalance(mock_dashboard.balance);
-      setStocks(mock_dashboard.portfolio);
-      setTotal(mock_dashboard.totalPortfolioValue);
-    }, 1000);
+    // setTimeout(() => {
+    //   setBalance(mock_dashboard.balance);
+    //   setStocks(mock_dashboard.portfolio);
+    //   setTotal(mock_dashboard.totalPortfolioValue);
+    // }, 1000);
 
   };
 
@@ -64,7 +64,6 @@ const Dashboard = () => {
       </FlexContainer>
 
       <FlexContainer gap="1em" justify="center">
-
         <DashSidebar>
           <MenuTab marginBottom="10%">
             <span>Navigation</span>
@@ -74,7 +73,7 @@ const Dashboard = () => {
 
         {stocks !== null ?
             <>
-            <DashBackground align="center" direction="row" padding="25px" gap="2rem" border="1px solid red">
+            <DashBackground align="flex-start" direction="row" padding="25px" gap="2rem" border="1px solid red">
             <DashContent balance={balance} total={total} stocks={stocks}/>
             </DashBackground>
             </>
