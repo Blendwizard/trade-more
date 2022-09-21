@@ -33,14 +33,13 @@ const GlobalCSS = createGlobalStyle`
   }
 
   .donut-container {
-    border: 1px solid pink;
+
     position: relative;
     width: 100%;
     height: 100%;
   }
 
   .line-container {
-    border: 1px solid red;
     position: relative;
     width: 60%;
     height: 100%;

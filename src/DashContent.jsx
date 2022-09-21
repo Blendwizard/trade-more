@@ -39,7 +39,7 @@ const TableContainer = styled.div`
   height: 100%;
   padding: 20px;
   border-radius: 45px;
-  overflow: auto;
+  overflow: scroll;
   background-color: rgba(4, 0, 31, 1);
 `;
 
@@ -49,7 +49,7 @@ const DashContent = ({ balance, total, stocks }) => {
 
   return (
       <>
-      <FlexContainer  width="100%" height="auto" align="center" justify="space-between" gap="0" direction="row" border="2px solid blue">
+      <FlexContainer  width="100%" height="auto" align="center" justify="space-around" gap="0" direction="row">
       <SummaryContainer>
         {/* <MenuTab height="27%">
           <span>Summary</span>
