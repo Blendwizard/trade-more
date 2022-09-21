@@ -6,7 +6,10 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 const HoldingsDoughnut = ({ balance, total, stocks }) => {
 
   ChartJS.register(ArcElement, Tooltip, Legend);
+
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false
@@ -46,7 +49,9 @@ const HoldingsDoughnut = ({ balance, total, stocks }) => {
   };
 
   return (
-    <Doughnut className="holdingGraph" data={chartData} options={options} ></Doughnut>
+    <div className="donut-container">
+      <Doughnut data={chartData} options={options} ></Doughnut>
+    </div>
   )
 };
 

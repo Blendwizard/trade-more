@@ -24,8 +24,11 @@ const GlobalCSS = createGlobalStyle`
     margin-bottom: 5%;
   }
 
-  .holdingGraph {
+  .donut-container {
+    border: 1px solid pink;
+    position: relative;
     width: 100%;
+    height: 100%;
   }
 
   table {

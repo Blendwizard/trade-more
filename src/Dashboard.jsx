@@ -5,7 +5,6 @@ import StockTable from './ui_components/StockTable';
 import { BounceLoader } from 'react-spinners';
 import NavigationGroup from './NavigationGroup.jsx';
 import DashContent from './DashContent.jsx';
-
 import FlexContainer from './ui_components/FlexContainer';
 import DashBackground from './ui_components/DashBackground';
 import DashSidebar from './ui_components/DashSidebar';
@@ -32,23 +31,23 @@ const Dashboard = () => {
   }
 
   const loadDashboard = async () => {
-    await fetch('/userDash', {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('data: ', data);
-      setBalance(data.balance);
-      setStocks(data.portfolio);
-      setTotal(data.totalPortfolioValue)
-    })
+    // await fetch('/userDash', {
+    //   method: 'GET',
+    //   headers: {'Content-Type': 'application/json'}
+    // })
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   console.log('data: ', data);
+    //   setBalance(data.balance);
+    //   setStocks(data.portfolio);
+    //   setTotal(data.totalPortfolioValue)
+    // })
 
-    // setTimeout(() => {
-    //   setBalance(mock_dashboard.balance);
-    //   setStocks(mock_dashboard.portfolio);
-    //   setTotal(mock_dashboard.totalPortfolioValue);
-    // }, 1000);
+    setTimeout(() => {
+      setBalance(mock_dashboard.balance);
+      setStocks(mock_dashboard.portfolio);
+      setTotal(mock_dashboard.totalPortfolioValue);
+    }, 1000);
 
   };
 
@@ -73,13 +72,13 @@ const Dashboard = () => {
 
         {stocks !== null ?
             <>
-            <DashBackground align="flex-start" direction="row" padding="25px" gap="2rem" border="1px solid red">
+            <DashBackground align="flex-start" direction="column" padding="25px" gap="2rem" border="1px solid white">
             <DashContent balance={balance} total={total} stocks={stocks}/>
             </DashBackground>
             </>
             :
             <>
-            <DashBackground  justify="center" align="center" direction="row" padding="25px" gap="2rem" border="1px solid red">
+            <DashBackground  justify="center" align="center" direction="row" padding="25px" gap="2rem" border="1px solid white">
             <BounceLoader color='#36d7b7' />
             </DashBackground>
             </>
