@@ -31,6 +31,13 @@ const GlobalCSS = createGlobalStyle`
     height: 100%;
   }
 
+  .line-container {
+    border: 1px solid red;
+    position: relative;
+    width: 60%;
+    height: 100%;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;

@@ -4,7 +4,7 @@ import FlexContainer from "./ui_components/FlexContainer";
 import MenuTab from "./ui_components/MenuTab";
 import HoldingsDoughnut from "./HoldingsDoughnut.jsx";
 import StockTable from "./ui_components/StockTable";
-
+import LineChart from "./ui_components/LineChart.jsx";
 
 
 const SummaryContainer = styled.div`
@@ -49,7 +49,7 @@ const DashContent = ({ balance, total, stocks }) => {
 
   return (
       <>
-      <FlexContainer  width="100%" height="auto" align="center" justify="space-between" gap="0" direction="row" border="1px solid blue">
+      <FlexContainer  width="100%" height="auto" align="center" justify="space-between" gap="0" direction="row" border="2px solid blue">
       <SummaryContainer>
         {/* <MenuTab height="27%">
           <span>Summary</span>
@@ -60,6 +60,8 @@ const DashContent = ({ balance, total, stocks }) => {
         </FlexContainer>
         <HoldingsDoughnut balance={balance} total={total} stocks={stocks}></HoldingsDoughnut>
       </SummaryContainer>
+
+        <LineChart></LineChart>
 
       </FlexContainer>
 
