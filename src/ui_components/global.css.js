@@ -8,6 +8,14 @@ const GlobalCSS = createGlobalStyle`
     font-family: 'Varela Round', sans-serif;
   }
 
+  html {
+    overflow: scroll;
+  }
+  ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent; /* make scrollbar transparent */
+  }
+
   *,
   *::before,
   *::after {
