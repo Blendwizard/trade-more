@@ -39,7 +39,7 @@ const HoldingsDoughnut = ({ balance, total, stocks }) => {
   // add color at the beginning to account for cash weight
 
   const colors = [];
-  colors.push('rgb(11, 178, 39)');
+  colors.push('rgb(6, 64, 34)');
   stocks.forEach((stock) => {
     const red = Math.floor(Math.random() * (255 - 0 + 1) + 0);
     const green = Math.floor(Math.random() * (255 - 0 + 1) + 0);

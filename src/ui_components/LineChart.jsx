@@ -21,9 +21,17 @@ const LineChart = ({ stocks }) => {
     Legend
   );
 
-  const stockData = stocks.map((stock) => stock.totalDelta);
+  const stockData = stocks.map((stock) => Number(stock.totalDelta));
   console.log('stonk data: ', stockData);
 
+  const barColors = [];
+  stocks.forEach((stock) => {
+    const colorChoice = Number(stock.totalDelta) < 0 ? 'rgb(201, 2, 2)' : 'rgb(110, 245, 105)';
+    barColors.push(colorChoice);
+  })
+  // Placeholders for testing purposes
+  barColors.push('rgb(110, 245, 105)');
+  barColors.push('rgb(201, 2, 2)');
 
   const options = {
     scales: {
@@ -44,16 +52,19 @@ const LineChart = ({ stocks }) => {
     },
   };
 
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  // Using placeholders for testing
+  const labels = stocks.map((stock) => stock.symbol);
+  labels.push("MSFT");
+  labels.push("GME");
 
   const data = {
     labels,
     datasets: [
       {
         label: 'Valuation',
-        data: [10000, 25000, 55626, 120000, 67000, 74000, 119546],
+        data: [...stockData, 1000, -500],
         borderColor: 'white',
-        backgroundColor: 'black',
+        backgroundColor: barColors,
       }
     ],
   };

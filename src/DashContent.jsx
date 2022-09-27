@@ -55,8 +55,8 @@ const DashContent = ({ balance, total, stocks }) => {
           <span>Summary</span>
         </MenuTab> */}
         <FlexContainer gap="0.5rem" direction="column">
-          <span>Balance: {balance} </span>
-          <span>Total Assets: {total} </span>
+          <span>Balance: ${balance} </span>
+          <span>Total Assets: ${total} </span>
         </FlexContainer>
         <HoldingsDoughnut balance={balance} total={total} stocks={stocks}></HoldingsDoughnut>
       </SummaryContainer>

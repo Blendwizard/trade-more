@@ -28,8 +28,8 @@ const StockTable = ({stocks}) => {
             <td>{stock.averageCost}</td>
             <td>{stock.currentPrice}</td>
             <td>{stock.singleDelta}</td>
-            <td>{stock.totalDelta}</td>
-            <td>{stock.currentTotalValue}</td>
+            <td style={Number(stock.totalDelta) < 0 ? {"color": "red"} : {"color": "green"}}>{stock.totalDelta}</td>
+            <td>${stock.currentTotalValue}</td>
           </tr>
           )
         })}

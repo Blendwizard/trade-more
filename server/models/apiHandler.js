@@ -13,7 +13,9 @@ class IEX {
 
   usd = (value) => {
     const number = (Number(value)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    return '$' + (number);
+    // return '$' + (number);
+
+    return number;
   }
 }
 
