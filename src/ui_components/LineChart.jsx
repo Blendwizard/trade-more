@@ -30,8 +30,8 @@ const LineChart = ({ stocks }) => {
     barColors.push(colorChoice);
   })
   // Placeholders for testing purposes
-  barColors.push('rgb(110, 245, 105)');
-  barColors.push('rgb(201, 2, 2)');
+  barColors.push('rgb(110, 245, 105, .6)');
+  barColors.push('rgb(201, 2, 2, .6)');
 
   const options = {
     scales: {
