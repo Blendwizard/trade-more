@@ -5,6 +5,7 @@ const Login = () => {
   const [credentials, setCredentials] = useState({username: '', password: ''})
   const navigate = useNavigate();
 
+
   const sendLoginInfo =  async (data) => {
     const response = await fetch('/login', {
       method: 'POST',
@@ -15,14 +16,15 @@ const Login = () => {
   }
 
   const handleSubmit = (e) => {
+    localStorage.setItem('user', credentials.username);
     sendLoginInfo(credentials)
     .then((res) => {
       if (res.status === 200) {
-        // window.location.href = res.url;
-        navigate('/dashboard')
+        navigate('/dashboard');
       } else {
-        console.log('Unauthorized')
-        alert('Incorrect username or password')
+        console.log('Unauthorized');
+        setUser(null);
+        alert('Incorrect username or password');
       }
     })
     e.preventDefault();
@@ -31,9 +33,9 @@ const Login = () => {
   const handleChange = (e) => {
     const target = e.target.id;
     if (target === 'username') {
-      setCredentials({username: e.target.value, password: credentials.password})
+      setCredentials({username: e.target.value, password: credentials.password});
     } else {
-      setCredentials({username: credentials.username, password: e.target.value})
+      setCredentials({username: credentials.username, password: e.target.value});
     }
 
   }

@@ -11,7 +11,6 @@ import DashSidebar from './ui_components/DashSidebar';
 import MenuTab from './ui_components/MenuTab';
 
 const Dashboard = () => {
-
   const [total, setTotal] = useState(null);
   const [balance, setBalance] = useState(null);
   const [stocks, setStocks] = useState(null);
@@ -21,6 +20,7 @@ const Dashboard = () => {
   }, []);
 
   const handleLogout = () => {
+    localStorage.clear();
     fetch('/logout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
@@ -58,10 +58,10 @@ const Dashboard = () => {
 
   return (
     <>
-      <FlexContainer justify="flex-end">
-        <p>Settings</p>
-        <p>Username</p>
-        <p onClick={handleLogout}>Logout</p>
+      <FlexContainer justify="flex-end" align="center" gap="2em">
+        <p>Signed in as: @{localStorage.getItem('user')} </p>
+        <p className='logout-btn' onClick={handleLogout}>Logout</p>
+        <i className="ci-settings_filled" style={{"fontSize": "1.5em"}}></i>
       </FlexContainer>
 
       <FlexContainer gap="1em" justify="center">

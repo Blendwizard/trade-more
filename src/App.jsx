@@ -10,12 +10,14 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import GlobalContainer from './ui_components/GlobalContainer.js';
 
 const App = () => {
-
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate('/')
   };
+
+
+
 
   return (
     <>

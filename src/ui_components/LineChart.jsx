@@ -22,16 +22,15 @@ const LineChart = ({ stocks }) => {
   );
 
   const stockData = stocks.map((stock) => Number(stock.totalDelta));
-  console.log('stonk data: ', stockData);
+  const labels = stocks.map((stock) => stock.symbol);
 
+  // Determine individual bar color
   const barColors = [];
   stocks.forEach((stock) => {
-    const colorChoice = Number(stock.totalDelta) < 0 ? 'rgb(201, 2, 2)' : 'rgb(110, 245, 105)';
+    const colorChoice = Number(stock.totalDelta) < 0 ? 'rgb(201, 2, 2, .6)' : 'rgb(110, 245, 105, .6)';
     barColors.push(colorChoice);
   })
-  // Placeholders for testing purposes
-  barColors.push('rgb(110, 245, 105, .6)');
-  barColors.push('rgb(201, 2, 2, .6)');
+
 
   const options = {
     scales: {
@@ -52,22 +51,20 @@ const LineChart = ({ stocks }) => {
     },
   };
 
-  // Using placeholders for testing
-  const labels = stocks.map((stock) => stock.symbol);
-  labels.push("MSFT");
-  labels.push("GME");
-
   const data = {
     labels,
     datasets: [
       {
-        label: 'Valuation',
-        data: [...stockData, 1000, -500],
+        label: 'Change',
+        data: stockData,
         borderColor: 'white',
         backgroundColor: barColors,
       }
     ],
   };
+
+  // Override default font color
+  ChartJS.defaults.color = "white";
 
   return (
     <div className='line-container'>

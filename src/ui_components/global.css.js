@@ -29,7 +29,15 @@ const GlobalCSS = createGlobalStyle`
   }
 
   .link {
-    margin-bottom: 5%;
+
+  }
+
+  .logout-btn {
+
+  }
+
+  .logout-btn: hover {
+    cursor: pointer;
   }
 
   .donut-container {
