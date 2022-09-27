@@ -36,6 +36,7 @@ const HoldingsDoughnut = ({ balance, total, stocks }) => {
   };
 
   // backgroundColor will need to be randomized to account for more stocks
+  // add color at the beginning to account for cash weight
 
   const colors = [];
   colors.push('rgb(11, 178, 39)');

@@ -61,7 +61,7 @@ const DashContent = ({ balance, total, stocks }) => {
         <HoldingsDoughnut balance={balance} total={total} stocks={stocks}></HoldingsDoughnut>
       </SummaryContainer>
 
-        <LineChart></LineChart>
+        <LineChart stocks={stocks}></LineChart>
 
       </FlexContainer>
 
