@@ -4,15 +4,14 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 const HoldingsDoughnut = ({ balance, total, stocks }) => {
+  ChartJS.register(ArcElement, Tooltip, Legend);
 
   const data = [
     helpers.calculateWeight(total, balance),
     ...stocks.map((stock) => helpers.calculateWeight(total, stock.currentTotalValue))
   ];
-  const labels = [ 'CASH' ,...stocks.map((stock) => stock.symbol) ];
-  console.log(labels)
 
-  ChartJS.register(ArcElement, Tooltip, Legend);
+  const labels = ['CASH', ...stocks.map((stock) => stock.symbol)];
 
   const options = {
     responsive: true,
@@ -37,8 +36,6 @@ const HoldingsDoughnut = ({ balance, total, stocks }) => {
 
   // backgroundColor will need to be randomized to account for more stocks
   // add color at the beginning to account for cash weight
-
-
   const colors = [];
   colors.push('rgb(6, 64, 34)');
   stocks.forEach((stock) => {

@@ -4,13 +4,13 @@ import FlexContainer from "./ui_components/FlexContainer";
 import MenuTab from "./ui_components/MenuTab";
 import HoldingsDoughnut from "./HoldingsDoughnut.jsx";
 import StockTable from "./ui_components/StockTable";
-import LineChart from "./ui_components/LineChart.jsx";
+import LineChart from "./LineChart.jsx";
 
 
 const SummaryContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid white;
+  border: 1px solid #c4a7eb6b;
 
   padding: 20px;
   gap: 1rem;
@@ -38,6 +38,7 @@ const TableContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 20px;
+  border: 1px solid #c4a7eb6b;
   border-radius: 45px;
   overflow: scroll;
   background-color: rgba(4, 0, 31, 1);

@@ -21,7 +21,9 @@ const LineChart = ({ stocks }) => {
     Legend
   );
 
-  const stockData = stocks.map((stock) => Number(stock.totalDelta));
+  // Order stocks by decreasing gains
+  stocks.sort((a, b) => b.totalDelta - a.totalDelta);
+  const stockDeltas = stocks.map((stock) => Number(stock.totalDelta));
   const labels = stocks.map((stock) => stock.symbol);
 
   // Determine individual bar color
@@ -29,7 +31,7 @@ const LineChart = ({ stocks }) => {
   stocks.forEach((stock) => {
     const colorChoice = Number(stock.totalDelta) < 0 ? 'rgb(201, 2, 2, .6)' : 'rgb(110, 245, 105, .6)';
     barColors.push(colorChoice);
-  })
+  });
 
 
   const options = {
@@ -56,7 +58,7 @@ const LineChart = ({ stocks }) => {
     datasets: [
       {
         label: 'Change',
-        data: stockData,
+        data: stockDeltas,
         borderColor: 'white',
         backgroundColor: barColors,
       }
