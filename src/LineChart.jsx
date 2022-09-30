@@ -48,7 +48,7 @@ const LineChart = ({ stocks }) => {
       },
       title: {
         display: true,
-        text: 'Portfolio Value',
+        text: `Today's P&L ($)`,
       },
     },
   };

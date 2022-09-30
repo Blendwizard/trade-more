@@ -13,7 +13,7 @@ const StockTable = ({stocks}) => {
           <th>Quantity Owned</th>
           <th>Average Cost</th>
           <th>Current Price</th>
-          <th>Delta</th>
+          <th>Delta &#40;$&#41;</th>
           <th>Current Gain/Loss</th>
           <th>Current Value</th>
         </tr>

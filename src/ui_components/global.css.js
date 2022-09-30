@@ -49,7 +49,7 @@ const GlobalCSS = createGlobalStyle`
 
   .line-container {
     position: relative;
-    width: 60%;
+    width: 100%;
     height: 100%;
   }
 
