@@ -37,6 +37,17 @@ const GlobalCSS = createGlobalStyle`
     text-decoration: underline;
   }
 
+  .research-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: .5px solid green
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+
   .logout-btn {
 
   }

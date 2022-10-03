@@ -62,7 +62,7 @@ const mock_dashboard = {
       "currentTotalValue": "2,430.95"
     }
   ],
-  totalPortfolioValue: "$21,000.00"
+  totalPortfolioValue: "9,907.30"
 
 }
 

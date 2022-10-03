@@ -8,12 +8,13 @@ import { BounceLoader } from 'react-spinners';
 import styled from "styled-components";
 
 const SearchButton = styled.button`
-  color: palevioletred;
+  color: white;
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid palevioletred;
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 3px;
+  background: rgb(4, 0, 31, .69);
 `;
 
 
@@ -72,14 +73,15 @@ const Research = () => {
   return (
     <>
       <FlexContainer className="search-group" direction="column" border="1px solid red" gap="1em" align="center">
-        <h2>Research a stock!</h2>
-        <form onSubmit={handleSubmit} >
-          <div>
-            <label htmlFor="symbol">Symbol: </label>
-            <input onChange={handleChange} type="text" id="symbol" name="symbol" autoComplete="off" required></input>
-          </div>
-          <input className="research-btn" type="submit" value="Search"></input>
-        </form>
+        <FlexContainer border="1px solid orange" gap="0" direction="column" align="center">
+          <h2>Research a stock!</h2>
+          <form className="research-form" onSubmit={handleSubmit}>
+            <div>
+              <input onChange={handleChange} type="text" id="symbol" name="symbol" autoComplete="off" style={{"textAlign": "center", "textTransform": "uppercase", "fontSize": "large"}} required></input>
+            </div>
+            <SearchButton>Search</SearchButton>
+          </form>
+        </FlexContainer>
         <FlexContainer className="quote-details" border="1px solid blue" direction="column">
           <DarkContainer align="center" minHeight="300px" align="center" gap="1em" justify={isLoading ? 'center' : 'normal'}>
             {renderView()}
