@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import StockData from "./ui_components/StockData";
+import StockDetailsTable from "./ui_components/StockDetailsTable";
 import OrderControls from "./OrderControls.jsx";
 import FlexContainer from "./ui_components/FlexContainer";
 
@@ -39,23 +40,25 @@ const Research = () => {
 
   return (
     <>
-    <FlexContainer direction="column" border="1px solid red">
-      <h2>Research a stock!</h2>
-      <form onSubmit={handleSubmit} >
-        <div>
-          <label htmlFor="symbol">Symbol: </label>
-          <input onChange={handleChange} type="text" id="symbol" name="symbol" autoComplete="off" required></input>
-        </div>
-        <input type="submit" value="Search"></input>
-      </form>
-      {
-        stock !== null
-          ? <>
-              <StockData stock={stock} />
-              <OrderControls stock={stock} />
-            </>
-          : null
-      }
+      <FlexContainer className="search-group" direction="column" border="1px solid red" gap="1em" align="center">
+        <h2>Research a stock!</h2>
+        <form onSubmit={handleSubmit} >
+          <div>
+            <label htmlFor="symbol">Symbol: </label>
+            <input onChange={handleChange} type="text" id="symbol" name="symbol" autoComplete="off" required></input>
+          </div>
+          <input type="submit" value="Search"></input>
+        </form>
+        <FlexContainer className="quote-details" border="1px solid blue">
+        {
+          stock !== null
+            ? <>
+                <StockDetailsTable stock={stock} />
+                <OrderControls stock={stock} />
+              </>
+            : null
+        }
+        </FlexContainer>
       </FlexContainer>
     </>
   )
