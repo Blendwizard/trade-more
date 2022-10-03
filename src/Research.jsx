@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import StockData from "./ui_components/StockData";
 import OrderControls from "./OrderControls.jsx";
+import FlexContainer from "./ui_components/FlexContainer";
 
 const Research = () => {
   const [symbol, setSymbol] = useState('');
@@ -38,6 +39,7 @@ const Research = () => {
 
   return (
     <>
+    <FlexContainer direction="column" border="1px solid red">
       <h2>Research a stock!</h2>
       <form onSubmit={handleSubmit} >
         <div>
@@ -54,6 +56,7 @@ const Research = () => {
             </>
           : null
       }
+      </FlexContainer>
     </>
   )
 };
