@@ -5,6 +5,18 @@ import OrderControls from "./OrderControls.jsx";
 import FlexContainer from "./ui_components/FlexContainer";
 import DarkContainer from "./ui_components/DarkContainer";
 import { BounceLoader } from 'react-spinners';
+import styled from "styled-components";
+
+const SearchButton = styled.button`
+  color: palevioletred;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
+
+
 
 const Research = () => {
   const [symbol, setSymbol] = useState('');
@@ -20,7 +32,7 @@ const Research = () => {
     const stock = JSON.stringify({ "stock": symbol })
     const response = await fetch('/stock', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: stock
     });
     setIsLoading(false);
@@ -30,17 +42,32 @@ const Research = () => {
   const handleSubmit = (e) => {
     setIsLoading(true);
     getStockData(symbol)
-    .then((response) => {
-      if (!response.ok) {
-        alert('Symbol incorrect or stock not found.')
-      } else {
-        response.json()
-        .then((data) => setStock(data))
-      }
-    })
-    .catch((err) => console.log('Err: ', err))
+      .then((response) => {
+        if (!response.ok) {
+          alert('Symbol incorrect or stock not found.')
+        } else {
+          response.json()
+            .then((data) => setStock(data))
+        }
+      })
+      .catch((err) => console.log('Err: ', err))
     e.preventDefault();
-  }
+  };
+
+  const renderView = () => {
+    if (!isLoading && stock === null) {
+      return (<StockDetailsTable />);
+    } else if (isLoading) {
+      return (<BounceLoader color="#36d7b7" />)
+    } else if (stock !== null && !isLoading) {
+      return (
+        <>
+          <StockDetailsTable stock={stock} />
+          <OrderControls stock={stock} />
+        </>
+      )
+    }
+  };
 
   return (
     <>
@@ -51,23 +78,12 @@ const Research = () => {
             <label htmlFor="symbol">Symbol: </label>
             <input onChange={handleChange} type="text" id="symbol" name="symbol" autoComplete="off" required></input>
           </div>
-          <input type="submit" value="Search"></input>
+          <input className="research-btn" type="submit" value="Search"></input>
         </form>
-        <FlexContainer className="quote-details" border="1px solid blue" direction="column" align="center">
-        {
-          stock !== null
-            ? <>
-                <DarkContainer>
-                  <StockDetailsTable stock={stock} />
-                </DarkContainer>
-                <DarkContainer>
-                  <OrderControls stock={stock} />
-                </DarkContainer>
-              </>
-            :
-            <h3>Input a stock symbol to begin.</h3>
-
-        }
+        <FlexContainer className="quote-details" border="1px solid blue" direction="column">
+          <DarkContainer align="center" minHeight="300px" align="center" gap="1em" justify={isLoading ? 'center' : 'normal'}>
+            {renderView()}
+          </DarkContainer>
         </FlexContainer>
       </FlexContainer>
     </>
