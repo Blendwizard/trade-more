@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import mock_dashboard from './sample_data/mock_dashboard';
 import StockTable from './ui_components/StockTable';
 import { BounceLoader } from 'react-spinners';
-import NavigationGroup from './NavigationGroup.jsx';
 import DashContent from './DashContent.jsx';
 import FlexContainer from './ui_components/FlexContainer';
 import DashBackground from './ui_components/DashBackground';
-import DashSidebar from './ui_components/DashSidebar';
-import MenuTab from './ui_components/MenuTab';
+import DashSidebar from './DashSidebar.jsx';
+import Research from './Research.jsx';
 
 const Dashboard = () => {
   const [total, setTotal] = useState(null);
   const [balance, setBalance] = useState(null);
   const [stocks, setStocks] = useState(null);
+  const [view, setView] = useState('Dashboard');
 
   useEffect(() => {
     loadDashboard();
@@ -30,60 +30,70 @@ const Dashboard = () => {
       })
   }
 
+  // Fetch user data
   const loadDashboard = async () => {
     await fetch('/userDash', {
       method: 'GET',
-      headers: {'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log('data: ', data);
-      setBalance(data.balance);
-      setStocks(data.portfolio);
-      setTotal(data.totalPortfolioValue)
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('data: ', data);
+        setBalance(data.balance);
+        setStocks(data.portfolio);
+        setTotal(data.totalPortfolioValue)
+      })
 
     // Use mock data with delay to mimic loading
-
     // setTimeout(() => {
     //   setBalance(mock_dashboard.balance);
     //   setStocks(mock_dashboard.portfolio);
     //   setTotal(mock_dashboard.totalPortfolioValue);
     // }, 1000);
-
   };
 
+  // Change dashboard window state
+  const changeView = (e) => {
+    setView(e.target.innerText);
+  };
 
-
+  // Change dash window view based on state
+  const renderView = (view) => {
+    switch (view) {
+      case "Dashboard":
+        return (
+          <DashContent balance={balance} total={total} stocks={stocks} />
+        )
+      case "Research":
+        return (
+          <Research />
+        )
+    };
+  };
 
   return (
     <>
       <FlexContainer justify="flex-end" align="center" gap="2em">
-        <p>Signed in as: @{localStorage.getItem('user')} </p>
+        <p>Signed in as: @{localStorage.getItem('user')}</p>
         <p className='logout-btn' onClick={handleLogout}>Logout</p>
-        <i className="ci-settings_filled" style={{"fontSize": "1.5em"}}></i>
+        <i className="ci-settings_filled" style={{ "fontSize": "1.5em" }}></i>
       </FlexContainer>
 
       <FlexContainer gap="1em" justify="center">
-        <DashSidebar>
-          <MenuTab marginBottom="10%">
-            <span>Navigation</span>
-          </MenuTab>
-          <NavigationGroup />
-        </DashSidebar>
+        <DashSidebar changeView={changeView} />
 
         {stocks !== null ?
-            <>
+          <>
             <DashBackground align="flex-start" direction="column" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
-            <DashContent balance={balance} total={total} stocks={stocks}/>
+              {renderView(view)}
             </DashBackground>
-            </>
-            :
-            <>
-            <DashBackground  justify="center" align="center" direction="row" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
-            <BounceLoader color='#36d7b7' />
+          </>
+          :
+          <>
+            <DashBackground justify="center" align="center" direction="row" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
+              <BounceLoader color='#36d7b7' />
             </DashBackground>
-            </>
+          </>
         }
 
       </FlexContainer>

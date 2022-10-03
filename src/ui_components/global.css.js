@@ -29,7 +29,12 @@ const GlobalCSS = createGlobalStyle`
   }
 
   .link {
+    color: white;
+  }
 
+  .link:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
 
   .logout-btn {

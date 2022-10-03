@@ -24,7 +24,7 @@ const LinkItem = styled.div`
   margin-bottom: 25%
 `;
 
-const NavigationGroup = () => {
+const NavigationGroup = ( {changeView} ) => {
 
 
   return (
@@ -36,13 +36,15 @@ const NavigationGroup = () => {
       </LinkItem>
       <LinkItem>
         <i className="ci-line_chart_up" style={{"fontSize":"1.5em", "marginRight": "7%"}}></i>
-        <Link className="link" to="/dashboard">Dashboard</Link>
+        <span onClick={changeView} className="link">Dashboard</span>
       </LinkItem>
+
       <LinkItem>
         <i className="ci-search" style={{"fontSize":"1.5em", "marginRight": "7%"}}></i>
-        <Link className="link" to="/research">Research</Link>
+        <span onClick={changeView} className="link">Research</span>
       </LinkItem>
       <LinkItem>
+
         <i className="ci-data" style={{"fontSize":"1.5em", "marginRight": "7%"}}></i>
         <Link className="link" to="/analytics">Analytics</Link>
       </LinkItem>
