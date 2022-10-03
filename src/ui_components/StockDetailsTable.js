@@ -5,8 +5,10 @@ const StockDetailsTable = ({ stock }) => {
   const format = new Format();
 
   return (
+    <>
+    <span>Stock Details</span>
     <table>
-      <colgroup span="8"></colgroup>
+      <colgroup span="7"></colgroup>
       <thead>
         <tr>
           <th>Company</th>
@@ -30,7 +32,7 @@ const StockDetailsTable = ({ stock }) => {
         </tr>
       </tbody>
     </table>
-
+    </>
   )
 
 };
