@@ -29,7 +29,7 @@ const StockDetailsTable = ({ stock }) => {
             <td>{stock.week52High}</td>
             <td>{stock.week52Low}</td>
             <td>{stock.peRatio}</td>
-            <td>{((stock.ytdChange).toFixed(2)) * 100}%</td>
+            <td>{(stock.ytdChange * 100).toFixed(2)}%</td>
             <td>{format.shorten(stock.marketCap)}</td>
           </tr>
         </tbody>

@@ -32,25 +32,25 @@ const Dashboard = () => {
 
   // Fetch user data
   const loadDashboard = async () => {
-    // await fetch('/userDash', {
-    //   method: 'GET',
-    //   headers: { 'Content-Type': 'application/json' }
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log('data: ', data);
-    //     setBalance(data.balance);
-    //     setStocks(data.portfolio);
-    //     setTotal(data.totalPortfolioValue)
-    //   })
+    await fetch('/userDash', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('data: ', data);
+        setBalance(data.balance);
+        setStocks(data.portfolio);
+        setTotal(data.totalPortfolioValue)
+      })
 
     // Use mock data with delay to mimic loading
-    setTimeout(() => {
-      console.log('Mocking data...');
-      setBalance(mock_dashboard.balance);
-      setStocks(mock_dashboard.portfolio);
-      setTotal(mock_dashboard.totalPortfolioValue);
-    }, 1000);
+    // setTimeout(() => {
+    //   console.log('Mocking data...');
+    //   setBalance(mock_dashboard.balance);
+    //   setStocks(mock_dashboard.portfolio);
+    //   setTotal(mock_dashboard.totalPortfolioValue);
+    // }, 1000);
   };
 
   // Change dashboard window state
