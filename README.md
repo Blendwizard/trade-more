@@ -1,7 +1,7 @@
 Inspired by a previous abstracted CS50 coursework project.
 
 # Summary
-A stock trading application with a detour exercise on cookie-session based authentication. Inspired by a CS50 Python project.
+A stock trading application with a detour exercise on cookie-session based authentication.
 
 ## Motivation
 1. To exercise and assess my ability to deliver an application based on theoretical requirements while navigating the design and development process.
