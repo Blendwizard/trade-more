@@ -81,7 +81,7 @@ const Dashboard = () => {
       </FlexContainer>
 
       <FlexContainer gap="1em" justify="center">
-        <DashSidebar changeView={changeView} />
+        <DashSidebar changeView={changeView} view={view}/>
 
         {stocks !== null ?
           <>

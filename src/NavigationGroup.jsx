@@ -23,7 +23,10 @@ const LinkItem = styled.div`
   min-height: 2em;
   &:hover {
     background-color: #6a4feb3d;
-  }
+    cursor: pointer;
+  };
+
+
 `;
 
 

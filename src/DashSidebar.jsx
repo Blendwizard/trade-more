@@ -14,18 +14,23 @@ const SideContainer = styled.div`
   background: rgba(4, 0, 31, 1);
   border-radius: 25px;
   border: 1px solid #c4a7eb6b;
-
+  align-items: center;
   padding-left: 1em;
-  padding-top: 3em;
   padding-right: 1em;
 `;
 
+const SideSearch = styled.input`
+  width: 80%;
+  border-radius: 25px;
+`;
 
-const DashSidebar = ({changeView}) => {
+
+const DashSidebar = ({changeView, view}) => {
 
   return (
     <>
     <SideContainer>
+      <h3>{view}</h3>
       <NavigationGroup changeView={changeView} />
     </SideContainer>
     </>
