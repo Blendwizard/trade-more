@@ -23,3 +23,33 @@ Downsides:
 * Lack of flexibility makes adding features potentially more difficult.
 * Upstream changes might require compounding system redesigns.
 
+## Feature Requirements
+
+```javascript
+  const Features = {
+    Critical: [
+      Authentication,
+      Account Balance,
+      User Portfolio,
+      Purchase/Sell Stocks,
+      Display Total Portfolio Value,
+      Stocks Held (Details),
+      Accurate Stock Quotes,
+      Add Funds,
+      Mobile Compatibility
+    ],
+    Want: [
+      Data Visualization,
+      Data Analytics,
+      Dark/Light Themes,
+      Transactions-to-CSV,
+      Predetermined Buy/Sell Orders
+    ],
+    Extra: [
+      News,
+      Recommendations,
+      Advanced Analytics
+    ]
+  }
+
+```
