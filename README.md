@@ -1,3 +1,5 @@
+Inspired by a previous abstracted CS50 coursework project.
+
 # Summary
 A stock trading application with a detour exercise on cookie-session based authentication.
 
@@ -9,6 +11,7 @@ A stock trading application with a detour exercise on cookie-session based authe
 ## Development Process
 ![](./imgs/waterfall.png "Process")
 As a solo project, I adhered to a Waterfall methodology rather than Agile.
+
 Reasoning:
 * The app is simple enough that we should be able to chart a course to completion without much complexity.
 * Having a concrete design document allows us to stay oriented in our development process.
@@ -20,3 +23,33 @@ Downsides:
 * Lack of flexibility makes adding features potentially more difficult.
 * Upstream changes might require compounding system redesigns.
 
+## Feature Requirements
+
+```javascript
+  const Features = {
+    Critical: [
+      Authentication,
+      Account Balance,
+      User Portfolio,
+      Purchase/Sell Stocks,
+      Display Total Portfolio Value,
+      Stocks Held (Details),
+      Accurate Stock Quotes,
+      Add Funds,
+      Mobile Compatibility
+    ],
+    Want: [
+      Data Visualization,
+      Data Analytics,
+      Dark/Light Themes,
+      Transactions-to-CSV,
+      Predetermined Buy/Sell Orders
+    ],
+    Extra: [
+      News,
+      Recommendations,
+      Advanced Analytics
+    ]
+  }
+
+```
