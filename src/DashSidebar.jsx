@@ -21,9 +21,7 @@ const DashSidebar = ({changeView}) => {
   return (
     <>
     <SideContainer>
-      <MenuTab marginBottom="10%">
-        <span>Navigation</span>
-      </MenuTab>
+
       <NavigationGroup changeView={changeView} />
     </SideContainer>
     </>
