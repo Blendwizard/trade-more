@@ -35,25 +35,25 @@ const NavigationGroup = ( {changeView, view} ) => {
   return (
     <LinkGroup>
         <LinkItem>
-          <i className="ci-home_alt_fill" style={{"fontSize":"1.5em"}}></i>
+          <i className="ci-home_alt_fill" style={{"fontSize":"1.5em", color: 'white'}}></i>
           <Link className="link" to="/">Home</Link>
         </LinkItem>
       <LinkItem onClick={() => changeView('Dashboard')} active={view === 'Dashboard'}>
-        <i className="ci-line_chart_up" style={{"fontSize":"1.5em"}}></i>
+        <i className="ci-line_chart_up" style={{"fontSize":"1.5em", color: 'white'}}></i>
         <span className="link">Dashboard</span>
       </LinkItem>
 
       <LinkItem onClick={() => changeView('Research')} active={view === 'Research'}>
-        <i className="ci-search" style={{"fontSize":"1.5em"}}></i>
+        <i className="ci-search" style={{"fontSize":"1.5em", color: 'white'}}></i>
         <span className="link">Research</span>
       </LinkItem>
       <LinkItem>
 
-        <i className="ci-data" style={{"fontSize":"1.5em"}}></i>
+        <i className="ci-data" style={{"fontSize":"1.5em", color: 'white'}}></i>
         <Link className="link" to="/analytics">Analytics</Link>
       </LinkItem>
       <LinkItem>
-        <i className="ci-credit_card" style={{"fontSize":"1.5em"}}></i>
+        <i className="ci-credit_card" style={{"fontSize":"1.5em", color: 'white'}}></i>
         <Link className="link" to="/account">Funding</Link>
       </LinkItem>
     </LinkGroup>

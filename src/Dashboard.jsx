@@ -8,12 +8,16 @@ import FlexContainer from './ui_components/FlexContainer';
 import DashBackground from './ui_components/DashBackground';
 import DashSidebar from './DashSidebar.jsx';
 import Research from './Research.jsx';
+import Ticker from './Ticker.jsx';
+import helpers from './helpers/helper';
 
 const Dashboard = () => {
   const [total, setTotal] = useState(null);
   const [balance, setBalance] = useState(null);
   const [stocks, setStocks] = useState(null);
+  const [stockDetails, setStockDetails] = useState(null);
   const [view, setView] = useState('Dashboard');
+
 
   useEffect(() => {
     loadDashboard();
@@ -32,25 +36,33 @@ const Dashboard = () => {
 
   // Fetch user data
   const loadDashboard = async () => {
-    // await fetch('/userDash', {
-    //   method: 'GET',
-    //   headers: { 'Content-Type': 'application/json' }
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log('data: ', data);
-    //     setBalance(data.balance);
-    //     setStocks(data.portfolio);
-    //     setTotal(data.totalPortfolioValue)
-    //   })
+    const stockDetailContainer = [];
+    await fetch('/userDash', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then((response) => response.json())
+      .then(async (data) => {
+        console.log('data: ', data);
+        setBalance(data.balance);
+        setStocks(data.portfolio);
+        setTotal(data.totalPortfolioValue);
+        for (let stock of data.portfolio) {
+          await helpers.getStockData(stock.symbol)
+          .then((info) => info.json())
+          .then((details) => stockDetailContainer.push(details))
+        }
+        setStockDetails(stockDetailContainer);
+      })
+
 
     // Use mock data with delay to mimic loading
-    setTimeout(() => {
-      console.log('Mocking data...');
-      setBalance(mock_dashboard.balance);
-      setStocks(mock_dashboard.portfolio);
-      setTotal(mock_dashboard.totalPortfolioValue);
-    }, 1000);
+    // setTimeout(() => {
+    //   console.log('Mocking data...');
+    //   setBalance(mock_dashboard.balance);
+    //   setStocks(mock_dashboard.portfolio);
+    //   setTotal(mock_dashboard.totalPortfolioValue);
+    // }, 1000);
   };
 
   // Change dashboard window state
@@ -62,6 +74,7 @@ const Dashboard = () => {
   const renderView = (view) => {
     switch (view) {
       case "Dashboard":
+        console.log('Rendering...');
         return (
           <DashContent balance={balance} total={total} stocks={stocks} />
         )
@@ -75,6 +88,7 @@ const Dashboard = () => {
   return (
     <>
       <FlexContainer justify="flex-end" align="center" gap="2em">
+        {stockDetails !== null ? <Ticker stockDetails={stockDetails} /> : null }
         <p>Signed in as: @{localStorage.getItem('user')}</p>
         <p className='logout-btn' onClick={handleLogout}>Logout</p>
         <i className="ci-settings_filled" style={{ "fontSize": "1.5em" }}></i>

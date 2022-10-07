@@ -62,8 +62,69 @@ const mock_dashboard = {
       "currentTotalValue": "2,430.95"
     }
   ],
-  totalPortfolioValue: "9,907.30"
+  totalPortfolioValue: "9,907.30",
 
+  stockDetails:
+    [
+      {
+        "avgTotalVolume": 11287383,
+        "calculationPrice": "tops",
+        "change": -4.13,
+        "changePercent": -0.05555,
+        "close": null,
+        "closeSource": "official",
+        "closeTime": null,
+        "companyName": "Taiwan Semiconductor Manufacturing - ADR",
+        "currency": "USD",
+        "delayedPrice": null,
+        "delayedPriceTime": null,
+        "extendedChange": null,
+        "extendedChangePercent": null,
+        "extendedPrice": null,
+        "extendedPriceTime": null,
+        "high": null,
+        "highSource": "IEX real time price",
+        "highTime": 1665149418213,
+        "iexAskPrice": 70.22,
+        "iexAskSize": 100,
+        "iexBidPrice": 70.21,
+        "iexBidSize": 300,
+        "iexClose": 70.22,
+        "iexCloseTime": 1665168456193,
+        "iexLastUpdated": 1665168456193,
+        "iexMarketPercent": 0.06050554909296696,
+        "iexOpen": 71.85,
+        "iexOpenTime": 1665149402277,
+        "iexRealtimePrice": 70.22,
+        "iexRealtimeSize": 100,
+        "iexVolume": 454182,
+        "lastTradeTime": 1665168456193,
+        "latestPrice": 70.22,
+        "latestSource": "IEX real time price",
+        "latestTime": "2:47:36 PM",
+        "latestUpdate": 1665168456193,
+        "latestVolume": null,
+        "low": null,
+        "lowSource": "15 minute delayed price",
+        "lowTime": 1665166300510,
+        "marketCap": 364166263180,
+        "oddLotDelayedPrice": null,
+        "oddLotDelayedPriceTime": null,
+        "open": null,
+        "openTime": null,
+        "openSource": "official",
+        "peRatio": 13.63,
+        "previousClose": 74.35,
+        "previousVolume": 11796844,
+        "primaryExchange": "NEW YORK STOCK EXCHANGE INC.",
+        "symbol": "TSM",
+        "volume": null,
+        "week52High": 142.74,
+        "week52Low": 67.65,
+        "ytdChange": -0.42778373338129183,
+        "isUSMarketOpen": true
+      }
+    ]
 }
 
 export default mock_dashboard;

@@ -37,6 +37,25 @@ const GlobalCSS = createGlobalStyle`
 
   }
 
+
+  .ticker-container {
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid red;
+    width: 55%
+  }
+
+  .ticker-message {
+    display: flex;
+    position: relative;
+    left: 100%;
+    flex-shrink: 0;
+    align-items: center;
+    animation: slide-left 10s linear infinite;
+  }
+
   .research-form {
     display: flex;
     flex-direction: column;
@@ -84,6 +103,15 @@ const GlobalCSS = createGlobalStyle`
     overflow: hidden;
   }
 
+  @keyframes slide-left {
+    from {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    to {
+      -webkit-transform: translateX(-300%);
+              transform: translateX(-300%);
+    }
 
 `;
 
