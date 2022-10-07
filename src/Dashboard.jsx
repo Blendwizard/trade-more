@@ -16,7 +16,7 @@ const Dashboard = () => {
   const [balance, setBalance] = useState(null);
   const [stocks, setStocks] = useState(null);
   const [stockDetails, setStockDetails] = useState(null);
-  const [view, setView] = useState('Dashboard');
+  const [view, setView] = useState(null);
 
 
   useEffect(() => {
@@ -53,6 +53,7 @@ const Dashboard = () => {
           .then((details) => stockDetailContainer.push(details))
         }
         setStockDetails(stockDetailContainer);
+        setView('Dashboard');
       })
 
 
@@ -97,7 +98,7 @@ const Dashboard = () => {
       <FlexContainer gap="1em" justify="center">
         <DashSidebar changeView={changeView} view={view}/>
 
-        {stocks !== null ?
+        {stocks !== null && stockDetails !== null ?
           <>
             <DashBackground align="flex-start" direction="column" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
               {renderView(view)}

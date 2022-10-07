@@ -43,17 +43,25 @@ const GlobalCSS = createGlobalStyle`
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
-    border: 1px solid red;
+
     width: 55%
   }
 
   .ticker-message {
     display: flex;
     position: relative;
+    gap: 4em;
+    font-family: 'Press Start 2P';
+    font-size: xx-small;
     left: 100%;
     flex-shrink: 0;
     align-items: center;
-    animation: slide-left 10s linear infinite;
+    animation: slide-left 30s linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+
+    }
   }
 
   .research-form {
@@ -109,8 +117,8 @@ const GlobalCSS = createGlobalStyle`
               transform: translateX(0);
     }
     to {
-      -webkit-transform: translateX(-300%);
-              transform: translateX(-300%);
+      -webkit-transform: translateX(-135%);
+              transform: translateX(-135%);
     }
 
 `;
