@@ -31,7 +31,7 @@ const DashSidebar = ({changeView, view}) => {
     <>
     <SideContainer>
       <h3>{view}</h3>
-      <NavigationGroup changeView={changeView} />
+      <NavigationGroup changeView={changeView} view={view} />
     </SideContainer>
     </>
   )

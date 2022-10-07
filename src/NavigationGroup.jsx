@@ -25,14 +25,12 @@ const LinkItem = styled.div`
     background-color: #6a4feb3d;
     cursor: pointer;
   };
-
-
+  background-color: ${(props) => props.active === true ? '#ffffff3d' : 'none'};
 `;
 
 
 
-const NavigationGroup = ( {changeView} ) => {
-
+const NavigationGroup = ( {changeView, view} ) => {
 
   return (
     <LinkGroup>
@@ -40,12 +38,12 @@ const NavigationGroup = ( {changeView} ) => {
           <i className="ci-home_alt_fill" style={{"fontSize":"1.5em"}}></i>
           <Link className="link" to="/">Home</Link>
         </LinkItem>
-      <LinkItem onClick={() => changeView('Dashboard')}>
+      <LinkItem onClick={() => changeView('Dashboard')} active={view === 'Dashboard'}>
         <i className="ci-line_chart_up" style={{"fontSize":"1.5em"}}></i>
         <span className="link">Dashboard</span>
       </LinkItem>
 
-      <LinkItem onClick={() => changeView('Research')}>
+      <LinkItem onClick={() => changeView('Research')} active={view === 'Research'}>
         <i className="ci-search" style={{"fontSize":"1.5em"}}></i>
         <span className="link">Research</span>
       </LinkItem>
