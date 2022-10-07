@@ -40,14 +40,14 @@ const NavigationGroup = ( {changeView} ) => {
           <i className="ci-home_alt_fill" style={{"fontSize":"1.5em"}}></i>
           <Link className="link" to="/">Home</Link>
         </LinkItem>
-      <LinkItem>
+      <LinkItem onClick={() => changeView('Dashboard')}>
         <i className="ci-line_chart_up" style={{"fontSize":"1.5em"}}></i>
-        <span onClick={changeView} className="link">Dashboard</span>
+        <span className="link">Dashboard</span>
       </LinkItem>
 
-      <LinkItem>
+      <LinkItem onClick={() => changeView('Research')}>
         <i className="ci-search" style={{"fontSize":"1.5em"}}></i>
-        <span onClick={changeView} className="link">Research</span>
+        <span className="link">Research</span>
       </LinkItem>
       <LinkItem>
 

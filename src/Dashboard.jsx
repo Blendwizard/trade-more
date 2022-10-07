@@ -54,8 +54,8 @@ const Dashboard = () => {
   };
 
   // Change dashboard window state
-  const changeView = (e) => {
-    setView(e.target.innerText);
+  const changeView = (switchTo) => {
+    setView(switchTo);
   };
 
   // Change dash window view based on state

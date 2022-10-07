@@ -34,7 +34,7 @@ const GlobalCSS = createGlobalStyle`
 
   .link:hover {
     cursor: pointer;
-    text-decoration: underline;
+
   }
 
   .research-form {
