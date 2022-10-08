@@ -30,7 +30,7 @@ const DashSidebar = ({changeView, view}) => {
   return (
     <>
     <SideContainer>
-      <h3>TradeMore</h3>
+      <h3 className="nav-title">TradeMore</h3>
       <NavigationGroup changeView={changeView} view={view} />
     </SideContainer>
     </>

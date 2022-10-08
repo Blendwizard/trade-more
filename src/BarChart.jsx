@@ -11,7 +11,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
 
-const LineChart = ({ stocks }) => {
+const BarChart = ({ stocks }) => {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -21,9 +21,15 @@ const LineChart = ({ stocks }) => {
     Legend
   );
 
+
   // Order stocks by decreasing gains
   stocks.sort((a, b) => b.totalDelta - a.totalDelta);
-  const stockDeltas = stocks.map((stock) => Number(stock.totalDelta));
+  const percentChanges = stocks.map((stock) => {
+    let percent = (stock.currentPrice - stock.averageCost) / stock.averageCost;
+    percent = (percent * 100).toFixed(2);
+    return Number(percent);
+  });
+  // const stockDeltas = stocks.map((stock) => Number(stock.totalDelta));
   const labels = stocks.map((stock) => stock.symbol);
 
   // Determine individual bar color
@@ -37,18 +43,29 @@ const LineChart = ({ stocks }) => {
   const options = {
     scales: {
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: '% Change'
+        }
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Stock'
+        }
       }
     },
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
+        display: false,
         position: 'top',
       },
       title: {
         display: true,
-        text: `Today's P&L ($)`,
+        text: `Today's P&L (%)`,
       },
     },
   };
@@ -57,8 +74,8 @@ const LineChart = ({ stocks }) => {
     labels,
     datasets: [
       {
-        label: 'Change',
-        data: stockDeltas,
+        label: '(%) Increase/Decrease',
+        data: percentChanges,
         borderColor: 'white',
         backgroundColor: barColors,
       }
@@ -76,5 +93,5 @@ const LineChart = ({ stocks }) => {
 
 };
 
-export default LineChart;
+export default BarChart;
 

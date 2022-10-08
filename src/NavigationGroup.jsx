@@ -15,7 +15,7 @@ const LinkGroup = styled.div`
 const LinkItem = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
   gap: 0.3em;
   padding: 5px;
@@ -35,7 +35,7 @@ const NavigationGroup = ( {changeView, view} ) => {
   return (
     <LinkGroup>
         <LinkItem>
-          <i className="ci-home_alt_fill" style={{"fontSize":"1.5em", color: 'white'}}></i>
+          <i className="ci-home_alt_fill" style={{"fontSize":"1.5em", color: 'white', marginTop: '5px'}}></i>
           <Link className="link" to="/">Home</Link>
         </LinkItem>
       <LinkItem onClick={() => changeView('Dashboard')} active={view === 'Dashboard'}>

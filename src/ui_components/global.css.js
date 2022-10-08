@@ -37,6 +37,12 @@ const GlobalCSS = createGlobalStyle`
 
   }
 
+  .nav-title {
+    color: #36d7b7;
+    font-family: 'Press Start 2P', 'sans-serif';
+    font-size: smaller;
+  }
+
 
   .ticker-container {
     display: flex;

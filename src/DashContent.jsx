@@ -4,7 +4,7 @@ import FlexContainer from "./ui_components/FlexContainer";
 import MenuTab from "./ui_components/MenuTab";
 import HoldingsDoughnut from "./HoldingsDoughnut.jsx";
 import StockTable from "./ui_components/StockTable";
-import LineChart from "./LineChart.jsx";
+import BarChart from "./BarChart.jsx";
 
 
 const SummaryContainer = styled.div`
@@ -61,7 +61,7 @@ const DashContent = ({ balance, total, stocks }) => {
       </SummaryContainer>
 
         <ChartContainer>
-          <LineChart stocks={stocks}></LineChart>
+          <BarChart stocks={stocks} />
         </ChartContainer>
       </FlexContainer>
 
