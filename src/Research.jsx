@@ -26,7 +26,7 @@ const Research = () => {
 
   const handleChange = (e) => {
     setSymbol(e.target.value);
-  }
+  };
 
 
   const getStockData = async () => {
@@ -36,23 +36,28 @@ const Research = () => {
       headers: { 'Content-Type': 'application/json' },
       body: stock
     });
-    setIsLoading(false);
     return response;
   }
 
   const handleSubmit = (e) => {
-    setIsLoading(true);
-    getStockData(symbol)
-      .then((response) => {
-        if (!response.ok) {
-          alert('Symbol incorrect or stock not found.')
-        } else {
-          response.json()
-            .then((data) => setStock(data))
-        }
-      })
-      .catch((err) => console.log('Err: ', err))
     e.preventDefault();
+    const test = /^[A-Za-z]+$/;
+    if (!symbol.match(test)) {
+      alert('Please input text only');
+    } else {
+      setIsLoading(true);
+      getStockData(symbol)
+        .then((response) => {
+          if (!response.ok) {
+            alert('Symbol incorrect or stock not found.')
+          } else {
+            response.json()
+              .then((data) => setStock(data))
+          }
+          setIsLoading(false);
+        })
+        .catch((err) => console.log('Err: ', err))
+    }
   };
 
   const renderView = () => {

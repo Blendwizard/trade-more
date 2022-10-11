@@ -36,7 +36,19 @@ const Dashboard = () => {
     } else {
       alert('Failed to logout');
     }
-  }
+  };
+
+
+  const mockData = () => {
+    setTimeout(() => {
+      console.log('Mocking data...');
+      setBalance(mock_dashboard.balance);
+      setStocks(mock_dashboard.portfolio);
+      setTotal(mock_dashboard.totalPortfolioValue);
+      setStockDetails(mock_dashboard.stockDetails);
+      setView('Dashboard');
+    }, 1000);
+  };
 
   // Fetch user data
   const loadDashboard = async () => {
@@ -58,17 +70,10 @@ const Dashboard = () => {
     //     }
     //     setStockDetails(stockDetailContainer);
     //     setView('Dashboard');
-    //   })
+    //   });
 
     // Use mock data with delay to mimic loading
-    setTimeout(() => {
-      console.log('Mocking data...');
-      setBalance(mock_dashboard.balance);
-      setStocks(mock_dashboard.portfolio);
-      setTotal(mock_dashboard.totalPortfolioValue);
-      setStockDetails(mock_dashboard.stockDetails);
-      setView('Dashboard');
-    }, 1000);
+    mockData();
   };
 
   // Change dashboard window state

@@ -44,7 +44,7 @@ module.exports = {
         res.cookie('auth', '', { maxAge: 1 });
         res.cookie('username', '', { maxAge: 1 });
         res.sendStatus(200);
-      } catch(e) {
+      } catch (e) {
         console.log('Failed to log user out');
         res.sendStatus(400);
       }
@@ -58,27 +58,36 @@ module.exports = {
     const sessionID = helpers.parseCookie(req.headers.cookie, 'id');
     console.log('Checking session ID: ', sessionID);
     let isValidSession = null;
-    const result = await models.database.lookupSession(sessionID);
-    isValidSession = result.rowCount < 1 ? false : true;
-    return isValidSession;
+    try {
+      const result = await models.database.lookupSession(sessionID);
+      isValidSession = result.rowCount < 1 ? false : true;
+      return isValidSession;
+    } catch (e) {
+      console.log('Error in session check controls');
+    }
   },
 
-  fetchUserDashboard: (req, res) => {
-    const username = helpers.parseCookie(req.headers.cookie, 'username')
-    console.log('username: ', username);
-    models.database.fetchUserDashboardData(username)
-      .then((data) => {
-        console.log('data sent for dashboard: ', data);
-        res.status(200).send(data);
-      })
+  fetchUserDashboard: async (req, res) => {
+    const username = await helpers.parseCookie(req.headers.cookie, 'username');
+    try {
+      const data = await models.database.fetchUserDashboardData(username);
+      console.log('Sending data to dashboard');
+      res.status(200).send(data);
+    } catch (e) {
+      console.log('Failed to send data to client');
+      res.sendStatus(400);
+    }
   },
 
-  getStockInfo: (req, res) => {
-    models.database.getStockData(req.body.stock)
-      .then((data) => {
-        res.status(200).send(data);
-      })
-      .catch((err) => res.status(400).json(err));
+  getStockInfo: async (req, res) => {
+    try {
+      const data = await models.database.getStockData(req.body.stock);
+      console.log(data);
+      res.status(200).send(data);
+    } catch (e) {
+      console.log('Failed to fetch stock data', e);
+      res.status(400).json(e);
+    }
   },
 
   attemptSale: async (req, res) => {
