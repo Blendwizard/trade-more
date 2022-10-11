@@ -82,10 +82,9 @@ module.exports = {
   getStockInfo: async (req, res) => {
     try {
       const data = await models.database.getStockData(req.body.stock);
-      console.log(data);
       res.status(200).send(data);
     } catch (e) {
-      console.log('Failed to fetch stock data', e);
+      console.log('Failed to fetch stock data');
       res.status(400).json(e);
     }
   },
@@ -93,13 +92,12 @@ module.exports = {
   attemptSale: async (req, res) => {
     const username = helpers.parseCookie(req.headers.cookie, 'username');
     const order = req.body;
-
     try {
       const result = await models.database.processOrder(order, username);
       res.status(200).send(result);
-    } catch (err) {
-      console.log('Sale error: ', err);
-      res.status(400).json(err);
+    } catch (e) {
+      console.log('Sale error: ', e);
+      res.status(400).json(e);
     }
   },
 
@@ -108,9 +106,9 @@ module.exports = {
     const username = helpers.parseCookie(req.headers.cookie, 'username');
     try {
       const result = await models.database.addFunds(amount, username);
-      res.status(200).send('success');
-    } catch {
-      res.status(400).send('error');
+      res.sendStatus(200);
+    } catch (e) {
+      res.status(400).json(e);
     }
   }
 

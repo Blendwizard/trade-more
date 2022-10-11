@@ -23,15 +23,16 @@ const AddFunds = () => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     sendFunds(funds)
       .then((res) => {
         if (!res.ok) {
           alert('Failed to add funds.');
         } else {
           navigate('/dashboard');
+          alert('Successfully added funds');
         }
       })
-    e.preventDefault();
   };
 
   return (
