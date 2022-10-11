@@ -14,6 +14,7 @@ const HoldingsDoughnut = ({ balance, total, stocks }) => {
   const labels = ['CASH', ...stocks.map((stock) => stock.symbol)];
 
   const options = {
+    borderWidth: 1,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

@@ -23,7 +23,6 @@ const Login = () => {
         navigate('/dashboard');
       } else {
         console.log('Unauthorized');
-        setUser(null);
         alert('Incorrect username or password');
       }
     })
