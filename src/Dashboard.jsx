@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import mock_dashboard from './sample_data/mock_dashboard';
 import StockTable from './ui_components/StockTable';
@@ -18,20 +19,23 @@ const Dashboard = () => {
   const [stockDetails, setStockDetails] = useState(null);
   const [view, setView] = useState(null);
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadDashboard();
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.clear();
-    fetch('/logout', {
+    const res = await fetch('/logout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
-    })
-      .then((res) => {
-        window.location.href = res.url;
-      })
+    });
+    if (res.status === 200) {
+      navigate('/');
+    } else {
+      alert('Failed to logout');
+    }
   }
 
   // Fetch user data

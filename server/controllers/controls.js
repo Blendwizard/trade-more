@@ -35,19 +35,21 @@ module.exports = {
     }
   },
 
-  logoutUser: (req, res) => {
+  logoutUser: async (req, res) => {
     const sessionID = helpers.parseCookie(req.headers.cookie, 'id');
     if (sessionID !== false) {
-      models.database.clearSession(sessionID)
-        .then((success) => {
-          // Destroy cookies
-          res.cookie('auth', '', { maxAge: 1 });
-          res.cookie('username', '', { maxAge: 1 });
-          res.redirect('/');
-        })
-        .catch((err) => res.send(err))
+      try {
+        await models.database.clearSession(sessionID);
+        // Destroy cookies
+        res.cookie('auth', '', { maxAge: 1 });
+        res.cookie('username', '', { maxAge: 1 });
+        res.sendStatus(200);
+      } catch(e) {
+        console.log('Failed to log user out');
+        res.sendStatus(400);
+      }
     } else {
-      res.redirect('/');
+      res.sendStatus(200);
     }
   },
 
