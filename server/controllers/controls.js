@@ -58,14 +58,8 @@ module.exports = {
     const sessionID = helpers.parseCookie(req.headers.cookie, 'id');
     console.log('Checking session ID: ', sessionID);
     let isValidSession = null;
-    await models.database.lookupSession(sessionID)
-      .then((result) => {
-        if (result.rowCount < 1) {
-          isValidSession = false;
-        } else {
-          isValidSession = true;
-        }
-      });
+    const result = await models.database.lookupSession(sessionID);
+    isValidSession = result.rowCount < 1 ? false : true;
     return isValidSession;
   },
 
