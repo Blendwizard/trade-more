@@ -9,30 +9,30 @@ module.exports = {
     try {
       await models.database.insertNewUser({ user: username, pass: password });
       res.sendStatus(200);
-    } catch {
+    } catch (e) {
       res.sendStatus(400);
     }
   },
 
-  attemptLogin: (req, res) => {
-    ({ username, password } = req.body);
-    models.database.validateCredentials({ user: username, pass: password })
-      .then((data) => {
-        if (helpers.validate(data)) {
-          const { session, options } = helpers.generateSessionID(username);
-          models.database.createSession(session, username)
-            .then(() => {
-              console.log('Setting new cookie');
-              res.cookie('auth', session, options);
-              res.cookie('username', username, options);
-              console.log('...redirecting to dashboard...');
-              res.redirect('/dashboard');
-            })
-        } else {
-          res.redirect(401, '/login');
-        }
-      })
-      .catch((err) => res.send(err));
+  attemptLogin: async (req, res) => {
+    const { username, password } = req.body;
+    try {
+      const data = await models.database.validateCredentials({ user: username, pass: password });
+      const validated = await helpers.validate(data, password);
+      if (validated) {
+        const { session, options } = helpers.generateSessionID(username);
+        await models.database.createSession(session, username);
+        res.cookie('auth', session, options);
+        res.cookie('username', username, options);
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(401);
+      }
+
+    } catch (e) {
+      console.log('Error attempting to login');
+      res.sendStatus(403);
+    }
   },
 
   logoutUser: (req, res) => {

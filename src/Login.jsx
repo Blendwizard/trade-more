@@ -16,17 +16,18 @@ const Login = () => {
   }
 
   const handleSubmit = (e) => {
-    localStorage.setItem('user', credentials.username);
+    e.preventDefault();
     sendLoginInfo(credentials)
     .then((res) => {
       if (res.status === 200) {
+        localStorage.setItem('user', credentials.username);
         navigate('/dashboard');
       } else {
         console.log('Unauthorized');
         alert('Incorrect username or password');
+        navigate('/login');
       }
     })
-    e.preventDefault();
   }
 
   const handleChange = (e) => {
@@ -45,7 +46,7 @@ const Login = () => {
     <form onSubmit={handleSubmit} >
       <div>
         <label htmlFor="username">Username: </label>
-        <input onChange={handleChange} type="text" id="username" name="username" required></input>
+        <input onChange={handleChange} type="text" id="username" name="username" autoComplete="off" required></input>
       </div>
 
       <div>
