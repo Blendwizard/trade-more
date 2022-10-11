@@ -57,13 +57,20 @@ module.exports = {
   checkSession: async (req, res) => {
     const sessionID = helpers.parseCookie(req.headers.cookie, 'id');
     console.log('Checking session ID: ', sessionID);
-    let isValidSession = null;
-    try {
-      const result = await models.database.lookupSession(sessionID);
-      isValidSession = result.rowCount < 1 ? false : true;
-      return isValidSession;
-    } catch (e) {
-      console.log('Error in session check controls');
+    if (sessionID) {
+      try {
+        const result = await models.database.lookupSession(sessionID);
+         if (result.rowCount >= 1) {
+          res.sendStatus(200);
+         } else {
+          console.log('Could not locate session from ID');
+          res.sendStatus(403);
+         }
+      } catch (e) {
+        console.log('Error in session check controls');
+      }
+    } else {
+      res.sendStatus(403);
     }
   },
 
