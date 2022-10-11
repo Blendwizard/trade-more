@@ -40,34 +40,35 @@ const Dashboard = () => {
 
   // Fetch user data
   const loadDashboard = async () => {
-    const stockDetailContainer = [];
-    await fetch('/userDash', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then((response) => response.json())
-      .then(async (data) => {
-        console.log('data: ', data);
-        setBalance(data.balance);
-        setStocks(data.portfolio);
-        setTotal(data.totalPortfolioValue);
-        for (let stock of data.portfolio) {
-          await helpers.getStockData(stock.symbol)
-          .then((info) => info.json())
-          .then((details) => stockDetailContainer.push(details))
-        }
-        setStockDetails(stockDetailContainer);
-        setView('Dashboard');
-      })
-
+    // const stockDetailContainer = [];
+    // await fetch('/userDash', {
+    //   method: 'GET',
+    //   headers: { 'Content-Type': 'application/json' }
+    // })
+    //   .then((response) => response.json())
+    //   .then(async (data) => {
+    //     console.log('data: ', data);
+    //     setBalance(data.balance);
+    //     setStocks(data.portfolio);
+    //     setTotal(data.totalPortfolioValue);
+    //     for (let stock of data.portfolio) {
+    //       await helpers.getStockData(stock.symbol)
+    //       .then((info) => info.json())
+    //       .then((details) => stockDetailContainer.push(details))
+    //     }
+    //     setStockDetails(stockDetailContainer);
+    //     setView('Dashboard');
+    //   })
 
     // Use mock data with delay to mimic loading
-    // setTimeout(() => {
-    //   console.log('Mocking data...');
-    //   setBalance(mock_dashboard.balance);
-    //   setStocks(mock_dashboard.portfolio);
-    //   setTotal(mock_dashboard.totalPortfolioValue);
-    // }, 1000);
+    setTimeout(() => {
+      console.log('Mocking data...');
+      setBalance(mock_dashboard.balance);
+      setStocks(mock_dashboard.portfolio);
+      setTotal(mock_dashboard.totalPortfolioValue);
+      setStockDetails(mock_dashboard.stockDetails);
+      setView('Dashboard');
+    }, 1000);
   };
 
   // Change dashboard window state
