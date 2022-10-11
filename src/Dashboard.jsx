@@ -50,30 +50,41 @@ const Dashboard = () => {
     }, 1000);
   };
 
+  const fetchData = async () => {
+    const response = await fetch('/userDash', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    return response;
+  };
+
   // Fetch user data
   const loadDashboard = async () => {
-    // const stockDetailContainer = [];
-    // await fetch('/userDash', {
-    //   method: 'GET',
-    //   headers: { 'Content-Type': 'application/json' }
-    // })
-    //   .then((response) => response.json())
-    //   .then(async (data) => {
-    //     console.log('data: ', data);
-    //     setBalance(data.balance);
-    //     setStocks(data.portfolio);
-    //     setTotal(data.totalPortfolioValue);
-    //     for (let stock of data.portfolio) {
-    //       await helpers.getStockData(stock.symbol)
-    //       .then((info) => info.json())
-    //       .then((details) => stockDetailContainer.push(details))
-    //     }
-    //     setStockDetails(stockDetailContainer);
-    //     setView('Dashboard');
-    //   });
+    const stockDetailContainer = [];
+    try {
+      const res = await fetchData();
+      if (res.status === 200) {
+        const data = await res.json();
+        setBalance(data.balance);
+        setStocks(data.portfolio);
+        setTotal(data.totalPortfolioValue);
+        for (let stock of data.portfolio) {
+          const info = await helpers.getStockData(stock.symbol);
+          const details = await info.json();
+          stockDetailContainer.push(details);
+        }
+        setStockDetails(stockDetailContainer);
+        setView('Dashboard');
+      } else {
+        alert('Failed to load dashboard');
+      }
+    } catch (e) {
+      console.log(e);
+      alert('Error in dashboard');
+    }
 
     // Use mock data with delay to mimic loading
-    mockData();
+    // mockData();
   };
 
   // Change dashboard window state
@@ -124,7 +135,7 @@ const Dashboard = () => {
 
       </FlexContainer>
     </>
-  )
-}
+  );
+};
 
 export default Dashboard;
