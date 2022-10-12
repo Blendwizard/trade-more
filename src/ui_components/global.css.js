@@ -3,14 +3,13 @@ import { createGlobalStyle } from "styled-components";
 const GlobalCSS = createGlobalStyle`
 
   body {
-    background-color: rgba(8, 0, 54, 1);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, #0c0022 100%);
     color: antiquewhite;
     font-family: 'Varela Round', sans-serif;
   }
 
-  html {
-    overflow: scroll;
-  }
   ::-webkit-scrollbar {
       width: 0px;
       background: transparent; /* make scrollbar transparent */
