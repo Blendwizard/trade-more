@@ -111,9 +111,6 @@ const Dashboard = () => {
     <>
       <FlexContainer justify="flex-end" align="center" gap="2em">
         {stockDetails !== null ? <Ticker stockDetails={stockDetails} /> : null }
-        <p>Signed in as: @{localStorage.getItem('user')}</p>
-        <p className='logout-btn' onClick={handleLogout}>Logout</p>
-        <i className="ci-settings_filled" style={{ "fontSize": "1.5em" }}></i>
       </FlexContainer>
 
       <FlexContainer gap="1em" justify="center">

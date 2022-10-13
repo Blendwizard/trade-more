@@ -2,13 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import MenuTab from "./ui_components/MenuTab";
 import NavigationGroup from "./NavigationGroup.jsx";
+import FlexContainer from "./ui_components/FlexContainer";
+import LinkItem from "./ui_components/LinkItem";
+import { useNavigate } from "react-router-dom";
 
 const SideContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: flex-start;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 15%;
   height: auto;
   background: rgba(4, 0, 31, 1);
@@ -17,6 +20,7 @@ const SideContainer = styled.div`
   align-items: center;
   padding-left: 1em;
   padding-right: 1em;
+  padding-bottom: 1em;
 `;
 
 const SideSearch = styled.input`
@@ -27,11 +31,43 @@ const SideSearch = styled.input`
 
 const DashSidebar = ({changeView, view}) => {
 
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    localStorage.clear();
+    const res = await fetch('/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if (res.status === 200) {
+      navigate('/');
+    } else {
+      alert('Failed to logout');
+    }
+  };
+
   return (
     <>
+
     <SideContainer>
-      <h3 className="nav-title">TradeMore</h3>
-      <NavigationGroup changeView={changeView} view={view} />
+      <FlexContainer direction="column" gap="0" align="center">
+        <h3 className="nav-title">TradeMore</h3>
+          <NavigationGroup changeView={changeView} view={view} />
+      </FlexContainer>
+      <FlexContainer direction="column" gap="0">
+        <LinkItem>
+          <i className="ci-settings_filled" style={{ "fontSize": "1.5em", "color": "white" }}></i>
+          <span className="link">Settings</span>
+        </LinkItem>
+        <LinkItem>
+          <i className="ci-user_circle" style={{ "fontSize": "1.5em", "color": "white" }}></i>
+          <span className="link">Account</span>
+        </LinkItem>
+        <LinkItem onClick={handleLogout}>
+          <i className="ci-exit" style={{ "fontSize": "1.5em", "color": "white" }}></i>
+          <span className="link">Logout</span>
+        </LinkItem>
+      </FlexContainer>
     </SideContainer>
     </>
   )
