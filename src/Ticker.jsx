@@ -7,7 +7,6 @@ const TickerContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
   color: ${(props) => props.color || 'none'};
 `
 
@@ -19,7 +18,6 @@ const TickerItem = ({ stock }) => {
     return { percent: Math.abs(percent), color: color };
   };
   const formatted = iconDecider(stock.changePercent);
-  // console.log(formatted);
 
   return (
     <TickerContainer color={formatted.color === 'green' ? '#008000' : 'red'}>
@@ -38,14 +36,12 @@ const TickerItem = ({ stock }) => {
 
 const Ticker = ({ stockDetails }) => {
 
-
-
   return (
     <>
       {stockDetails !== null
         ?
         <div className="ticker-container">
-          <TickerMessage>{stockDetails.map((stock, index) => {
+          <TickerMessage >{stockDetails.map((stock, index) => {
             return <TickerItem stock={stock} key={index} />
           })}</TickerMessage>
         </div>

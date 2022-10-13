@@ -99,15 +99,6 @@ const GlobalCSS = createGlobalStyle`
     overflow: hidden;
   }
 
-  @keyframes slide-left {
-    from {
-      -webkit-transform: translateX(0);
-              transform: translateX(0);
-    }
-    to {
-      -webkit-transform: translateX(-135%);
-              transform: translateX(-135%);
-    }
 
 `;
 

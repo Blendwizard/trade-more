@@ -1,15 +1,6 @@
 import styled, {keyframes} from "styled-components";
 
 
-const slideLeft = keyframes`
-    0% {
-      transform: translate3d(100%, 0, 0);
-    }
-    100% {
-      transform: translate3d(-400%, 0, 0);
-    }
-`;
-
 const TickerMessage = styled.div`
 display: flex;
 position: relative;
@@ -19,11 +10,20 @@ font-size: xx-small;
 left: 100%;
 flex-shrink: 0;
 align-items: center;
-animation: ${slideLeft} linear infinite;
-animation-duration: 30s;
+animation: slide-left linear infinite;
+animation-duration: ${(props) => props.duration || '30s'};
 
 &:hover {
   animation-play-state: paused;
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(${(props) => props.rate || '-400%'} , 0, 0);
   }
 }
 
