@@ -239,7 +239,15 @@ const mock_dashboard = {
         "week52Low": 67.65,
         "ytdChange": -0.42778373338129183,
         "isUSMarketOpen": true
-      }
+      },
+      {"companyName":"test"},
+      {"companyName":"test"},
+      {"companyName":"test"},
+      {"companyName":"test"},
+      {"companyName":"test"},
+      {"companyName":"test"},
+      {"companyName":"test"},
+      {"companyName":"test"},
     ]
 }
 

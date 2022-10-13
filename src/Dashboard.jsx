@@ -60,31 +60,31 @@ const Dashboard = () => {
 
   // Fetch user data
   const loadDashboard = async () => {
-    const stockDetailContainer = [];
-    try {
-      const res = await fetchData();
-      if (res.status === 200) {
-        const data = await res.json();
-        setBalance(data.balance);
-        setStocks(data.portfolio);
-        setTotal(data.totalPortfolioValue);
-        for (let stock of data.portfolio) {
-          const info = await helpers.getStockData(stock.symbol);
-          const details = await info.json();
-          stockDetailContainer.push(details);
-        }
-        setStockDetails(stockDetailContainer);
-        setView('Dashboard');
-      } else {
-        alert('Failed to load dashboard');
-      }
-    } catch (e) {
-      console.log(e);
-      alert('Error in dashboard');
-    }
+    // const stockDetailContainer = [];
+    // try {
+    //   const res = await fetchData();
+    //   if (res.status === 200) {
+    //     const data = await res.json();
+    //     setBalance(data.balance);
+    //     setStocks(data.portfolio);
+    //     setTotal(data.totalPortfolioValue);
+    //     for (let stock of data.portfolio) {
+    //       const info = await helpers.getStockData(stock.symbol);
+    //       const details = await info.json();
+    //       stockDetailContainer.push(details);
+    //     }
+    //     setStockDetails(stockDetailContainer);
+    //     setView('Dashboard');
+    //   } else {
+    //     alert('Failed to load dashboard');
+    //   }
+    // } catch (e) {
+    //   console.log(e);
+    //   alert('Error in dashboard');
+    // }
 
     // Use mock data with delay to mimic loading
-    // mockData();
+    mockData();
   };
 
   // Change dashboard window state
@@ -110,7 +110,7 @@ const Dashboard = () => {
   return (
     <>
       <FlexContainer justify="flex-end" align="center" gap="2em">
-        {stockDetails !== null ? <Ticker stockDetails={stockDetails} /> : null }
+        <Ticker stockDetails={stockDetails} />
       </FlexContainer>
 
       <FlexContainer gap="1em" justify="center">

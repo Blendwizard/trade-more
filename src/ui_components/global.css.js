@@ -48,25 +48,8 @@ const GlobalCSS = createGlobalStyle`
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
-
-    width: 55%
-  }
-
-  .ticker-message {
-    display: flex;
-    position: relative;
-    gap: 4em;
-    font-family: 'Press Start 2P';
-    font-size: xx-small;
-    left: 100%;
-    flex-shrink: 0;
-    align-items: center;
-    animation: slide-left 30s linear infinite;
-
-    &:hover {
-      animation-play-state: paused;
-
-    }
+    min-height: 25px;
+    width: 100%
   }
 
   .research-form {
