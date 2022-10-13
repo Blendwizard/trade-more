@@ -13,10 +13,12 @@ const MessageBox = styled.div`
   color: #35d7b7;
   font-size: small;
   padding: 20px;
+  background-color: #90ffff1f;
 `;
 
 const StatusBar = styled.progress`
   width: 100%;
+
 `;
 
 const style = {
@@ -35,7 +37,7 @@ const AlertMessage = ( {message, total} ) => {
       <MessageBox>
         <i className="ci-off_outline_close" style={style}></i>
         {message}
-        {total !== null ?  <StatusBar value={total.replace(/\,/g,'')} max={35000}/> : <StatusBar value={0} max={35000}></StatusBar>}
+        {/* {total !== null ?  <StatusBar value={total.replace(/\,/g,'')} max={35000}/> : <StatusBar value={0} max={35000}></StatusBar>} */}
 
       </MessageBox>
     </>
