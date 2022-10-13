@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import FlexContainer from "./ui_components/FlexContainer";
+import AlertMessage from "./ui_components/AlertMessage";
 
 const LinkGroup = styled.div`
   display: flex;

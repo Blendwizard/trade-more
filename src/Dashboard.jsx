@@ -18,8 +18,9 @@ const Dashboard = () => {
   const [stocks, setStocks] = useState(null);
   const [stockDetails, setStockDetails] = useState(null);
   const [view, setView] = useState(null);
-
   const navigate = useNavigate();
+
+
 
   useEffect(() => {
     loadDashboard();
@@ -87,6 +88,7 @@ const Dashboard = () => {
     mockData();
   };
 
+
   // Change dashboard window state
   const changeView = (switchTo) => {
     setView(switchTo);
@@ -114,7 +116,7 @@ const Dashboard = () => {
       </FlexContainer>
 
       <FlexContainer gap="1em" justify="center">
-        <DashSidebar changeView={changeView} view={view}/>
+        <DashSidebar changeView={changeView} view={view} total={total} />
 
         {stocks !== null && stockDetails !== null ?
           <>

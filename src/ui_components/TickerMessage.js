@@ -23,7 +23,7 @@ animation-duration: ${(props) => props.duration || '30s'};
     transform: translate3d(100%, 0, 0);
   }
   100% {
-    transform: translate3d(${(props) => props.rate || '-400%'} , 0, 0);
+    transform: translate3d(${(props) => props.rate || '-100%'} , 0, 0);
   }
 }
 

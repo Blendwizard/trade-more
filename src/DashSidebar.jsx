@@ -5,6 +5,8 @@ import NavigationGroup from "./NavigationGroup.jsx";
 import FlexContainer from "./ui_components/FlexContainer";
 import LinkItem from "./ui_components/LinkItem";
 import { useNavigate } from "react-router-dom";
+import AlertMessage from "./ui_components/AlertMessage";
+
 
 const SideContainer = styled.div`
   display: flex;
@@ -29,7 +31,10 @@ const SideSearch = styled.input`
 `;
 
 
-const DashSidebar = ({changeView, view}) => {
+
+
+
+const DashSidebar = ({ changeView, view, total }) => {
 
   const navigate = useNavigate();
 
@@ -48,27 +53,28 @@ const DashSidebar = ({changeView, view}) => {
 
   return (
     <>
-
-    <SideContainer>
-      <FlexContainer direction="column" gap="0" align="center">
-        <h3 className="nav-title">TradeMore</h3>
+      <SideContainer>
+        <FlexContainer direction="column" gap="0" align="center">
+          <h3 className="nav-title">TradeMore</h3>
           <NavigationGroup changeView={changeView} view={view} />
-      </FlexContainer>
-      <FlexContainer direction="column" gap="0">
-        <LinkItem>
-          <i className="ci-settings_filled" style={{ "fontSize": "1.5em", "color": "white" }}></i>
-          <span className="link">Settings</span>
-        </LinkItem>
-        <LinkItem>
-          <i className="ci-user_circle" style={{ "fontSize": "1.5em", "color": "white" }}></i>
-          <span className="link">Account</span>
-        </LinkItem>
-        <LinkItem onClick={handleLogout}>
-          <i className="ci-exit" style={{ "fontSize": "1.5em", "color": "white" }}></i>
-          <span className="link">Logout</span>
-        </LinkItem>
-      </FlexContainer>
-    </SideContainer>
+        </FlexContainer>
+        <AlertMessage total={total} message={"Reach an account balance of $30,000 to unlock new ETFs and Mutual Funds"} />
+
+        <FlexContainer direction="column" gap="0">
+          <LinkItem>
+            <i className="ci-settings_filled" style={{ "fontSize": "1.5em", "color": "white" }}></i>
+            <span className="link">Settings</span>
+          </LinkItem>
+          <LinkItem>
+            <i className="ci-user_circle" style={{ "fontSize": "1.5em", "color": "white" }}></i>
+            <span className="link">Account</span>
+          </LinkItem>
+          <LinkItem onClick={handleLogout}>
+            <i className="ci-exit" style={{ "fontSize": "1.5em", "color": "white" }}></i>
+            <span className="link">Logout</span>
+          </LinkItem>
+        </FlexContainer>
+      </SideContainer>
     </>
   )
 };
