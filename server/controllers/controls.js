@@ -89,6 +89,7 @@ module.exports = {
   getStockInfo: async (req, res) => {
     try {
       const data = await models.database.getStockData(req.body.stock);
+      console.log("data: ", data);
       res.status(200).send(data);
     } catch (e) {
       console.log('Failed to fetch stock data');

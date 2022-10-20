@@ -20,7 +20,7 @@ const StockTable = ({ stocks }) => {
   return (
     <>
       <FlexContainer className="tableBackground" height="100%" align="flex-start">
-        <TableContainer>
+        <TableContainer className="dash-content">
           <table>
             <colgroup span="8"></colgroup>
             <thead>

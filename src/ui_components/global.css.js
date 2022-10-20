@@ -98,6 +98,19 @@ const GlobalCSS = createGlobalStyle`
     overflow: hidden;
   }
 
+  .dash-content {
+    animation: fade-in 0.7s linear;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0
+    }
+    100% {
+      opacity: 1
+    }
+  }
+
 
 `;
 

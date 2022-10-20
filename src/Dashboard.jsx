@@ -62,31 +62,31 @@ const Dashboard = () => {
 
   // Fetch user data
   const loadDashboard = async () => {
-    // const stockDetailContainer = [];
-    // try {
-    //   const res = await fetchData();
-    //   if (res.status === 200) {
-    //     const data = await res.json();
-    //     setBalance(data.balance);
-    //     setStocks(data.portfolio);
-    //     setTotal(data.totalPortfolioValue);
-    //     for (let stock of data.portfolio) {
-    //       const info = await helpers.getStockData(stock.symbol);
-    //       const details = await info.json();
-    //       stockDetailContainer.push(details);
-    //     }
-    //     setStockDetails(stockDetailContainer);
-    //     setView('Dashboard');
-    //   } else {
-    //     alert('Failed to load dashboard');
-    //   }
-    // } catch (e) {
-    //   console.log(e);
-    //   alert('Error in dashboard');
-    // }
+    const stockDetailContainer = [];
+    try {
+      const res = await fetchData();
+      if (res.status === 200) {
+        const data = await res.json();
+        setBalance(data.balance);
+        setStocks(data.portfolio);
+        setTotal(data.totalPortfolioValue);
+        // for (let stock of data.portfolio) {
+        //   const info = await helpers.getStockData(stock.symbol);
+        //   const details = await info.json();
+        //   stockDetailContainer.push(details);
+        // }
+        // setStockDetails(stockDetailContainer);
+        setView('Dashboard');
+      } else {
+        alert('Failed to load dashboard');
+      }
+    } catch (e) {
+      console.log(e);
+      alert('Error in dashboard');
+    }
 
     // Use mock data with delay to mimic loading
-    mockData();
+    // mockData();
   };
 
 
@@ -118,10 +118,10 @@ const Dashboard = () => {
 
   return (
     <>
-      <Ticker stockDetails={stockDetails} />
+      {/* <Ticker stockDetails={stockDetails} /> */}
       <FlexContainer gap="1em" justify="center">
         <DashSidebar changeView={changeView} view={view} total={total} />
-        <DashBackground align="flex-start" direction="column" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
+        <DashBackground  align="flex-start" direction="column" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
           {renderView(view)}
         </DashBackground>
       </FlexContainer>

@@ -17,7 +17,7 @@ const DashContent = ({ balance, total, stocks }) => {
 
   return (
     <>
-      <FlexContainer width="100%" height="auto" align="center" justify="space-around" gap="1.5em" direction="row">
+      <FlexContainer className="dash-content" width="100%" height="auto" align="center" justify="space-around" gap="1.5em" direction="row">
         <Summary balance={balance} total={total} stocks={stocks} />
         <BarChart stocks={stocks} />
       </FlexContainer>

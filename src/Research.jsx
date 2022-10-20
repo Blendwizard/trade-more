@@ -39,24 +39,28 @@ const Research = () => {
     return response;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const test = /^[A-Za-z]+$/;
     if (!symbol.match(test)) {
       alert('Please input text only');
     } else {
       setIsLoading(true);
-      getStockData(symbol)
-        .then((response) => {
-          if (!response.ok) {
-            alert('Symbol incorrect or stock not found.')
-          } else {
-            response.json()
-              .then((data) => setStock(data))
+      try {
+        const response = await getStockData();
+        if (response.status === 200) {
+          const data = await response.json();
+          if (data.companyName === "" || null) {
+            throw Error("Error in stock data");
           }
-          setIsLoading(false);
-        })
-        .catch((err) => console.log('Err: ', err))
+          setStock(data);
+        } else {
+          alert(`Server responded with a ${response.status} code`)
+        }
+      } catch (e) {
+        alert("Failed to load stock data");
+      }
+      setIsLoading(false);
     }
   };
 
