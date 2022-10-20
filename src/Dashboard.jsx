@@ -23,6 +23,7 @@ const Dashboard = () => {
 
 
   useEffect(() => {
+    setView("Loading");
     loadDashboard();
   }, []);
 
@@ -61,31 +62,31 @@ const Dashboard = () => {
 
   // Fetch user data
   const loadDashboard = async () => {
-    const stockDetailContainer = [];
-    try {
-      const res = await fetchData();
-      if (res.status === 200) {
-        const data = await res.json();
-        setBalance(data.balance);
-        setStocks(data.portfolio);
-        setTotal(data.totalPortfolioValue);
-        for (let stock of data.portfolio) {
-          const info = await helpers.getStockData(stock.symbol);
-          const details = await info.json();
-          stockDetailContainer.push(details);
-        }
-        setStockDetails(stockDetailContainer);
-        setView('Dashboard');
-      } else {
-        alert('Failed to load dashboard');
-      }
-    } catch (e) {
-      console.log(e);
-      alert('Error in dashboard');
-    }
+    // const stockDetailContainer = [];
+    // try {
+    //   const res = await fetchData();
+    //   if (res.status === 200) {
+    //     const data = await res.json();
+    //     setBalance(data.balance);
+    //     setStocks(data.portfolio);
+    //     setTotal(data.totalPortfolioValue);
+    //     for (let stock of data.portfolio) {
+    //       const info = await helpers.getStockData(stock.symbol);
+    //       const details = await info.json();
+    //       stockDetailContainer.push(details);
+    //     }
+    //     setStockDetails(stockDetailContainer);
+    //     setView('Dashboard');
+    //   } else {
+    //     alert('Failed to load dashboard');
+    //   }
+    // } catch (e) {
+    //   console.log(e);
+    //   alert('Error in dashboard');
+    // }
 
     // Use mock data with delay to mimic loading
-    // mockData();
+    mockData();
   };
 
 
@@ -106,6 +107,12 @@ const Dashboard = () => {
         return (
           <Research />
         )
+      case "Loading":
+        return (
+          <FlexContainer justify="center" align="center" height="100%">
+            <BounceLoader color='#36d7b7' />
+          </FlexContainer>
+        )
     };
   };
 
@@ -114,21 +121,9 @@ const Dashboard = () => {
       <Ticker stockDetails={stockDetails} />
       <FlexContainer gap="1em" justify="center">
         <DashSidebar changeView={changeView} view={view} total={total} />
-
-        {stocks !== null && stockDetails !== null ?
-          <>
-            <DashBackground align="flex-start" direction="column" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
-              {renderView(view)}
-            </DashBackground>
-          </>
-          :
-          <>
-            <DashBackground justify="center" align="center" direction="row" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
-              <BounceLoader color='#36d7b7' />
-            </DashBackground>
-          </>
-        }
-
+        <DashBackground align="flex-start" direction="column" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
+          {renderView(view)}
+        </DashBackground>
       </FlexContainer>
     </>
   );
