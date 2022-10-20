@@ -111,7 +111,6 @@ const Dashboard = () => {
 
   return (
     <>
-
       <Ticker stockDetails={stockDetails} />
       <FlexContainer gap="1em" justify="center">
         <DashSidebar changeView={changeView} view={view} total={total} />

@@ -10,6 +10,19 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
+import styled from 'styled-components';
+
+const ChartContainer = styled.div`
+  min-width: 0;
+
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #c4a7eb6b;
+  background-color: rgba(4, 0, 31, 1);
+  border-radius: 45px;
+  padding: 25px;
+`;
 
 const BarChart = ({ stocks }) => {
   ChartJS.register(
@@ -86,9 +99,11 @@ const BarChart = ({ stocks }) => {
   ChartJS.defaults.color = "white";
 
   return (
-    <div className='line-container'>
-      <Bar options={options} data={data} />
-    </div>
+    <ChartContainer>
+      <div className='line-container'>
+        <Bar options={options} data={data} />
+      </div>
+    </ChartContainer>
   )
 
 };
