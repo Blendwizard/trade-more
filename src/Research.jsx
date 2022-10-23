@@ -39,7 +39,7 @@ const Research = () => {
     return response;
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const test = /^[A-Za-z]+$/;
     if (!symbol.match(test)) {
@@ -57,7 +57,7 @@ const Research = () => {
         } else {
           alert(`Server responded with a ${response.status} code`)
         }
-      } catch (e) {
+      } catch (err) {
         alert("Failed to load stock data");
       }
       setIsLoading(false);
@@ -86,7 +86,7 @@ const Research = () => {
           <h2>Research a stock!</h2>
           <form className="research-form" onSubmit={handleSubmit}>
             <div>
-              <input onChange={handleChange} type="text" id="symbol" name="symbol" autoComplete="off" style={{"textAlign": "center", "textTransform": "uppercase", "fontSize": "large"}} required></input>
+              <input onChange={handleChange} type="text" id="symbol" name="symbol" autoComplete="off" style={{ "textAlign": "center", "textTransform": "uppercase", "fontSize": "large" }} required></input>
             </div>
             <SearchButton>Search</SearchButton>
           </form>
