@@ -53,3 +53,7 @@ Downsides:
   }
 
 ```
+## Dashboard (Working Prototype) 
+<img width="1012" alt="dash_prototype_gh" src="https://user-images.githubusercontent.com/70232572/198509452-525335ac-5eb5-4c87-a96c-ccfa29da290a.png">
+
+
