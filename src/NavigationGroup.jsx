@@ -36,8 +36,8 @@ const NavigationGroup = ( {changeView, view} ) => {
   return (
     <LinkGroup>
         <LinkItem>
-          <i className="ci-home_alt_fill" style={{"fontSize":"1.5em", color: 'white', marginTop: '5px'}}></i>
-          <Link className="link" to="/">Home</Link>
+          <i className="ci-home_alt_fill" style={{"fontSize":"1.5em", color: 'white'}}></i>
+          <Link className="link" style={{"marginTop": "5px"}} to="/">Home</Link>
         </LinkItem>
       <LinkItem onClick={() => changeView('Dashboard')} active={view === 'Dashboard'}>
         <i className="ci-line_chart_up" style={{"fontSize":"1.5em", color: 'white'}}></i>

@@ -70,12 +70,12 @@ const Dashboard = () => {
         setBalance(data.balance);
         setStocks(data.portfolio);
         setTotal(data.totalPortfolioValue);
-        // for (let stock of data.portfolio) {
-        //   const info = await helpers.getStockData(stock.symbol);
-        //   const details = await info.json();
-        //   stockDetailContainer.push(details);
-        // }
-        // setStockDetails(stockDetailContainer);
+        for (let stock of data.portfolio) {
+          const info = await helpers.getStockData(stock.symbol);
+          const details = await info.json();
+          stockDetailContainer.push(details);
+        }
+        setStockDetails(stockDetailContainer);
         setView('Dashboard');
       } else {
         alert('Failed to load dashboard');
@@ -118,7 +118,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {/* <Ticker stockDetails={stockDetails} /> */}
+      <Ticker stockDetails={stockDetails} />
       <FlexContainer gap="1em" justify="center">
         <DashSidebar changeView={changeView} view={view} total={total} />
         <DashBackground  align="flex-start" direction="column" padding="25px" gap="2rem" border="1px solid #c4a7eb6b">
